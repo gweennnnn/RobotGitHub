@@ -8,6 +8,7 @@ import rp13.search.problem.puzzle.EightPuzzle;
 import rp13.search.problem.puzzle.EightPuzzleSuccessorFunction;
 import rp13.search.problem.puzzle.EightPuzzle.PuzzleMove;
 import rp13.search.util.ActionStatePair;
+import rp13.search.util.EqualityGoalTest;
 
 
 
@@ -23,7 +24,7 @@ public class BreadthFirstSearch {
 	EightPuzzleSuccessorFunction sf;
 	
 	//LIST OF FRONTIER STATES
-	List<EightPuzzle> frontier;
+	List<Node> frontier;
 	
 	//LIST OF ELEMENTS THAT HAVE ALREADY BEEN EXPLORED
 	List<EightPuzzle> explored;
@@ -55,62 +56,61 @@ public class BreadthFirstSearch {
 		return false;
 	}
 	
-	public List<PuzzleMove> search(EightPuzzle start){
+	public Node pop(){
+		return frontier.remove(0);
 		
-		//LIST OF MOVES THAT A ROBOT SHOULD MAKE
-		List<PuzzleMove> returnMoves = new ArrayList();
+	}
+	
+	public List<PuzzleMove> search(ActionStatePair<PuzzleMove, EightPuzzle> start, EightPuzzle goal){
 		
-		//LIST OF SUCCESSOR STATES AND THE MOVES TO GET TO THEM
-		
+		List<PuzzleMove> failed = new ArrayList();
+				
 		List<ActionStatePair<PuzzleMove, EightPuzzle>> successors = new ArrayList();
 		
-		//LIST OF NODES ON THE TREE MAKING A PATH FROM THE START STATE TO THE END STATE
+		Node<PuzzleMove, EightPuzzle> currentNode = new Node(start);
 		
-		//Node<ActionStatePair<state, move>, predecessorNode>
+		EightPuzzle currentState = currentNode.data.getState();
 		
-		List<Node> treePath = new ArrayList();
+		EqualityGoalTest<EightPuzzle> equals = new EqualityGoalTest(goal);
 		
-		EightPuzzle currentState = start;
 		
-		if (isGoalState(currentState))
-			return moves;
+
 		
-	
-		else{
-			while(!isGoalState(currentState)){
+		frontier.add(currentNode);
+		
+			while(!frontier.isEmpty()){
 				
-				sf.getSuccessors(start, successors);
-				
-				
+			
+				if(equals.isGoal(currentState)){
+					return currentNode.solutionList();
 				}
-			return moves;
+				//FILLING IN THE FRONTIERS LIST WITH SUCCESSORS
+				
+				sf.getSuccessors(currentNode.data.getState(), successors); //<----------gets all the successors
+				
+				for(ActionStatePair<PuzzleMove, EightPuzzle> state : successors){ //<--------------saves all the successors as nodes
+					
+					if(!isInList(currentState, explored)){
+						
+						Node<PuzzleMove, EightPuzzle> node = new Node(state, currentNode);
+						
+						frontier.add(node); //<------------------adds it to the frontiers list
+					}
+
+					
+				}
+				
+				explored.add(currentState);
+				currentNode = pop();			
+				currentState = currentNode.data.getState();
+			}
 			
-//			some code
+			return failed;
 			
-	//		NICKS CODE FOR THE SEARCH
-			
-	//		while(!agenda.isEmpty()) {
-	//			
-	//			 node = agenda.pop();
-	//			 
-	//			 if(isGoal(state)) {
-	//				 return node;
-	//			 }
-	//			 
-	//			 else {
-	//			 //generate successors
-	//			 
-	//			// ... 
-	//			
-	//			for(SearchNode node : successors) {
-	//				 agenda.push(node);
-	//			 }
-	//			 }
-	//			}
 		}
 		
 
-	}
+
 	
 	
 	
