@@ -37,7 +37,8 @@ public class StringPuzzle {
 		//Check that the swapping letters exist
 		boolean positive = (swap.getFirst() | swap.getSecond()) >= 0;
 		boolean notOOB = (swap.getFirst() | swap.getSecond()) < value.length();
-		//Checking if it's swapping the same character is done in the Swap constructor.
+		boolean sameChar = value.charAt(swap.getFirst()) == value.charAt(swap.getSecond());
+		//Checking if it's swapping the same character position is done in the Swap constructor.
 		
 		return positive && notOOB;
 	}
