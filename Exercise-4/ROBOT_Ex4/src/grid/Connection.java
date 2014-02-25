@@ -1,3 +1,4 @@
+package grid;
 import java.awt.Point;
 
 /**
@@ -16,7 +17,6 @@ public class Connection {
 	}
 	
 	/**
-	 * 
 	 * @param c The connection being compared to
 	 * @return Whether or not both of the points in the connection are equal, regardless of permutation.
 	 */

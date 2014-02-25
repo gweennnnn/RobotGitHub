@@ -1,3 +1,4 @@
+package part1;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -31,7 +32,7 @@ public class puzzles {
 //		List<ActionStatePair<PuzzleMove, EightPuzzle>> successor = new List<ActionStatePair>();
 //		sf.getSuccessors(_state, _successors);
 		
-		System.out.println(x);
+		//System.out.println(x);
 	}
 	
 	

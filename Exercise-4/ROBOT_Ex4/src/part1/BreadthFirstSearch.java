@@ -1,3 +1,4 @@
+package part1;
 import java.util.List;
 
 import rp13.search.problem.puzzle.EightPuzzle;

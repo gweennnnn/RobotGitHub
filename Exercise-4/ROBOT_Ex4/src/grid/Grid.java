@@ -1,3 +1,4 @@
+package grid;
 import java.awt.Point;
 import java.util.Random;
 
@@ -163,6 +164,12 @@ public class Grid {
 	private Point addPoints(Point p1, Point p2) {
 		Point r_point = new Point(p1.x + p2.x, p1.y + p2.y);
 		return r_point;
+	}
+	
+	@Override
+	public boolean equals(Grid g)
+	{
+		
 	}
 
 	@Override
