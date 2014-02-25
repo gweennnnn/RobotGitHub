@@ -24,6 +24,7 @@ public class ActionStatePair<ActionT, StateT> {
 		m_action = _action;
 		m_state = _state;
 	}
+	
 
 	/**
 	 * Get action.

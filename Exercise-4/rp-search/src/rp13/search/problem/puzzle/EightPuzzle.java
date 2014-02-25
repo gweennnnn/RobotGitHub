@@ -24,7 +24,7 @@ public class EightPuzzle {
 	 * 
 	 */
 	public enum PuzzleMove {
-		UP(-3), DOWN(3), LEFT(-1), RIGHT(1);
+		UP(-3), DOWN(3), LEFT(-1), RIGHT(1), START(0);
 
 		private final int m_move;
 
