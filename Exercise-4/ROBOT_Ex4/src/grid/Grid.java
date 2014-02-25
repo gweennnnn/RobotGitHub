@@ -166,10 +166,30 @@ public class Grid {
 		return r_point;
 	}
 	
-	@Override
+	/**
+	 * Checks for equality with another grid
+	 * @param g The grid being compared to.
+	 * @return Whether or not the values of g are equal with the ones in this grid.
+	 */
 	public boolean equals(Grid g)
 	{
+		//Equal Size
+		boolean e3 = (width == g.width);
+		boolean e4 = (height == g.height);
+
+		//Equal Blockages
+		boolean e1 = true;
+		Connection[] gBlks = g.getBlockages();
+		for (int i = 0; i < blockages.length; i++)
+		{
+			if (blockages[i] != gBlks[i]) e1 = false;
+		}
 		
+		//Equal position
+		boolean e2 = (robotPosition.x == g.getPosition().x) && 
+					 (robotPosition.y == g.getPosition().y);
+		
+		return (e1 && e2 && e3 && e4);
 	}
 
 	@Override
