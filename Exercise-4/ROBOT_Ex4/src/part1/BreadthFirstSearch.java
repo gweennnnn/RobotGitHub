@@ -69,7 +69,7 @@ public class BreadthFirstSearch {
 		
 		Node<PuzzleMove, EightPuzzle> currentNode = new Node(start);
 		
-		EightPuzzle currentState = currentNode.data.getState();
+		EightPuzzle currentState = currentNode.getData().getState();
 		
 		EqualityGoalTest<EightPuzzle> equals = new EqualityGoalTest(goal);
 		
@@ -86,7 +86,7 @@ public class BreadthFirstSearch {
 				}
 				//FILLING IN THE FRONTIERS LIST WITH SUCCESSORS
 				
-				sf.getSuccessors(currentNode.data.getState(), successors); //<----------gets all the successors
+				sf.getSuccessors(currentNode.getData().getState(), successors); //<----------gets all the successors
 				
 				for(ActionStatePair<PuzzleMove, EightPuzzle> state : successors){ //<--------------saves all the successors as nodes
 					
@@ -102,7 +102,7 @@ public class BreadthFirstSearch {
 				
 				explored.add(currentState);
 				currentNode = pop();			
-				currentState = currentNode.data.getState();
+				currentState = currentNode.getData().getState();
 			}
 			
 			return failed;
