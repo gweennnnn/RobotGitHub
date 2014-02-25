@@ -19,9 +19,12 @@ public class StringSuccessorFunction implements
 				if (j != i)
 				{
 					Swap move = new Swap(i, j);
-					StringPuzzle successor = new StringPuzzle(_state);
-					successor.makeMove(move);
-					_successors.add(new ActionStatePair<Swap, StringPuzzle>(move,successor));
+					if (_state.isPossibleMove(move))
+					{
+						StringPuzzle successor = new StringPuzzle(_state);
+						successor.makeMove(move);
+						_successors.add(new ActionStatePair<Swap, StringPuzzle>(move,successor));
+					}
 				}
 			}
 		}

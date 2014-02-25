@@ -21,19 +21,17 @@ public class Node<_action, _state> {
 	public ArrayList<_action> solutionList(){
 		
 		ArrayList<_action> list;
-		list = new ArrayList<_action>();
-
 		
 		if (predecessor == null) 
 		{
-			return list;
+			list = new ArrayList<_action>();
 		}
 		else 
 		{
+			_action action = data.getAction();
 			list = predecessor.solutionList();
-			list.add(data.getAction());
+			list.add(action);
 		}
-		
 		return list;
 	}
 }

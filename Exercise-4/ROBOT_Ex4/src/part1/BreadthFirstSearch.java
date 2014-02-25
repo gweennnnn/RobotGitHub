@@ -7,15 +7,8 @@ import org.omg.CORBA.Current;
 import rp13.search.problem.puzzle.EightPuzzle;
 import rp13.search.problem.puzzle.EightPuzzleSuccessorFunction;
 import rp13.search.problem.puzzle.EightPuzzle.PuzzleMove;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 import rp13.search.util.ActionStatePair;
 import rp13.search.util.EqualityGoalTest;
->>>>>>> 2db84afba3636c08ea407d5663fdf42aaa36999c
-=======
-import rp13.search.util.ActionStatePair;
->>>>>>> parent of 7f1aae0... Part 2 Begun
 
 
 
@@ -54,77 +47,6 @@ public class BreadthFirstSearch {
 	
 	//CHECKS IF A PARTICULAR STATE IS IN A LIST (F.E. FRONTIERS LIST)
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
-	public boolean isInList(){
-=======
-	public boolean isInList(EightPuzzle currentState, List a){
-		
-		for (int i = 0; i < a.size(); i++){
-			if (a.get(i) == currentState) return true;
-		}
-		
-		return false;
-	}
-	
-	public List<PuzzleMove> search(EightPuzzle start){
-		
-		//LIST OF MOVES THAT A ROBOT SHOULD MAKE
-		List<PuzzleMove> returnMoves = new ArrayList();
-		
-		//LIST OF SUCCESSOR STATES AND THE MOVES TO GET TO THEM
->>>>>>> parent of 7f1aae0... Part 2 Begun
-		
-		List<ActionStatePair<PuzzleMove, EightPuzzle>> successors = new ArrayList();
-		
-		//LIST OF NODES ON THE TREE MAKING A PATH FROM THE START STATE TO THE END STATE
-		
-		//Node<ActionStatePair<state, move>, predecessorNode>
-		
-		List<Node> treePath = new ArrayList();
-		
-		EightPuzzle currentState = start;
-		
-		if (isGoalState(currentState))
-			return moves;
-		
-	
-		else{
-			while(!isGoalState(currentState)){
-				
-				sf.getSuccessors(start, successors);
-				
-				
-				}
-			return moves;
-			
-//			some code
-			
-	//		NICKS CODE FOR THE SEARCH
-			
-	//		while(!agenda.isEmpty()) {
-	//			
-	//			 node = agenda.pop();
-	//			 
-	//			 if(isGoal(state)) {
-	//				 return node;
-	//			 }
-	//			 
-	//			 else {
-	//			 //generate successors
-	//			 
-	//			// ... 
-	//			
-	//			for(SearchNode node : successors) {
-	//				 agenda.push(node);
-	//			 }
-	//			 }
-	//			}
-		}
-		
-
-	}
-=======
 	public boolean isInList(EightPuzzle currentState, List a){
 		
 		for (int i = 0; i < a.size(); i++){
@@ -189,7 +111,6 @@ public class BreadthFirstSearch {
 		
 
 
->>>>>>> 2db84afba3636c08ea407d5663fdf42aaa36999c
 	
 	
 	
