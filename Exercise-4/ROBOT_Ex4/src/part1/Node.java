@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import rp13.search.util.ActionStatePair;
 
 public class Node<_action, _state> {
-	Node predecessor;
-	ActionStatePair<_action, _state> data;
+	private Node predecessor;
+	private ActionStatePair<_action, _state> data;
 	
 	public Node(ActionStatePair<_action, _state> data) {
 		this(data, null);
@@ -24,16 +24,24 @@ public class Node<_action, _state> {
 		list = new ArrayList<_action>();
 
 		
-		if (predecessor == null) 
-		{
-			return list;
-		}
-		else 
+		if (predecessor != null)
 		{
 			list = predecessor.solutionList();
 			list.add(data.getAction());
 		}
 		
 		return list;
+	}
+
+	public Node getPredecessor() {
+		return predecessor;
+	}
+
+	public ActionStatePair<_action, _state> getData() {
+		return data;
+	}
+
+	public void setData(ActionStatePair<_action, _state> data) {
+		this.data = data;
 	}
 }
