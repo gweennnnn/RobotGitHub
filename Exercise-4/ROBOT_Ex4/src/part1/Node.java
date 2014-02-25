@@ -6,16 +6,18 @@ import rp13.search.util.ActionStatePair;
 
 public class Node<_action, _state> {
 	private Node predecessor;
-	private ActionStatePair<_action, _state> data;
+	private _action move;
+	private _state state;
 	
-	public Node(ActionStatePair<_action, _state> data) {
-		this(data, null);
+	public Node(_action move, _state state) {
+		this(move, state, null);
 	}
 	
-	public Node(ActionStatePair<_action, _state> data, Node predecessor) {
+	public Node(_action move, _state state, Node<_action, _state> predecessor) {
 		super();
 		this.predecessor = predecessor;
-		this.data = data;
+		this.move = move;
+		this.state = state;
 	}
 	
 	public ArrayList<_action> solutionList(){
@@ -27,7 +29,7 @@ public class Node<_action, _state> {
 		if (predecessor != null)
 		{
 			list = predecessor.solutionList();
-			list.add(data.getAction());
+			list.add(getMove());
 		}
 		
 		return list;
@@ -37,11 +39,11 @@ public class Node<_action, _state> {
 		return predecessor;
 	}
 
-	public ActionStatePair<_action, _state> getData() {
-		return data;
+	public _action getMove() {
+		return move;
 	}
 
-	public void setData(ActionStatePair<_action, _state> data) {
-		this.data = data;
+	public _state getState() {
+		return state;
 	}
 }

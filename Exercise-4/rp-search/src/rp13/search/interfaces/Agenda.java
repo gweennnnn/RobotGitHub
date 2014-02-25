@@ -23,6 +23,14 @@ public interface Agenda<ItemT> extends Iterable<ItemT> {
 	 * @return
 	 */
 	ItemT pop();
+	
+	/**
+	 * Returns the next item from the agenda, without removing
+	 * 
+	 * @return
+	 */
+	ItemT peek();
+	
 
 	/**
 	 * Returns true if the agenda is empty
