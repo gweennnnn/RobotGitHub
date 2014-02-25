@@ -7,13 +7,13 @@ import java.util.List;
 import rp13.search.interfaces.*;
 import rp13.search.util.EqualityGoalTest;
 
-public class DepthFirstSearch<action, state, succFunct> implements Agenda<Node<action, state>> {
+public class UninformedSearch<action, state, succFunct> implements Agenda<Node<action, state>> {
 	private List<Node<action, state>> frontier;
 	private List<state> explored;
 	private state startState;
 	private EqualityGoalTest<state> goaltest;
 	
-	public DepthFirstSearch(state startState, state endState)
+	public UninformedSearch(state startState, state endState)
 	{
 		this.startState = startState;
 		this.frontier = new ArrayList<Node<action, state>>();
