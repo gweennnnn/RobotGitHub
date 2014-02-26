@@ -51,25 +51,9 @@ public class UninformedSearch<_action, _state> extends EqualityGoalTest<_state>
 
 		succFunct.getSuccessors(currNode.getState(), successors);
 		
-		if(!successors.isEmpty())
+		for(int i = 0; i < successors.size(); i++)
 		{
-			for(ActionStatePair<_action, _state> successor : successors)
-			{
-				if(successor.getState() != currNode.getState() && successor.getAction() != PuzzleMove.START)
-				{
-					Node<_action, _state> tempNode = new Node<_action, _state>(successor.getAction(), successor.getState(), currNode);
-					System.out.println(tempNode.getMove());
-					System.out.println(tempNode.getState());
-					this.list.push(tempNode);
-				}
-			}
-			successors.removeAll(successors);
-		}
-		
-		if(!this.getList().isEmpty())
-		{
-			Node<_action, _state> temp = this.list.pop();
-			search(temp, succFunct, new ArrayList<ActionStatePair<_action, _state>>());
+			System.out.println(successors.);
 		}
 		return new ArrayList<_action>();
 	}
@@ -91,8 +75,6 @@ public class UninformedSearch<_action, _state> extends EqualityGoalTest<_state>
 		
 		List<PuzzleMove> moves = USearch.search(currentNode, succfunct, new ArrayList<ActionStatePair<PuzzleMove, EightPuzzle>>());
 		
-		for(int i = 0; i < moves.size(); i++)
-			System.out.println(moves.get(i) + " ");
 		
 	}
 }
