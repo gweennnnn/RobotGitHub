@@ -86,6 +86,7 @@ public class EightPuzzle {
 		m_blankPosition = m_board.length - 1;
 	}
 	
+	
 	private EightPuzzle(boolean x) {
 		m_board = new int[] { 1, 2, BLANK, 3, 4, 5, 6, 7, 8 };
 		m_blankPosition = 2;
