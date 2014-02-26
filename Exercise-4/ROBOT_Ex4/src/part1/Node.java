@@ -39,6 +39,11 @@ public class Node<_action, _state> {
 		return predecessor;
 	}
 
+	
+	public void setPredecessor(Node<_action, _state> predecessor) {
+		this.predecessor = predecessor;
+	}
+
 	public _action getMove() {
 		return move;
 	}

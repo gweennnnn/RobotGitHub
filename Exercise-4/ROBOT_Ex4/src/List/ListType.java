@@ -48,6 +48,7 @@ public class ListType<_action, _state> implements Agenda<Node<_action, _state>>
 		return frontier.isEmpty();
 	}
 
+	
 	@Override
 	public boolean contains(Node<_action, _state> _item) {
 		return this.explored.contains(_item.getState());
