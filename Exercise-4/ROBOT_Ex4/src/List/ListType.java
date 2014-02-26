@@ -23,6 +23,12 @@ public class ListType<_action, _state> implements Agenda<Node<_action, _state>>
 		return frontier;
 	}
 
+	//testing purposes
+	public int getSize()
+	{
+		return this.frontier.size();
+	}
+	
 	public List<_state> getExplored() {
 		return explored;
 	}

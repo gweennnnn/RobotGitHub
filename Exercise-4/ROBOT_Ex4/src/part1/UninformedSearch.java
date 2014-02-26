@@ -46,32 +46,47 @@ public class UninformedSearch<_action, _state> extends EqualityGoalTest<_state>
 	{	
 		Node<_action, _state> currentNode = startNode;
 		System.out.println("So, starting from the first node..");
+		int counter = 0;
 		do
 		{
-
-			System.out.println(currentNode);
+			System.out.println("SIZES");
+			System.out.println(this.list.getSize());
+			currentNode = this.list.pop(); // <------already adds an item to the explored set
+			System.out.println(this.list.getSize());
+			
+			System.out.println("CURRENT NODE!");
+			System.out.println(currentNode.getMove());
+			System.out.println(currentNode.getState());
 			if (this.isGoal(currentNode.getState()))
 				return currentNode.solutionList();
 			
 			// FILLING IN THE FRONTIERS LIST WITH SUCCESSORS
 
-			succFunct.getSuccessors(currentNode.getState(), successors); // <----------gets
-																	// all the
-																	// successors
+			succFunct.getSuccessors(currentNode.getState(), successors); // <----------gets all the successors
 
 			if(successors.isEmpty())
 				System.out.println("Derp");
 			
+			System.out.println("CURRENT CHILDREN");
 			for (ActionStatePair<_action, _state> state : successors)
 			{ 	
 				Node<_action, _state> tempNode = new Node<_action, _state>(state.getAction(), state.getState());
 				
 				if (!list.contains(tempNode) && !tempNode.getMove().equals(startAction))
+				{
+					System.out.println(tempNode.getMove());
+					System.out.println(tempNode.getState());
 					this.list.push(tempNode); // <------------------adds it to the frontiers list
+				}
 			}
 			successors.removeAll(successors);
+			
+			
+			System.out.println();
+			System.out.println();
+			System.out.println("NEXT NODE!");
+			counter++;
 
-			currentNode = this.list.pop(); // <------already adds an item to the explored set
 		}
 		while (!this.list.isEmpty());
 		
@@ -102,6 +117,5 @@ public class UninformedSearch<_action, _state> extends EqualityGoalTest<_state>
 		
 		for(int i = 0; i < moves.size(); i++)
 			System.out.println(moves.get(i));
-		
 	}
 }
