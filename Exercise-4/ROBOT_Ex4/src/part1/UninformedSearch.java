@@ -53,7 +53,7 @@ public class UninformedSearch<_action, _state> extends EqualityGoalTest<_state>
 		
 		for(int i = 0; i < successors.size(); i++)
 		{
-			System.out.println(successors.);
+			System.out.println(successors);
 		}
 		return new ArrayList<_action>();
 	}
