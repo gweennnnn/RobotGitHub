@@ -125,7 +125,7 @@ public class UninformedSearch<_action, _state> extends EqualityGoalTest<_state>
 	{
 		//This is how you use it
 		UninformedSearch<PuzzleMove, EightPuzzle> USearch = new UninformedSearch<PuzzleMove, EightPuzzle>
-							(EightPuzzle.randomEightPuzzle(), EightPuzzle.orderedEightPuzzle(), SearchType.BreadthFirst);
+							(EightPuzzle.randomEightPuzzle(), EightPuzzle.PuzzleMove.START, EightPuzzle.orderedEightPuzzle(), SearchType.BreadthFirst);
 		
 		EightPuzzleSuccessorFunction succfunct = new EightPuzzleSuccessorFunction();
 		
