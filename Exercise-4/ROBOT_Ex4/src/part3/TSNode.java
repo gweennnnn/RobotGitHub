@@ -2,8 +2,8 @@ package part3;
 
 public class TSNode {
 
-	String ID;
-	Neighbor[] neighbors;
+	private String ID;
+	private Neighbor[] neighbors;
 	
 	public TSNode(String ID)
 	{
@@ -42,9 +42,58 @@ public class TSNode {
 		return null;
 	}
 	
+	public int getDistanceByNeighbor(Neighbor _n)
+	{
+		for (Neighbor n : neighbors)
+		{
+			if (_n == n) return n.getDistance();
+		}
+		return -1;
+	}
+	
+	public int getDistanceByNode(TSNode target)
+	{
+		for (Neighbor n : neighbors)
+		{
+			System.out.println(n);
+			if (n.getNode().equals(target)) return n.getDistance();
+		}
+		return -1;
+	}
+	
+	public boolean equals(TSNode target)
+	{
+		return ID == target.getID();
+	}
+	
+	private String getID() {
+		return ID;
+	}
+	
+	private Neighbor[] getNeighbors() {
+		return neighbors;
+	}
+
 	public void setNeighbors(Neighbor[] neighbors)
 	{
 		this.neighbors = neighbors;
+	}
+	
+	public String toString()
+	{
+		return (ID.toString());
+	}
+	
+	public String toStringFull()
+	{
+		String s = ID.toString() + " has neighbors: ";
+		for (Neighbor n : neighbors)
+		{
+			s += "\n-";
+			s += n;
+		}
+		
+		return (ID.toString() + " has neighbors: ");
 	}
 	
 	public static void main(String[] args)

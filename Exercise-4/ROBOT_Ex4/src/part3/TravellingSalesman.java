@@ -10,6 +10,11 @@ public class TravellingSalesman {
 		this.cities = cities;
 	}
 	
-//	public TSNode[] getBest()
+	public TSNode[] getBestPath()
+	{
+		
+		TSNode[] path ;
+		return TSNode[];
+	}
 
 }

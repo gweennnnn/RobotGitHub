@@ -19,4 +19,9 @@ public class Neighbor {
 		return distance;
 	}
 	
+	public String toString()
+	{
+		return (node.toString() + " is " + distance + " away.");
+	}
+	
 }
