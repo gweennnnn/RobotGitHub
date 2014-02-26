@@ -1,11 +1,12 @@
 package part1;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import rp13.search.util.ActionStatePair;
 
 public class Node<_action, _state> {
-	private Node predecessor;
+	private Node<_action, _state> predecessor;
 	private _action move;
 	private _state state;
 	
@@ -20,19 +21,13 @@ public class Node<_action, _state> {
 		this.state = state;
 	}
 	
-	public ArrayList<_action> solutionList(){
-		
-		ArrayList<_action> list;
-		list = new ArrayList<_action>();
-
-		
+	public void getSolutionList(List<_action> solutionList)
+	{
 		if (predecessor != null)
 		{
-			list = predecessor.solutionList();
-			list.add(getMove());
+			predecessor.getSolutionList(solutionList);
+			solutionList.add(getMove());
 		}
-		
-		return list;
 	}
 
 	public Node getPredecessor() {
