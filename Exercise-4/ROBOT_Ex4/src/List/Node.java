@@ -1,4 +1,4 @@
-package part1;
+package List;
 
 import java.util.List;
 
@@ -31,6 +31,10 @@ public class Node<_action, _state> {
 			solutionList.add(0, currNode.getMove());
 			currNode = currNode.getPredecessor();
 		}
+//		if()
+//		predecessor.getSolutionList(solutionList, startAction);
+//		solutionList.add(getMove());
+
 	}
 
 

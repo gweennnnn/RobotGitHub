@@ -3,6 +3,7 @@ package part1;
 import java.util.ArrayList;
 import java.util.List;
 
+import List.Node;
 import List.Queue;
 import List.Stack;
 import rp13.search.interfaces.*;
@@ -93,7 +94,7 @@ public class UninformedSearch<_action, _state> extends EqualityGoalTest<_state>
 		}
 
 
-
+		System.out.println("No solution!");
 		return new ArrayList<_action>();
 	}
 	
@@ -101,7 +102,7 @@ public class UninformedSearch<_action, _state> extends EqualityGoalTest<_state>
 	{
 		//This is how you use it
 		UninformedSearch<PuzzleMove, EightPuzzle> USearch = new UninformedSearch<PuzzleMove, EightPuzzle>
-							(EightPuzzle.testEightPuzzle(), EightPuzzle.PuzzleMove.START, EightPuzzle.orderedEightPuzzle(), SearchType.DepthFirst);
+							(EightPuzzle.testEightPuzzle(), EightPuzzle.PuzzleMove.START, EightPuzzle.orderedEightPuzzle(), SearchType.BreadthFirst);
 		
 		EightPuzzleSuccessorFunction succfunct = new EightPuzzleSuccessorFunction();
 		
@@ -109,10 +110,13 @@ public class UninformedSearch<_action, _state> extends EqualityGoalTest<_state>
 															        (PuzzleMove.START, USearch.getStartState());
 		
 		List<PuzzleMove> solutionList = USearch.search(firstNode, succfunct, new ArrayList<ActionStatePair<PuzzleMove, EightPuzzle>>());
-		
+		int count = 0;
 		for(int i = 0; i < solutionList.size(); i++)
 		{
 			System.out.print(solutionList.get(i) + ", ");
+			count++;
 		}
+		System.out.println();
+		System.out.println(count);
 	}
 }

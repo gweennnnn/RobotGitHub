@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import part1.Node;
 import rp13.search.interfaces.Agenda;
 
 public class ListType<_action, _state> implements Agenda<Node<_action, _state>>
