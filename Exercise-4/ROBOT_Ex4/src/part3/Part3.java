@@ -1,51 +1,54 @@
 package part3;
 
+import established.PathFollower;
+import grid.Grid;
+import grid.Grid.Direction;
+
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
+
+import part2.Part2;
 
 public class Part3 {
+	
+	Grid grid;
 
 	public static void main(String[] args) {
-		/*TSNode a = new TSNode("A");
-		TSNode b = new TSNode("B");
-		TSNode c = new TSNode("C");
-		TSNode d = new TSNode("D");
-		TSNode e = new TSNode("E");
-		TSNode f = new TSNode("F");
-		TSNode g = new TSNode("G");
-		TSNode h = new TSNode("H");
-		TSNode i = new TSNode("I");
-
-		a.setNeighbors(new Neighbor[]{
-				new Neighbor(g, 5), 
-				new Neighbor(d, 10), 
-				new Neighbor(b, 8)
-		   });
-		b.setNeighbors(new Neighbor[]{
-				new Neighbor(a, 10), 
-				new Neighbor(c, 3)
-		   });
-		c.setNeighbors(new Neighbor[]{
-				new Neighbor(b, 3), 
-				new Neighbor(e, 6)
-		   });
-		d.setNeighbors(new Neighbor[]{
-				new Neighbor(a, 8), 
-				new Neighbor(h, 3)
-		   });*/
 		
 		TSNode a = new TSNode(new Point(0, 0));
-		TSNode b = new TSNode(new Point(0, 0));
-		TSNode c = new TSNode(new Point(0, 0));
-		TSNode d = new TSNode(new Point(0, 0));
-		TSNode e = new TSNode(new Point(0, 0));
-		TSNode f = new TSNode(new Point(0, 0));
-		TSNode g = new TSNode(new Point(0, 0));
-		TSNode h = new TSNode(new Point(0, 0));
-		TSNode i = new TSNode(new Point(0, 0));
+		TSNode b = new TSNode(new Point(3, 3));
+		TSNode c = new TSNode(new Point(2, 1));
+		TSNode d = new TSNode(new Point(1, 4));
+		TSNode e = new TSNode(new Point(4, 2));
 		
-		TSNode[] allCities = new TSNode[]{a, b, c, d, e, f, g, h, i};
+		TSNode[] allCities = new TSNode[]{a, b, c, d, e};
 		TravellingSalesman ts = new TravellingSalesman(allCities, a);
-//		ts.getBest();
+		
+		TSNode[] order = ts.getBestOrder();
+		List<Direction> actionList = orderToActions(order);
+		String sPath = "";
+		for (TSNode n : order)
+		{
+			sPath += Part2.listToPath(actionList);
+		}
+		
+		//Plug the string into the pathFollower
+		PathFollower pf = new PathFollower(sPath);
+		pf.runPath();
+		
+	}
+	
+	private static List<Direction> orderToActions(TSNode[] travelOrder)
+	{
+		ArrayList<Direction> actions = new ArrayList<Direction>();
+		
+		for (TSNode n : travelOrder)
+		{
+			actions = search.search();
+		}
+		
+		return actions;
 	}
 
 }

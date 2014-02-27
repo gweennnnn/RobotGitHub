@@ -6,6 +6,7 @@ import java.util.List;
 import lejos.util.Matrix;
 import established.PathFollower;
 import part1.UninformedSearch;
+import rp13.search.problem.puzzle.EightPuzzle;
 import rp13.search.problem.puzzle.EightPuzzle.PuzzleMove;
 import grid.Grid.Direction;
 import grid.Connection;
@@ -13,8 +14,8 @@ import grid.Grid;
 
 public class Part2{
 
-	Point start;
-	Point end;
+	Point start = new Point(0, 0);
+	Point end = new Point(2, 2);
 	Grid startState;
 	Grid endState;
 	
@@ -45,6 +46,13 @@ public class Part2{
 	 */
 	public Part2()
 	{
+		Connection[] blockages = defaultBlockages();
+		startState = new Grid(blockages, start, 5, 5);
+		endState = new Grid(blockages, end, 5, 5);
+	}
+	
+	private Connection[] defaultBlockages()
+	{
 		// Generate Blockages on the grid
 		Point s1 = new Point(1, 4);
 		Point e1 = new Point(2, 4);
@@ -68,20 +76,32 @@ public class Part2{
 
 		Connection[] blockages = new Connection[] { b1, b2, b3, b4, b5 };
 
-		startState = new Grid(blockages, start, 5, 5);
-		startState = new Grid(blockages, end, 5, 5);
-		
+//		Connection[] blockages = new Connection[] {};
+		return blockages;
 	}
 
 	public void run() {
-		////However a new search is done
-		UninformedSearch<Direction, Grid> s = new UninformedSearch<Direction, Grid>(startState, endState, UninformedSearch.SearchType.BreadthFirst);
 		
+		//(Whatever way) a new search is done
+		UninformedSearch<Direction, Grid> s = new UninformedSearch<Direction, Grid>(startState, Grid.Direction.START, endState, UninformedSearch.SearchType.BreadthFirst);
 		////However the results are received
-		List<Direction> actionList = s.search(currNode, succFunct, successors));
+		List<Direction> actionList = s.search(startState, succFunct, endState, successors));
+		
+		
+		
 		String path = listToPath(actionList);
 		PathFollower pf = new PathFollower(path);
 		pf.runPath();
+		
+//		List<Direction> l = new ArrayList<Direction>();
+//		l.add(Direction.UP);   //Forward
+//		l.add(Direction.RIGHT);//Right
+//		l.add(Direction.UP);   //Left
+//		l.add(Direction.LEFT); //Left
+//		l.add(Direction.DOWN); //Left
+//		
+//		String sPath = Part2.listToPath(l);
+//		if (sPath.equals("01222")) System.out.println("Relativity Regulator fully functional");
 	}
 	
 	/**
@@ -89,7 +109,7 @@ public class Part2{
 	 * @param actionList The List of Grid movement Directions being followed
 	 * @return A string code for the NXT Pathfollower Robot to follow.
 	 */
-	private String listToPath(List<Direction> actionList)
+	public static String listToPath(List<Direction> actionList)
 	{
 		ArrayList<GridDirection> movements = new ArrayList<GridDirection>();
 		ArrayList<GridDirection> orientations = new ArrayList<GridDirection>();
@@ -133,12 +153,12 @@ public class Part2{
 		return s;
 	}
 	
-	private String submitRelativity(GridDirection gridDirection, GridDirection orientation)
+	private static String submitRelativity(GridDirection gridDirection, GridDirection orientation)
 	{
 		return submitRelativity(gridDirection.val, orientation.val);
 	}
 	
-	private String submitRelativity(int gridDirection, int orientation) throws IllegalArgumentException
+	private static String submitRelativity(int gridDirection, int orientation) throws IllegalArgumentException
 	{
 		if ((gridDirection | orientation) == -1) throw new IllegalArgumentException("Trying to turn 180 degrees on the grid.");
 		Integer movementCode = relativityRegulator[gridDirection][orientation];

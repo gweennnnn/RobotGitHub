@@ -39,17 +39,6 @@ public class UninformedSearch<_action, _state> extends EqualityGoalTest<_state>
 	public Agenda<Node<_action, _state>> getList() {
 		return list;
 	}
-	
-	public List<_action> search(SuccessorFunction<_action, _state> succFunct) 
-    { 
-        //Default start 
-        Node <_action, _state> startNode = new Node<_action, _state>(null, startState); 
-        //Default successors (empty) 
-        ArrayList<ActionStatePair<_action, _state>> emptySuccs = new ArrayList<ActionStatePair<_action, _state>>(); 
-        //Get the successors 
-        succFunct.getSuccessors(startState, emptySuccs); 
-        return search(startNode, succFunct, emptySuccs); 
-    } 
 
 	public List<_action> search(Node<_action, _state> startNode, SuccessorFunction<_action, _state> succFunct, List<ActionStatePair<_action, _state>> successors)
 	{	
@@ -107,30 +96,25 @@ public class UninformedSearch<_action, _state> extends EqualityGoalTest<_state>
 		return new ArrayList<_action>();
 	}
 	
-	 public static void main (String[] args) 
-	    { 
-	        //This is how you use it 
-	        UninformedSearch<PuzzleMove, EightPuzzle> USearch = new UninformedSearch<PuzzleMove, EightPuzzle> 
-	                            (EightPuzzle.testEightPuzzle(), EightPuzzle.orderedEightPuzzle(), SearchType.BreadthFirst); 
-	          
-	        //With Delegation 
-	        List<PuzzleMove> solutionList = USearch.search(new EightPuzzleSuccessorFunction()); 
-	          
-	        Node<EightPuzzle.PuzzleMove, EightPuzzle> firstNode = new Node<EightPuzzle.PuzzleMove, EightPuzzle> 
-	                                                                    (null, USearch.getStartState()); 
-	        //Without delegation 
-//	      EightPuzzleSuccessorFunction succfunct = new EightPuzzleSuccessorFunction(); 
-//	      Node<EightPuzzle.PuzzleMove, EightPuzzle> firstNode = new Node<EightPuzzle.PuzzleMove, EightPuzzle> 
-//	      (PuzzleMove.START, USearch.getStartState()); 
-//	      List<PuzzleMove> solutionList = USearch.search(firstNode, succfunct, new ArrayList<ActionStatePair<PuzzleMove, EightPuzzle>>()); 
-	          
-	        int count = 0; 
-	        for(int i = 0; i < solutionList.size(); i++) 
-	        { 
-	            System.out.print(solutionList.get(i) + ", "); 
-	            count++; 
-	        } 
-	        System.out.println(); 
-	        System.out.println(count); 
-	    }
+	public static void main (String[] args)
+	{
+		//This is how you use it
+		UninformedSearch<PuzzleMove, EightPuzzle> USearch = new UninformedSearch<PuzzleMove, EightPuzzle>
+							(EightPuzzle.testEightPuzzle(), EightPuzzle.orderedEightPuzzle(), SearchType.DepthFirst);
+		
+		EightPuzzleSuccessorFunction succfunct = new EightPuzzleSuccessorFunction();
+		
+		Node<EightPuzzle.PuzzleMove, EightPuzzle> firstNode = new Node<EightPuzzle.PuzzleMove, EightPuzzle>
+															        (null, USearch.getStartState());
+		
+		List<PuzzleMove> solutionList = USearch.search(firstNode, succfunct, new ArrayList<ActionStatePair<PuzzleMove, EightPuzzle>>());
+		int count = 0;
+		for(int i = 0; i < solutionList.size(); i++)
+		{
+			System.out.print(solutionList.get(i) + ", ");
+			count++;
+		}
+		System.out.println();
+		System.out.println(count);
+	}
 }
