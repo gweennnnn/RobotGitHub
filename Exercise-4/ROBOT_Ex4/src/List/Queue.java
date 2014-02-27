@@ -4,7 +4,7 @@ package List;
 import part1.Node;
 import rp13.search.interfaces.Agenda;
 
-public class Queue<_action, _state> extends ListType<_action, _state> implements Agenda<Node<_action, _state>> 
+public class Queue<_action, _state> extends ListType<_action, _state>
 {
 	public Queue()
 	{
