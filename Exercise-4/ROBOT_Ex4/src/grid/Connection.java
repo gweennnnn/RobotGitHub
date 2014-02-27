@@ -1,4 +1,5 @@
 package grid;
+
 import java.awt.Point;
 
 /**
@@ -26,5 +27,10 @@ public class Connection {
 							(c.to.equals(from) && c.from.equals(to));
 				
 		return isEqual;
+	}
+	
+	public String toString()
+	{
+		return "(" + from.x + ", " + from.y + ") to (" + to.x + ", " + to.y + ")";
 	}
 }

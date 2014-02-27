@@ -134,13 +134,24 @@ public class Grid {
 	}
 
 	private boolean isBlockage(Connection c) {
-		if ((c.to.x | c.from.x) >= width) return false;
-		if ((c.to.y | c.from.y) >= height) return false;
-		
-		boolean isIt = false;
+		boolean xBad = (c.to.x >= width) || (c.from.x >= width);
+		boolean yBad = (c.to.y >= height) || (c.from.y >= height);
+		if (xBad) return false; //Not a valid connection
+		if (yBad) return false; //Not a valid connection
+		return Grid.isBlockage(c, this.blockages);
+	}
+
+	private static boolean isBlockage(Connection c, Connection[] blockages) 
+	{
 		for (Connection b : blockages)
-			if (b.equals(c)) isIt = true;
-		return isIt;
+		{
+			if (b!=null)
+			{
+				if (b.equals(c)) return true;
+			}
+		}
+		
+		return false;
 	}
 
 
@@ -160,10 +171,157 @@ public class Grid {
 		}
 	}
 
-	//Add the coordinates of two points together
+	/**
+	 * Add the coordinates of two points together
+	 */
 	private Point addPoints(Point p1, Point p2) {
 		Point r_point = new Point(p1.x + p2.x, p1.y + p2.y);
 		return r_point;
+	}
+	
+	/**
+	 * Get a complete random grid
+	 */
+	public static Grid randomGrid()
+	{
+		Random generator = new Random();
+		return randomGrid(generator.nextInt(50));
+	}
+	
+	/**
+	 * Get a random grid with a set number of blockages, but a random size
+	 * @param numberOfBlockages The number of blockages found in the grid
+	 */
+	public static Grid randomGrid(int numberOfBlockages)
+	{
+		Random generator = new Random();
+		int w = -1;
+		int h = -1;
+		
+		while (!validBlockageNumber(numberOfBlockages, w, h))
+		{
+			w = generator.nextInt(10);
+			h = generator.nextInt(10);
+		}
+		
+		return randomGrid(numberOfBlockages, w, h);
+	}
+	
+	/**
+	 * Get a random grid, with specified blockages and width and height
+	 * @param numberOfBlockages Number of blockages on the grid
+	 * @param width Width of the grid
+	 * @param height Height of the grid
+	 */
+	public static Grid randomGrid(int numberOfBlockages, int width, int height)
+	{
+		//Make sure the numbers given are doable.
+		if (!validBlockageNumber(numberOfBlockages, width, height))
+			throw new IllegalArgumentException("Cannot create a random grid with " + numberOfBlockages + " blockages on a grid of width " + width + " and height " + height + ".");
+		
+		Grid r_grid = null; //The grid being returned
+		Connection[] blockages = new Connection[numberOfBlockages];
+		
+		Random generator = new Random();
+		
+		for (int i = 0; i < blockages.length; i++)
+		{
+			Connection blockage = null;
+			
+			//Make a new blockage
+			do
+			{
+				//The two points whose path to the other is being blocked
+				Point p1;
+				Point p2;
+				
+				//Generate the first point
+				int x1 = generator.nextInt(width);
+				int y1 = generator.nextInt(height);
+				p1 = new Point(x1, y1);
+				
+					/* The second point is trickier, and less random. 
+					 * It must be within the grid, and share a 
+					 * coordinate with the first point
+					 */
+				//Use Integer objects, so that sharedCoord can point to one of them
+				int x2;
+				int y2;
+
+				boolean xOrY = generator.nextBoolean(); //Decide which coordinate is shared
+				
+				if (xOrY) //Shares the x-coordinate
+				{
+					x2 = x1;
+					//Check to see if it's on the edge
+					boolean topEdge = (y1 == height-1);
+					boolean bottomEdge = (y1 == 0);
+					
+					if (topEdge)
+					{
+						y2 = y1 - 1;
+					}
+					else if (bottomEdge)
+					{
+						y2 = y1 + 1;
+					}
+					else //Not near an edge
+					{
+						boolean upOrDown = generator.nextBoolean();
+						
+						y2 = (upOrDown) ? y1+1 : y1-1; 
+					}
+				}
+				else //Shares the y-coordinate
+				{
+					y2 = y1;
+					//Check to see if it's on the edge
+					boolean topEdge = (x1 == width-1);
+					boolean bottomEdge = (x1 == 0);
+					
+					if (topEdge)
+					{
+						x2 = x1 - 1;
+					}
+					else if (bottomEdge)
+					{
+						x2 = x1 + 1;
+					}
+					else //Not near an edge
+					{
+						boolean upOrDown = generator.nextBoolean();
+						
+						x2 = (upOrDown) ? x1+1 : x1-1; 
+					}
+				}
+				
+				p2 = new Point(x2, y2);
+
+				//Add this random blockage to the list of blockages
+				blockage = new Connection(p1, p2);
+			} while (isBlockage(blockage, blockages)); //Repeat if the generated blockage already exists.
+			
+			//Once a valid and new blockage is created, add it to the blockages
+			blockages[i] = blockage;
+		}
+		
+		Point start = new Point(generator.nextInt(width), generator.nextInt(height));
+		r_grid = new Grid(blockages, start, width, height);
+		return r_grid;
+	}
+	
+	/**
+	 * Uses a derived equation to calculate whether or not the number of blockages is impossible on a grid of a certain size.
+	 * @param bnum Number of blockages
+	 * @param w Width of the grid
+	 * @param h Height of the grid
+	 * @return Whether or not the blockages/grid size is valid.
+	 */
+	private static boolean validBlockageNumber(int bnum, int w, int h)
+	{
+		if ((w|h) < 0) return false;
+		int maxBlockages = 2*w*h - w - h; //Derived equation for the max number of blockages on a grid of width w and height h.
+		return bnum <= maxBlockages;
 	}
 	
 	/**
@@ -198,8 +356,8 @@ public class Grid {
 		// use a string builder for efficiency
 		StringBuilder sb = new StringBuilder();
 
+		//For each row
 		for (int y = height-1; y >= 0; y--) {
-			
 			sb.append("\n"); //Start a new line
 			
 			//Draw horizontals
@@ -208,10 +366,10 @@ public class Grid {
 				Point thisPosition = new Point(x, y);
 				Point newPosition = new Point(x+1, y); //The node to the right
 				boolean blockageHere = isBlockage(thisPosition, newPosition);
-				
+
 				//Draw the node
 				if (thisPosition.equals(robotPosition))
-					sb.append("#"); //Represent the robot's position
+					sb.append("R"); //Represent the robot's position
 				else
 					sb.append("+"); //Represent a junction
 				
@@ -226,7 +384,7 @@ public class Grid {
 			sb.append("\n"); //Start a new line
 			
 			//Draw Verticals
-			if (y > 0)
+			if (y != 0) //Only draw connections to the next row if there is a row below (not true when y == 0)
 			{
 				for (int x = 0; x < width; x++) {
 					//Loop through the width x height grid Point data
@@ -245,7 +403,8 @@ public class Grid {
 	
 	public static void main(String[] args) {
 
-		// Generate Blockages on the grid
+		//HARD-CODED GRID
+		/*// Generate Blockages on the grid
 		Point s1 = new Point(1, 4);
 		Point e1 = new Point(2, 4);
 		Connection b1 = new Connection(s1, e1);
@@ -262,14 +421,14 @@ public class Grid {
 		Point e4 = new Point(2, 3);
 		Connection b4 = new Connection(s4, e4);
 
-		Point s5 = new Point(4, 2);
+		Point s5 = new Point(3, 3);
 		Point e5 = new Point(4, 3);
 		Connection b5 = new Connection(s5, e5);
 
-		Connection[] blockages = new Connection[] { b1, b2, b3, b4, b5 };
-
-		Grid grid = new Grid(blockages, new Point(0, 0), 5, 5);
-
+		Connection[] blockages = new Connection[] { b1, b2, b3, b4, b5 };*/
+		
+		//RANDOM
+		Grid grid = Grid.randomGrid(20, 5, 5);
 		System.out.println(grid);
 	}
 

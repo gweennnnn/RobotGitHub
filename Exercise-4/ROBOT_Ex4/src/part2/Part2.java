@@ -40,6 +40,9 @@ public class Part2{
 		
 	}
 	
+	/**
+	 * Construct a grid
+	 */
 	public Part2()
 	{
 		// Generate Blockages on the grid
@@ -81,6 +84,11 @@ public class Part2{
 		pf.runPath();
 	}
 	
+	/**
+	 * Translates a list of Grid Directions into a readable string code to construct a Pathfollower Robot.
+	 * @param actionList The List of Grid movement Directions being followed
+	 * @return A string code for the NXT Pathfollower Robot to follow.
+	 */
 	private String listToPath(List<Direction> actionList)
 	{
 		ArrayList<GridDirection> movements = new ArrayList<GridDirection>();
