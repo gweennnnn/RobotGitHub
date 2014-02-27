@@ -1,11 +1,12 @@
 package part1;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import rp13.search.util.ActionStatePair;
+import rp13.search.problem.puzzle.EightPuzzle.PuzzleMove;
+
 
 public class Node<_action, _state> {
-	private Node predecessor;
+	private Node<_action, _state> predecessor;
 	private _action move;
 	private _state state;
 	
@@ -20,22 +21,20 @@ public class Node<_action, _state> {
 		this.state = state;
 	}
 	
-	public ArrayList<_action> solutionList(){
-		
-		ArrayList<_action> list;
-		list = new ArrayList<_action>();
 
+	public void getSolutionList(List<_action> solutionList, _action startAction)
+	{
+		Node<_action, _state> currNode = this;
 		
-		if (predecessor != null)
+		while(currNode.getMove() != startAction)
 		{
-			list = predecessor.solutionList();
-			list.add(getMove());
+			solutionList.add(0, currNode.getMove());
+			currNode = currNode.getPredecessor();
 		}
-		
-		return list;
 	}
 
-	public Node getPredecessor() {
+
+	public Node<_action, _state> getPredecessor() {
 		return predecessor;
 	}
 
