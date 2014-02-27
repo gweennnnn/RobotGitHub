@@ -22,11 +22,11 @@ public class Node<_action, _state> {
 	}
 	
 
-	public void getSolutionList(List<_action> solutionList, _action startAction)
+	public void getSolutionList(List<_action> solutionList)
 	{
 		Node<_action, _state> currNode = this;
 		
-		while(currNode.getMove() != startAction)
+		while(currNode.getMove() != null)
 		{
 			solutionList.add(0, currNode.getMove());
 			currNode = currNode.getPredecessor();

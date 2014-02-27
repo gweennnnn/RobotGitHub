@@ -24,7 +24,7 @@ public class EightPuzzle {
 	 * 
 	 */
 	public enum PuzzleMove {
-		UP(-3), DOWN(3), LEFT(-1), RIGHT(1), START(0);
+		UP(-3), DOWN(3), LEFT(-1), RIGHT(1);
 
 		private final int m_move;
 
@@ -87,7 +87,7 @@ public class EightPuzzle {
 	}
 
 	private EightPuzzle(boolean x) {
-		m_board = new int[] { 1, 2, 3, 4, 5, 6, 8, 7, BLANK };
+		m_board = new int[] { 1, 2, BLANK, 3, 4, 5, 6, 7, 8 };
 		m_blankPosition = 2;
 	}
 	/**

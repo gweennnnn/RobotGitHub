@@ -16,16 +16,14 @@ import rp13.search.util.EqualityGoalTest;
 public class UninformedSearch<_action, _state> extends EqualityGoalTest<_state>
 {
 	private _state startState;
-	private _action startAction;
 	private Agenda<Node<_action, _state>> list; 
 	
 	public enum SearchType { DepthFirst, BreadthFirst };
 	
-	public UninformedSearch(_state startState, _action startAction, _state endState, SearchType searchType)
+	public UninformedSearch(_state startState, _state endState, SearchType searchType)
 	{
 		super(endState);
 		this.startState = startState;
-		this.startAction = startAction;
 		
 		if(searchType.equals(SearchType.DepthFirst))
 			this.list = new Stack<_action, _state>();
@@ -60,7 +58,7 @@ public class UninformedSearch<_action, _state> extends EqualityGoalTest<_state>
 			{
 				System.out.println("GOAL STATE FOUND");
 				List<_action> solutionList = new ArrayList<_action> ();
-				currentNode.getSolutionList(solutionList, this.startAction);
+				currentNode.getSolutionList(solutionList);
 				return solutionList;
 			}
 
@@ -76,7 +74,7 @@ public class UninformedSearch<_action, _state> extends EqualityGoalTest<_state>
 			{ 	
 				Node<_action, _state> tempNode = new Node<_action, _state>(state.getAction(), state.getState(), currentNode);
 
-				if (!list.contains(tempNode) && !tempNode.getMove().equals(startAction))
+				if (!list.contains(tempNode) && !tempNode.getMove().equals(null))
 				{
 					System.out.println(tempNode.getMove());
 					System.out.println(tempNode.getState());
@@ -102,12 +100,12 @@ public class UninformedSearch<_action, _state> extends EqualityGoalTest<_state>
 	{
 		//This is how you use it
 		UninformedSearch<PuzzleMove, EightPuzzle> USearch = new UninformedSearch<PuzzleMove, EightPuzzle>
-							(EightPuzzle.testEightPuzzle(), EightPuzzle.PuzzleMove.START, EightPuzzle.orderedEightPuzzle(), SearchType.BreadthFirst);
+							(EightPuzzle.testEightPuzzle(), EightPuzzle.orderedEightPuzzle(), SearchType.DepthFirst);
 		
 		EightPuzzleSuccessorFunction succfunct = new EightPuzzleSuccessorFunction();
 		
 		Node<EightPuzzle.PuzzleMove, EightPuzzle> firstNode = new Node<EightPuzzle.PuzzleMove, EightPuzzle>
-															        (PuzzleMove.START, USearch.getStartState());
+															        (null, USearch.getStartState());
 		
 		List<PuzzleMove> solutionList = USearch.search(firstNode, succfunct, new ArrayList<ActionStatePair<PuzzleMove, EightPuzzle>>());
 		int count = 0;
