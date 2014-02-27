@@ -1,18 +1,20 @@
 package part3;
 
+import java.awt.Point;
+
 public class TSNode {
 
-	private String ID;
+	private Point position;
 	private Neighbor[] neighbors;
 	
-	public TSNode(String ID)
+	public TSNode(Point position)
 	{
-		this(ID, null);
+		this(position, null);
 	}
 	
-	public TSNode(String ID, Neighbor[] neighbors) {
+	public TSNode(Point position, Neighbor[] neighbors) {
 		super();
-		this.ID = ID;
+		this.position = position;
 		setNeighbors(neighbors);
 	}
 	
@@ -63,11 +65,12 @@ public class TSNode {
 	
 	public boolean equals(TSNode target)
 	{
-		return ID == target.getID();
+		return position.x == target.getPosition().x &&
+			   position.y == target.getPosition().y;
 	}
 	
-	private String getID() {
-		return ID;
+	private Point getPosition() {
+		return position;
 	}
 	
 	private Neighbor[] getNeighbors() {
@@ -81,24 +84,24 @@ public class TSNode {
 	
 	public String toString()
 	{
-		return (ID.toString());
+		return (position.toString());
 	}
 	
 	public String toStringFull()
 	{
-		String s = ID.toString() + " has neighbors: ";
+		String s = position.toString() + " has neighbors: ";
 		for (Neighbor n : neighbors)
 		{
 			s += "\n-";
 			s += n;
 		}
 		
-		return (ID.toString() + " has neighbors: ");
+		return s;
 	}
 	
 	public static void main(String[] args)
 	{
-		TSNode tsn = new TSNode("A");
+		TSNode tsn = new TSNode(new Point(0, 0));
 		
 	}
 	

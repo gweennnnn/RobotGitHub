@@ -1,27 +1,27 @@
-package part2;
+package established;
 
 import java.util.*;
 
 import lejos.nxt.Button;
 import lejos.nxt.LCD;
-import lejos.util.TextMenu;
-import shared.LineFollower;
+import lejos.util.Matrix;
 
 public class PathFollower extends LineFollower {
 	
-	private final int LEFT = 0;
-	private final int RIGHT = 1;
-	private int[] SEQUENCE = makeSequence("1111");
-	private Random rand = new Random();
+	protected final int FORWARD = 0;
+	protected final int LEFT = 1;
+	protected final int RIGHT = 2;
+	protected int[] SEQUENCE = makeSequence("12020");
+	protected Random rand = new Random();
 	
-	public PathFollower(List<ActionStatePair<Direction, State>> path){
-		
+	public PathFollower(String path){
+		SEQUENCE = makeSequence(path);
 	}
 
 	/**
 	 * Traverses a random path
 	 */
-	private void runRandom()
+	public void runRandom()
 	{
 		init(); //Scan the area
 		
@@ -49,7 +49,7 @@ public class PathFollower extends LineFollower {
 	/**
 	 * Traverses a set path.
 	 */
-	private void runPath()
+	public void runPath()
 	{
 		init();
 		
@@ -71,7 +71,7 @@ public class PathFollower extends LineFollower {
 	/**
 	 * Allow the user to input their own path.
 	 */
-	private static int[] inputPath()
+	protected static int[] inputPath()
 	{
 		String input = "";
 		boolean firstIteration = true;
@@ -80,7 +80,7 @@ public class PathFollower extends LineFollower {
 		System.out.println();
 		System.out.println();
 		System.out.println();
-		while (!(Button.ENTER.isDown() || Button.ESCAPE.isDown()) || firstIteration)
+		while (Button.ESCAPE.isDown() || firstIteration)
 		{
 			LCD.clearDisplay();
 			LCD.clearDisplay();
@@ -88,8 +88,9 @@ public class PathFollower extends LineFollower {
 			System.out.println(input);
 			
 			waitForPress();
-			if (Button.LEFT.isDown()) input += "0";
-			if (Button.RIGHT.isDown()) input += "1";
+			if (Button.ENTER.isDown()) input += "0"; //Forward
+			if (Button.LEFT.isDown()) input += "1";  //Left
+			if (Button.RIGHT.isDown()) input += "2"; //Right
 			
 			firstIteration = false;
 		}
@@ -137,12 +138,15 @@ public class PathFollower extends LineFollower {
 		
 		switch(SEQUENCE[0])
 		{
-			case LEFT:
-				turnLeft();
-				break;
-			case RIGHT:
-				turnRight();
-				break;
+		case FORWARD:
+			//Keep going, don't turn.
+			break;
+		case RIGHT:
+			turnRight();
+			break;
+		case LEFT:
+			turnLeft();
+			break;
 		}
 		nextMovement();
 	}
