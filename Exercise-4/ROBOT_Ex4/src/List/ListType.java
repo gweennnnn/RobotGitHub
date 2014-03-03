@@ -56,4 +56,5 @@ public class ListType<_action, _state> implements Agenda<Node<_action, _state>>
 	public Node<_action, _state> peek() {
 		return this.frontier.get(0);
 	}
+
 }
