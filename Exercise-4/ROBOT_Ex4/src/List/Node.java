@@ -2,11 +2,9 @@ package List;
 
 import java.util.List;
 
-import rp13.search.problem.puzzle.EightPuzzle.PuzzleMove;
 
-
-public class Node<_action, _state> {
-	private Node<_action, _state> predecessor;
+public class Node<_action, _state> implements NodeInterface<_action, _state>{
+	private NodeInterface<_action, _state> predecessor;
 	private _action move;
 	private _state state;
 	
@@ -14,39 +12,49 @@ public class Node<_action, _state> {
 		this(move, state, null);
 	}
 	
-	public Node(_action move, _state state, Node<_action, _state> predecessor) {
+	public Node(_action move, _state state, NodeInterface<_action, _state> predecessor) {
 		super();
 		this.predecessor = predecessor;
 		this.move = move;
 		this.state = state;
 	}
+
 	
 
-	public void getSolutionList(List<_action> solutionList)
-	{
-		Node<_action, _state> currNode = this;
-		
-		while(currNode.getMove() != null)
-		{
-			solutionList.add(0, currNode.getMove());
-			currNode = currNode.getPredecessor();
-		}
-//		if()
-//		predecessor.getSolutionList(solutionList, startAction);
-//		solutionList.add(getMove());
-
+	@Override
+	public NodeInterface<_action, _state> getPredecessor() {
+		return this.predecessor;
 	}
 
-
-	public Node<_action, _state> getPredecessor() {
-		return predecessor;
+	@Override
+	public void setPredecessor(NodeInterface<_action, _state> predecessor) {
+		this.predecessor = predecessor;
 	}
-
+	
+	@Override
 	public _action getMove() {
 		return move;
 	}
 
+	@Override
 	public _state getState() {
 		return state;
+	}
+
+	@Override
+	public void getSolutionList(List<_action> x) {
+		NodeInterface<_action, _state> currNode = this;
+				
+		while(currNode.getMove() != null)
+		{
+			x.add(0, currNode.getMove());
+			currNode = currNode.getPredecessor();
+		}
+	}
+
+	@Override
+	public int getValue() {
+		// TODO Auto-generated method stub
+		return -1;
 	}
 }

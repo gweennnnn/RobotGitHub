@@ -1,10 +1,5 @@
 package List;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import rp13.search.interfaces.Agenda;
 
 public class Stack<_action, _state> extends ListType<_action, _state>
 {

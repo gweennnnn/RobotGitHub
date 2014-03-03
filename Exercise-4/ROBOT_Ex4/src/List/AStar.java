@@ -27,4 +27,7 @@
 
 package List;
 
-public class AStar 
+public class AStar
+{
+	
+}

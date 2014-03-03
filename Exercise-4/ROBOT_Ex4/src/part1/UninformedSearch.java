@@ -55,16 +55,16 @@ public class UninformedSearch<_action, _state> extends EqualityGoalTest<_state>
 	{	
 		Node<_action, _state> currentNode = startNode;
 		this.list.push(startNode);
-		System.out.println("So, starting from the first node..");
-		int counter = 0;
+//		System.out.println("So, starting from the first node..");
+//		int counter = 0;
 		while (!this.list.isEmpty())
 		{
 			currentNode = this.list.pop(); // <------already adds an item to the explored set
 
-			System.out.println("CURRENT NODE!");
-			System.out.println(counter + " passes so far...");
-			System.out.println(currentNode.getMove());
-			System.out.println(currentNode.getState());
+//			System.out.println("CURRENT NODE!");
+//			System.out.println(counter + " passes so far...");
+//			System.out.println(currentNode.getMove());
+//			System.out.println(currentNode.getState());
 			if (this.isGoal(currentNode.getState()))
 			{
 				System.out.println("GOAL STATE FOUND");
@@ -77,33 +77,33 @@ public class UninformedSearch<_action, _state> extends EqualityGoalTest<_state>
 
 			succFunct.getSuccessors(currentNode.getState(), successors); // <----------gets all the successors
 
-			if(successors.isEmpty())
-				System.out.println("Derp");
-
-			System.out.println("CURRENT CHILDREN");
+//			if(successors.isEmpty())
+//				System.out.println("Derp");
+//
+//			System.out.println("CURRENT CHILDREN");
 			for (ActionStatePair<_action, _state> state : successors)
 			{ 	
 				Node<_action, _state> tempNode = new Node<_action, _state>(state.getAction(), state.getState(), currentNode);
 
 				if (!list.contains(tempNode) && !tempNode.getMove().equals(null))
 				{
-					System.out.println(tempNode.getMove());
-					System.out.println(tempNode.getState());
+//					System.out.println(tempNode.getMove());
+//					System.out.println(tempNode.getState());
 					this.list.push(tempNode); // <------------------adds it to the frontiers list
 				}
 			}
 			successors.removeAll(successors);
 
 
-			System.out.println();
-			System.out.println();
-			System.out.println("NEXT NODE!");
-			counter++;
+//			System.out.println();
+//			System.out.println();
+//			System.out.println("NEXT NODE!");
+//			counter++;
 
 		}
 
 
-		System.out.println("No solution!");
+//		System.out.println("No solution!");
 		return new ArrayList<_action>();
 	}
 	
@@ -111,18 +111,10 @@ public class UninformedSearch<_action, _state> extends EqualityGoalTest<_state>
 	    { 
 	        //This is how you use it 
 	        UninformedSearch<PuzzleMove, EightPuzzle> USearch = new UninformedSearch<PuzzleMove, EightPuzzle> 
-	                            (EightPuzzle.testEightPuzzle(), EightPuzzle.orderedEightPuzzle(), SearchType.BreadthFirst); 
+	                            (EightPuzzle.testEightPuzzle(), EightPuzzle.orderedEightPuzzle(), SearchType.DepthFirst); 
 	          
 	        //With Delegation 
 	        List<PuzzleMove> solutionList = USearch.search(new EightPuzzleSuccessorFunction()); 
-	          
-	        Node<EightPuzzle.PuzzleMove, EightPuzzle> firstNode = new Node<EightPuzzle.PuzzleMove, EightPuzzle> 
-	                                                                    (null, USearch.getStartState()); 
-	        //Without delegation 
-//	      EightPuzzleSuccessorFunction succfunct = new EightPuzzleSuccessorFunction(); 
-//	      Node<EightPuzzle.PuzzleMove, EightPuzzle> firstNode = new Node<EightPuzzle.PuzzleMove, EightPuzzle> 
-//	      (PuzzleMove.START, USearch.getStartState()); 
-//	      List<PuzzleMove> solutionList = USearch.search(firstNode, succfunct, new ArrayList<ActionStatePair<PuzzleMove, EightPuzzle>>()); 
 	          
 	        int count = 0; 
 	        for(int i = 0; i < solutionList.size(); i++) 
