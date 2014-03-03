@@ -4,6 +4,9 @@ import grid.Connection;
 import java.awt.Point;
 import java.util.Random;
 
+import puzzles.EightPuzzle;
+import puzzles.PuzzleInterface;
+
 /**
  * A class to represent a traversable robot grid. Takes into account hard-coded
  * blockages on the grid.
@@ -11,7 +14,7 @@ import java.util.Random;
  * @author Jordan Bell
  * 
  */
-public class StringPuzzle {
+public class StringPuzzle implements PuzzleInterface {
 
 	public String value;
 
@@ -92,14 +95,28 @@ public class StringPuzzle {
 	 * @param g The grid being compared to.
 	 * @return Whether or not the values of g are equal with the ones in this grid.
 	 */
-	public boolean equals(StringPuzzle sp)
+	@Override
+	public boolean equals(Object _that)
 	{
-		return (value.equals(sp.value));
+		
+		if (_that instanceof StringPuzzle)
+		{
+			StringPuzzle that = (StringPuzzle) _that;
+			return (value.equals(that));
+		}
+			
+		return false;
 	}
 
 	@Override
 	public String toString() {
 		return value;
+	}
+	
+	@Override
+	public int calculateValue() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	public static void main(String[] args) {
@@ -122,5 +139,7 @@ public class StringPuzzle {
 		
 		
 	}
+
+	
 
 }

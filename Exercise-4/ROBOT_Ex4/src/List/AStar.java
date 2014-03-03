@@ -1,13 +1,13 @@
 package List;
 
-public class AStar <_action, _state> extends ListType<_action, _state>
+public class AStar <_action> extends ListType<_action>
 {
 	public AStar()
 	{
 		super();
 	}
 	
-	public void push(AStarNode<_action, _state> item) {
+	public void push(AStarNode<_action> item) {
 		boolean added = false;
 		if(frontier.size() == 0)
 			frontier.add(item);
@@ -26,7 +26,7 @@ public class AStar <_action, _state> extends ListType<_action, _state>
 	}
 	
 	@Override
-	public AStarNode<_action, _state>  pop() {
+	public AStarNode<_action>  pop() {
 		System.out.println("Extend this class and overwrite this particular method");
 		return null;
 	}

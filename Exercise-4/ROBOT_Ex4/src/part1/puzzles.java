@@ -2,9 +2,10 @@ package part1;
 import java.util.List;
 import java.util.ArrayList;
 
-import rp13.search.problem.puzzle.EightPuzzle;
-import rp13.search.problem.puzzle.EightPuzzleSuccessorFunction;
-import rp13.search.problem.puzzle.EightPuzzle.PuzzleMove;
+import puzzles.EightPuzzle;
+import puzzles.EightPuzzleSuccessorFunction;
+import puzzles.EightPuzzle.PuzzleMove;
+import rp13.search.interfaces.SuccessorFunction;
 import rp13.search.util.ActionStatePair;
 
 
@@ -19,7 +20,7 @@ public class puzzles {
 		List<ActionStatePair<PuzzleMove, EightPuzzle>> frontiers = null;
 		List<ActionStatePair<PuzzleMove, EightPuzzle>> successor = null;
 		
-		EightPuzzleSuccessorFunction sf = new EightPuzzleSuccessorFunction();
+		SuccessorFunction<PuzzleMove, EightPuzzle> sf = new EightPuzzleSuccessorFunction();
 		
 		sf.getSuccessors(startState, successor);
 		

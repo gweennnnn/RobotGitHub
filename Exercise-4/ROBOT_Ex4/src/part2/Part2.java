@@ -6,7 +6,7 @@ import java.util.List;
 import lejos.util.Matrix;
 import established.PathFollower;
 import part1.UninformedSearch;
-import rp13.search.problem.puzzle.EightPuzzle.PuzzleMove;
+import puzzles.EightPuzzle.PuzzleMove;
 import grid.Grid.Direction;
 import grid.Connection;
 import grid.Grid;

@@ -3,6 +3,7 @@
  */
 package rp13.search.interfaces;
 
+
 import java.util.List;
 
 import rp13.search.util.ActionStatePair;

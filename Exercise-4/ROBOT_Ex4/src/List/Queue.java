@@ -1,7 +1,7 @@
 package List;
 
 
-public class Queue<_action, _state> extends ListType<_action, _state>
+public class Queue<_action> extends ListType<_action>
 {
 	public Queue()
 	{
@@ -9,7 +9,7 @@ public class Queue<_action, _state> extends ListType<_action, _state>
 	}
 
 	@Override
-	public Node<_action, _state> pop() {
+	public Node<_action> pop() {
 		if(this.frontier.isEmpty())
 			return null;
 		this.explored.add(this.frontier.get(0).getState());

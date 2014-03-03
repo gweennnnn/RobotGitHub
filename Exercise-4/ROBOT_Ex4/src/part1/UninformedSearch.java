@@ -3,57 +3,58 @@ package part1;
 import java.util.ArrayList;
 import java.util.List;
 
+import puzzles.EightPuzzle;
+import puzzles.EightPuzzleSuccessorFunction;
+import puzzles.EightPuzzle.PuzzleMove;
+import puzzles.PuzzleInterface;
 import List.Node;
 import List.Queue;
 import List.Stack;
 import rp13.search.interfaces.*;
-import rp13.search.problem.puzzle.EightPuzzle;
-import rp13.search.problem.puzzle.EightPuzzle.PuzzleMove;
-import rp13.search.problem.puzzle.EightPuzzleSuccessorFunction;
 import rp13.search.util.ActionStatePair;
 import rp13.search.util.EqualityGoalTest;
 
-public class UninformedSearch<_action, _state> extends EqualityGoalTest<_state>
+public class UninformedSearch<_action> extends EqualityGoalTest<PuzzleInterface>
 {
-	private _state startState;
-	private Agenda<Node<_action, _state>> list; 
+	private PuzzleInterface startState;
+	private Agenda<Node<_action>> list; 
 	
 	public enum SearchType { DepthFirst, BreadthFirst };
 	
-	public UninformedSearch(_state startState, _state endState, SearchType searchType)
+	public UninformedSearch(PuzzleInterface startState, PuzzleInterface endState, SearchType searchType)
 	{
 		super(endState);
 		this.startState = startState;
 		
 		if(searchType.equals(SearchType.DepthFirst))
-			this.list = new Stack<_action, _state>();
+			this.list = new Stack<_action>();
 		else
-			this.list = new Queue<_action, _state>();	
+			this.list = new Queue<_action>();	
 			
 	}
 	
-	public _state getStartState() {
+	public PuzzleInterface getStartState() {
 		return startState;
 	}
 
-	public Agenda<Node<_action, _state>> getList() {
+	public Agenda<Node<_action>> getList() {
 		return list;
 	}
 	
-	public List<_action> search(SuccessorFunction<_action, _state> succFunct) 
+	public List<_action> search(SuccessorFunction<_action, PuzzleInterface> succFunct) 
     { 
         //Default start 
-        Node <_action, _state> startNode = new Node<_action, _state>(null, startState); 
+        Node <_action> startNode = new Node<_action>(null, startState); 
         //Default successors (empty) 
-        ArrayList<ActionStatePair<_action, _state>> emptySuccs = new ArrayList<ActionStatePair<_action, _state>>(); 
+        ArrayList<ActionStatePair<_action, PuzzleInterface>> emptySuccs = new ArrayList<ActionStatePair<_action, PuzzleInterface>>(); 
         //Get the successors 
         succFunct.getSuccessors(startState, emptySuccs); 
         return search(startNode, succFunct, emptySuccs); 
     } 
 
-	public List<_action> search(Node<_action, _state> startNode, SuccessorFunction<_action, _state> succFunct, List<ActionStatePair<_action, _state>> successors)
+	public List<_action> search(Node<_action> startNode, SuccessorFunction<_action, PuzzleInterface> succFunct, List<ActionStatePair<_action, PuzzleInterface>> successors)
 	{	
-		Node<_action, _state> currentNode = startNode;
+		Node<_action> currentNode = startNode;
 		this.list.push(startNode);
 //		System.out.println("So, starting from the first node..");
 //		int counter = 0;
@@ -81,9 +82,9 @@ public class UninformedSearch<_action, _state> extends EqualityGoalTest<_state>
 //				System.out.println("Derp");
 //
 //			System.out.println("CURRENT CHILDREN");
-			for (ActionStatePair<_action, _state> state : successors)
+			for (ActionStatePair<_action, PuzzleInterface> state : successors)
 			{ 	
-				Node<_action, _state> tempNode = new Node<_action, _state>(state.getAction(), state.getState(), currentNode);
+				Node<_action> tempNode = new Node<_action>(state.getAction(), state.getState(), currentNode);
 
 				if (!list.contains(tempNode) && !tempNode.getMove().equals(null))
 				{
@@ -110,11 +111,12 @@ public class UninformedSearch<_action, _state> extends EqualityGoalTest<_state>
 	 public static void main (String[] args) 
 	    { 
 	        //This is how you use it 
-	        UninformedSearch<PuzzleMove, EightPuzzle> USearch = new UninformedSearch<PuzzleMove, EightPuzzle> 
+	        UninformedSearch<PuzzleMove> USearch = new UninformedSearch<PuzzleMove>
 	                            (EightPuzzle.testEightPuzzle(), EightPuzzle.orderedEightPuzzle(), SearchType.DepthFirst); 
 	          
 	        //With Delegation 
-	        List<PuzzleMove> solutionList = USearch.search(new EightPuzzleSuccessorFunction()); 
+	        SuccessorFunction x = new EightPuzzleSuccessorFunction();
+	        List<PuzzleMove> solutionList = USearch.search(x); 
 	          
 	        int count = 0; 
 	        for(int i = 0; i < solutionList.size(); i++) 

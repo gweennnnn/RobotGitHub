@@ -1,9 +1,9 @@
-package rp13.search.problem.puzzle;
+package puzzles;
 
 import java.util.List;
 
+import puzzles.EightPuzzle.PuzzleMove;
 import rp13.search.interfaces.SuccessorFunction;
-import rp13.search.problem.puzzle.EightPuzzle.PuzzleMove;
 import rp13.search.util.ActionStatePair;
 
 /**
@@ -16,6 +16,8 @@ import rp13.search.util.ActionStatePair;
  */
 public class EightPuzzleSuccessorFunction implements
 		SuccessorFunction<PuzzleMove, EightPuzzle> {
+	
+
 
 	/**
 	 * 
@@ -50,5 +52,6 @@ public class EightPuzzleSuccessorFunction implements
 		}
 
 	}
+
 
 }

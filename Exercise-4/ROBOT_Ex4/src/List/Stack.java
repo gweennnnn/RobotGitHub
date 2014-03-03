@@ -1,7 +1,7 @@
 package List;
 
 
-public class Stack<_action, _state> extends ListType<_action, _state>
+public class Stack<_action> extends ListType<_action>
 {
 	public Stack()
 	{
@@ -9,7 +9,7 @@ public class Stack<_action, _state> extends ListType<_action, _state>
 	}
 	
 	@Override
-	public Node<_action, _state> pop() {
+	public Node<_action> pop() {
 		if(this.frontier.isEmpty())
 			return null;
 		int lastItem = this.frontier.size() - 1;

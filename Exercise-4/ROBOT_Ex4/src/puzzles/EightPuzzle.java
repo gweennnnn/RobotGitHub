@@ -1,4 +1,4 @@
-package rp13.search.problem.puzzle;
+package puzzles;
 
 
 import java.util.Arrays;
@@ -15,7 +15,7 @@ import java.util.Random;
  * @author Nick Hawes
  * 
  */
-public class EightPuzzle {
+public class EightPuzzle implements PuzzleInterface {
 
 	/**
 	 * Explicit enumeration of moves the blank tile can take.
@@ -197,9 +197,7 @@ public class EightPuzzle {
 				return Arrays.equals(this.m_board, that.m_board);
 			}
 		}
-
 		return false;
-
 	}
 
 	/**
@@ -237,6 +235,12 @@ public class EightPuzzle {
 	 */
 	public static EightPuzzle randomEightPuzzle() {
 		return randomEightPuzzle(WIDTH * WIDTH * WIDTH);
+	}
+	public int calculateValue()
+	{
+		//remember to set value in node! D:
+		
+		return 0;
 	}
 
 	public static void main(String[] args) {

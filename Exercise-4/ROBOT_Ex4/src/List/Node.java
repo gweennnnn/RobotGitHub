@@ -2,17 +2,19 @@ package List;
 
 import java.util.List;
 
+import puzzles.PuzzleInterface;
 
-public class Node<_action, _state> implements NodeInterface<_action, _state>{
-	private NodeInterface<_action, _state> predecessor;
+
+public class Node<_action> implements NodeInterface<_action>{
+	private NodeInterface<_action> predecessor;
 	private _action move;
-	private _state state;
+	private PuzzleInterface state;
 	
-	public Node(_action move, _state state) {
+	public Node(_action move, PuzzleInterface state) {
 		this(move, state, null);
 	}
 	
-	public Node(_action move, _state state, NodeInterface<_action, _state> predecessor) {
+	public Node(_action move, PuzzleInterface state, NodeInterface<_action> predecessor) {
 		super();
 		this.predecessor = predecessor;
 		this.move = move;
@@ -22,12 +24,12 @@ public class Node<_action, _state> implements NodeInterface<_action, _state>{
 	
 
 	@Override
-	public NodeInterface<_action, _state> getPredecessor() {
+	public NodeInterface<_action> getPredecessor() {
 		return this.predecessor;
 	}
 
 	@Override
-	public void setPredecessor(NodeInterface<_action, _state> predecessor) {
+	public void setPredecessor(NodeInterface<_action> predecessor) {
 		this.predecessor = predecessor;
 	}
 	
@@ -37,13 +39,13 @@ public class Node<_action, _state> implements NodeInterface<_action, _state>{
 	}
 
 	@Override
-	public _state getState() {
+	public PuzzleInterface getState() {
 		return state;
 	}
 
 	@Override
 	public void getSolutionList(List<_action> x) {
-		NodeInterface<_action, _state> currNode = this;
+		NodeInterface<_action> currNode = this;
 				
 		while(currNode.getMove() != null)
 		{

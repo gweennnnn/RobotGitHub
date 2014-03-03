@@ -28,4 +28,8 @@ public class GridSuccessorFunction implements
 			}
 		}
 	}
+
+	public int getValue(EightPuzzle state) {
+		return 0;
+	}
 }

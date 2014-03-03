@@ -29,5 +29,9 @@ public class StringSuccessorFunction implements
 			}
 		}
 	}
+
+	public int getValue(EightPuzzle state) {
+		return 0;
+	}
 }
 
