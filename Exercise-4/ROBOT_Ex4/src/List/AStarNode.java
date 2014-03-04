@@ -9,10 +9,7 @@ public class AStarNode<_action> extends Node<_action> implements NodeInterface<_
 	private int costToGetHere;
 	
 	public AStarNode(_action move, PuzzleInterface state) {
-		super(move, state);
-		this.value = state.calculateValue();
-		this.costToGetHere = 0;
-		this.setPredecessor(null);
+		this(move, state, state.calculateValue(), null);
 		// TODO Auto-generated constructor stub
 	}
 
