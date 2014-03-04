@@ -10,8 +10,10 @@ import part1.Search.SearchType;
 import puzzles.EightPuzzle;
 import puzzles.EightPuzzleSuccessorFunction;
 import puzzles.EightPuzzle.PuzzleMove;
+import puzzles.StringPuzzle;
+import puzzles.StringSuccessorFunction;
+import puzzles.Swap;
 import rp13.search.interfaces.SuccessorFunction;
-import stringPuzzle.*;
 
 /**
  * 
