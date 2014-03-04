@@ -44,7 +44,7 @@ public class Node<_action> implements NodeInterface<_action>{
 	}
 
 	@Override
-	public void getSolutionList(List<_action> x) {
+	public void getSolutionList(List x) {
 		NodeInterface<_action> currNode = this;
 				
 		while(currNode.getMove() != null)

@@ -6,7 +6,7 @@ import puzzles.PuzzleInterface;
 
 public interface NodeInterface<_action> {
 	
-	public void getSolutionList(List<_action> x);
+	public void getSolutionList(List x);
 	
 	public NodeInterface<_action> getPredecessor();
 	

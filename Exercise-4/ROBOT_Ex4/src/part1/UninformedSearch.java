@@ -79,10 +79,10 @@ public class UninformedSearch<_action> extends EqualityGoalTest<PuzzleInterface>
 			System.out.println("CURRENT NODE!");
 			System.out.println(counter + " passes so far...");
 			System.out.println(currentNode.getMove());
-			System.out.println(currentNode.getState());
+//			System.out.println(currentNode.getState());
 			if (this.isGoal(currentNode.getState()))
 			{
-				System.out.println("GOAL STATE FOUND");
+//				System.out.println("GOAL STATE FOUND");
 				List<_action> solutionList = new ArrayList<_action> ();
 				currentNode.getSolutionList(solutionList);
 				return solutionList;
@@ -93,7 +93,7 @@ public class UninformedSearch<_action> extends EqualityGoalTest<PuzzleInterface>
 			succFunct.getSuccessors(currentNode.getState(), successors); // <----------gets all the successors
 
 			if(successors.isEmpty())
-				System.out.println("Derp");
+//				System.out.println("Derp");
 
 			System.out.println("CURRENT CHILDREN");
 			for (ActionStatePair<_action, PuzzleInterface> state : successors)
@@ -107,23 +107,23 @@ public class UninformedSearch<_action> extends EqualityGoalTest<PuzzleInterface>
 
 				if (!list.contains(tempNode) && !tempNode.getMove().equals(null))
 				{
-					System.out.println(tempNode.getMove());
-					System.out.println(tempNode.getState());
+//					System.out.println(tempNode.getMove());
+//					System.out.println(tempNode.getState());
 					this.list.push(tempNode); // <------------------adds it to the frontiers list
 				}
 			}
 			successors.removeAll(successors);
 
 
-			System.out.println();
-			System.out.println();
-			System.out.println("NEXT NODE!");
+//			System.out.println();
+//			System.out.println();
+//			System.out.println("NEXT NODE!");
 			counter++;
 
 		}
 
 
-		System.out.println("No solution!");
+//		System.out.println("No solution!");
 		return new ArrayList<_action>();
 	}
 	

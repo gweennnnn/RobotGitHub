@@ -275,6 +275,4 @@ public class EightPuzzle implements PuzzleInterface {
 		return 1;
 		else return -1;
 	}
- 
-
 }

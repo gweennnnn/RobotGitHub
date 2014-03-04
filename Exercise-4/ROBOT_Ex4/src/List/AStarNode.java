@@ -1,5 +1,7 @@
 package List;
 
+import java.util.List;
+
 import puzzles.PuzzleInterface;
 
 
@@ -41,5 +43,16 @@ public class AStarNode<_action> extends Node<_action> implements NodeInterface<_
 		return this.costToGetHere;
 	}
 
+	@Override
+	public void getSolutionList(List x) {
+		NodeInterface<_action> currNode = this;
+				
+		while(currNode.getMove() != null)
+		{
+			System.out.println("MOVE" + currNode.getMove());
+			System.out.println("value: " + currNode.getValue());
+			currNode = currNode.getPredecessor();
+		}
+	}
 	
 }
