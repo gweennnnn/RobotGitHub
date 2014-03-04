@@ -1,6 +1,10 @@
 package List;
 
-
+/**
+ * 
+ * @author Gwen & Goda c:
+ *
+ */
 public class Stack<_action> extends ListType<_action>
 {
 	public Stack()

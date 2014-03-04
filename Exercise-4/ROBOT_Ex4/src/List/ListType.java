@@ -7,6 +7,11 @@ import java.util.List;
 import puzzles.PuzzleInterface;
 import rp13.search.interfaces.Agenda;
 
+/**
+ * 
+ * @author Gwen & Goda c:
+ *
+ */
 public class ListType<_action> implements Agenda<NodeInterface<_action>>
 {
 	protected List<NodeInterface<_action>> frontier;

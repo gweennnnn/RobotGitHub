@@ -1,7 +1,10 @@
 package List;
 
-import java.util.List;
-
+/**
+ * 
+ * @author Gwen & Goda c:
+ *
+ */
 public class AStar <_action> extends Queue<_action> {
 	public AStar()
 	{
@@ -11,8 +14,6 @@ public class AStar <_action> extends Queue<_action> {
 	
 	@Override
 	public void push(NodeInterface<_action> _item) {
-		System.out.println("PUSH");
-		System.out.println("Size of frontier: " + frontier.size());
 		boolean added = false;
 		if(frontier.size() == 0)
 			frontier.add(_item);

@@ -4,6 +4,11 @@ import java.util.List;
 
 import puzzles.PuzzleInterface;
 
+/**
+ * 
+ * @author Gwen & Goda c:
+ *
+ */
 public interface NodeInterface<_action> {
 	
 	public void getSolutionList(List x);

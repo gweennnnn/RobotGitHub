@@ -1,6 +1,10 @@
 package List;
 
-
+/**
+ * 
+ * @author Gwen & Goda c:
+ *
+ */
 public class Queue<_action> extends ListType<_action>
 {
 	public Queue()

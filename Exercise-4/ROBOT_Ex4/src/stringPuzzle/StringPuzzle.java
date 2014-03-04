@@ -136,7 +136,4 @@ public class StringPuzzle implements PuzzleInterface {
 		return 1;
 		else return -1;
 	}
-
-	
-
 }

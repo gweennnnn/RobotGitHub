@@ -4,7 +4,11 @@ import java.util.List;
 
 import puzzles.PuzzleInterface;
 
-
+/**
+ * 
+ * @author Gwen & Goda c:
+ *
+ */
 public class Node<_action> implements NodeInterface<_action>{
 	protected NodeInterface<_action> predecessor;
 	protected _action move;
