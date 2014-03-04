@@ -227,9 +227,14 @@ public class EightPuzzle implements PuzzleInterface {
 		return new EightPuzzle(new int[]{ 1, 2, BLANK, 3, 4, 5, 6, 7, 8 }, 2);
 	}
 	
-	public static EightPuzzle easyTestEightPuzzle()
+	public static EightPuzzle testEightPuzzle2()
 	{
 		return new EightPuzzle(new int[]{ 2, BLANK, 3, 1, 5, 6, 4, 7, 8 }, 1);
+	}
+	
+	public static EightPuzzle testEightPuzzle3()
+	{
+		return new EightPuzzle(new int[]{ 1, BLANK, 2, 4, 5, 3, 7, 8, 6 }, 1);
 	}
 
 	/**

@@ -5,7 +5,7 @@
     <classes>
       <class name="test.myTest">
         <methods>
-          <include name="testEightPuzzleAStar"/>
+          <include name="testStringPuzzleBreadthFirst"/>
           <include name="setUp"/>
         </methods>
       </class> <!-- test.myTest -->
