@@ -72,7 +72,6 @@ public class Search<_action> extends EqualityGoalTest<PuzzleInterface>
 		while (!this.list.isEmpty())
 		{
 			currentNode = this.list.pop();
-			System.out.println("CURRENT NODE!");
 			System.out.println(counter + " passes so far...");
 //			System.out.println(currentNode.getMove());
 //			System.out.println(currentNode.getState());

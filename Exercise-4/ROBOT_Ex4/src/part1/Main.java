@@ -21,7 +21,7 @@ public class Main {
     { 
         //This is how you use it 
 	 
-        solveStringPuzzle();
+        solveStringPuzzle("hello");
     }
 	
 	
@@ -44,13 +44,13 @@ public class Main {
 		System.out.println("Total Moves: " + count); 
 	}
 
-	public static void solveStringPuzzle()
+	public static void solveStringPuzzle(String word)
 	{
 
-		StringPuzzle startstate = new StringPuzzle("java");
+		StringPuzzle startstate = new StringPuzzle(word);
 		startstate.jumble();
 		System.out.println(startstate);
-		StringPuzzle goalstate = new StringPuzzle("java");
+		StringPuzzle goalstate = new StringPuzzle(word);
 		SuccessorFunction succfunc = new StringSuccessorFunction();
 		Search<Swap> USearch = new Search<Swap>(startstate, goalstate, searchChoice);
 				List<Swap> solutionList = USearch.search(succfunc, searchChoice); 
