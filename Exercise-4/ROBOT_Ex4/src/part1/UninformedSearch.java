@@ -7,7 +7,9 @@ import puzzles.EightPuzzle;
 import puzzles.EightPuzzleSuccessorFunction;
 import puzzles.EightPuzzle.PuzzleMove;
 import puzzles.PuzzleInterface;
+import List.AStar;
 import List.Node;
+import List.NodeInterface;
 import List.Queue;
 import List.Stack;
 import rp13.search.interfaces.*;
@@ -17,9 +19,9 @@ import rp13.search.util.EqualityGoalTest;
 public class UninformedSearch<_action> extends EqualityGoalTest<PuzzleInterface>
 {
 	private PuzzleInterface startState;
-	private Agenda<Node<_action>> list; 
+	private Agenda<NodeInterface<_action>> list; 
 	
-	public enum SearchType { DepthFirst, BreadthFirst };
+	public enum SearchType { DepthFirst, BreadthFirst, AStar };
 	
 	public UninformedSearch(PuzzleInterface startState, PuzzleInterface endState, SearchType searchType)
 	{
@@ -28,8 +30,10 @@ public class UninformedSearch<_action> extends EqualityGoalTest<PuzzleInterface>
 		
 		if(searchType.equals(SearchType.DepthFirst))
 			this.list = new Stack<_action>();
+		else if(searchType.equals(SearchType.BreadthFirst))
+			this.list = new Queue<_action>();
 		else
-			this.list = new Queue<_action>();	
+			this.list = new AStar<_action>();
 			
 	}
 	
@@ -44,7 +48,7 @@ public class UninformedSearch<_action> extends EqualityGoalTest<PuzzleInterface>
 	public List<_action> search(SuccessorFunction<_action, PuzzleInterface> succFunct) 
     { 
         //Default start 
-        Node <_action> startNode = new Node<_action>(null, startState); 
+        NodeInterface<_action> startNode = new Node<_action>(null, startState); 
         //Default successors (empty) 
         ArrayList<ActionStatePair<_action, PuzzleInterface>> emptySuccs = new ArrayList<ActionStatePair<_action, PuzzleInterface>>(); 
         //Get the successors 
@@ -52,9 +56,9 @@ public class UninformedSearch<_action> extends EqualityGoalTest<PuzzleInterface>
         return search(startNode, succFunct, emptySuccs); 
     } 
 
-	public List<_action> search(Node<_action> startNode, SuccessorFunction<_action, PuzzleInterface> succFunct, List<ActionStatePair<_action, PuzzleInterface>> successors)
+	public List<_action> search(NodeInterface<_action> startNode, SuccessorFunction<_action, PuzzleInterface> succFunct, List<ActionStatePair<_action, PuzzleInterface>> successors)
 	{	
-		Node<_action> currentNode = startNode;
+		NodeInterface<_action> currentNode = startNode;
 		this.list.push(startNode);
 //		System.out.println("So, starting from the first node..");
 //		int counter = 0;
@@ -112,7 +116,7 @@ public class UninformedSearch<_action> extends EqualityGoalTest<PuzzleInterface>
 	    { 
 	        //This is how you use it 
 	        UninformedSearch<PuzzleMove> USearch = new UninformedSearch<PuzzleMove>
-	                            (EightPuzzle.testEightPuzzle(), EightPuzzle.orderedEightPuzzle(), SearchType.DepthFirst); 
+	                            (EightPuzzle.testEightPuzzle(), EightPuzzle.orderedEightPuzzle(), SearchType.AStar); 
 	          
 	        //With Delegation 
 	        SuccessorFunction x = new EightPuzzleSuccessorFunction();
