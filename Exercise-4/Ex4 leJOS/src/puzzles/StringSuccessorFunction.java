@@ -1,7 +1,6 @@
-package stringPuzzle;
+package puzzles;
 import java.util.List;
 
-import puzzles.PuzzleInterface;
 import rp13.search.interfaces.SuccessorFunction;
 import rp13.search.util.ActionStatePair;
 

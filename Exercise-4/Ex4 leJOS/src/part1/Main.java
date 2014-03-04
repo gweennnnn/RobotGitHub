@@ -3,11 +3,9 @@ package part1;
 import java.util.List;
 
 import part1.Search.SearchType;
-import puzzles.EightPuzzle;
-import puzzles.EightPuzzleSuccessorFunction;
+import puzzles.*;
 import puzzles.EightPuzzle.PuzzleMove;
 import rp13.search.interfaces.SuccessorFunction;
-import stringPuzzle.*;
 
 /**
  * 
@@ -20,15 +18,14 @@ public class Main {
 	public static void main (String[] args) 
     { 
         //This is how you use it 
-	 
-        solveStringPuzzle("hello");
+        solveStringPuzzle("hi");
     }
 	
 	
 	public static void solveEightPuzzle()
 	{
 		Search<PuzzleMove> USearch = new Search<PuzzleMove>
-        (EightPuzzle.testEightPuzzle(), EightPuzzle.orderedEightPuzzle(), searchChoice); 
+        (EightPuzzle.randomEightPuzzle(), EightPuzzle.orderedEightPuzzle(), searchChoice); 
 
 		//With Delegation 
 		SuccessorFunction succfunc = new EightPuzzleSuccessorFunction();
@@ -51,6 +48,7 @@ public class Main {
 		startstate.jumble();
 		System.out.println(startstate);
 		StringPuzzle goalstate = new StringPuzzle(word);
+		System.out.println(goalstate);
 		SuccessorFunction succfunc = new StringSuccessorFunction();
 		Search<Swap> USearch = new Search<Swap>(startstate, goalstate, searchChoice);
 				List<Swap> solutionList = USearch.search(succfunc, searchChoice); 

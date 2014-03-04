@@ -1,23 +1,35 @@
 package List;
 
-import rp13.search.interfaces.Agenda;
-
-public class AStar <_action, _state> extends ListType<_action, _state>
-{
+/**
+ * 
+ * @author Gwen & Goda c:
+ *
+ */
+public class AStar <_action> extends Queue<_action> {
 	public AStar()
 	{
 		super();
 	}
 	
+	
 	@Override
-	public void push(Node<_action, _state> _item) {
-		frontier.add(_item);
-	}
+	public void push(NodeInterface<_action> _item) {
+		boolean added = false;
+		if(frontier.size() == 0)
+			frontier.add(_item);
+		else
+		{
+			for(int i = 0; i < frontier.size(); i++)
+			{
+				if(_item.getValue() <= frontier.get(i).getValue())
+				{
+					frontier.add(i, _item);
+					added = true;
+					break;
+				}
+			}
 
-	@Override
-	public Node<_action, _state> pop() {
-		System.out.println("Extend this class and overwrite this particular method");
-		return null;
+			if (added == false) frontier.add(_item);
+		}
 	}
-
 }

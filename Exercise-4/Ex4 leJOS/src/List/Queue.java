@@ -1,9 +1,11 @@
 package List;
 
-
-import rp13.search.interfaces.Agenda;
-
-public class Queue<_action, _state> extends ListType<_action, _state>
+/**
+ * 
+ * @author Gwen & Goda c:
+ *
+ */
+public class Queue<_action> extends ListType<_action>
 {
 	public Queue()
 	{
@@ -11,7 +13,7 @@ public class Queue<_action, _state> extends ListType<_action, _state>
 	}
 
 	@Override
-	public Node<_action, _state> pop() {
+	public NodeInterface<_action> pop() {
 		if(this.frontier.isEmpty())
 			return null;
 		this.explored.add(this.frontier.get(0).getState());

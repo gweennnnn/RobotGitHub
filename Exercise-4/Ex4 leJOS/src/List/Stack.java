@@ -1,12 +1,11 @@
 package List;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import rp13.search.interfaces.Agenda;
-
-public class Stack<_action, _state> extends ListType<_action, _state>
+/**
+ * 
+ * @author Gwen & Goda c:
+ *
+ */
+public class Stack<_action> extends ListType<_action>
 {
 	public Stack()
 	{
@@ -14,7 +13,7 @@ public class Stack<_action, _state> extends ListType<_action, _state>
 	}
 	
 	@Override
-	public Node<_action, _state> pop() {
+	public NodeInterface<_action> pop() {
 		if(this.frontier.isEmpty())
 			return null;
 		int lastItem = this.frontier.size() - 1;

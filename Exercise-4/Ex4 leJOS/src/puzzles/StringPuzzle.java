@@ -1,11 +1,8 @@
-package stringPuzzle;
+package puzzles;
 import grid.Connection;
 
 import java.awt.Point;
 import java.util.Random;
-
-import puzzles.EightPuzzle;
-import puzzles.PuzzleInterface;
 
 /**
  * A class to represent a traversable robot grid. Takes into account hard-coded
@@ -83,7 +80,7 @@ public class StringPuzzle implements PuzzleInterface {
 		Random generator = new Random();
 		int range = value.length();
 		
-		for (int i = 0; i < 100; i++){
+		for (int i = 0; i < 99; i++){
 			int a = generator.nextInt(range);
 			int b = a;
 			

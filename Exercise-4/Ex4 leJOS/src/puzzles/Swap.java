@@ -1,4 +1,4 @@
-package stringPuzzle;
+package puzzles;
 
 public class Swap {
 	private int first;
