@@ -1,6 +1,7 @@
 package grid;
 import java.awt.Point;
 import java.util.Random;
+import java.lang.Math;
 
 import puzzles.EightPuzzle;
 import puzzles.PuzzleInterface;
@@ -18,8 +19,8 @@ public class Grid implements PuzzleInterface{
 	 * The enumeration of the directions the robot can take
 	 */
 	public enum Direction {
-		UP(new Point(0, -1)),
-		DOWN(new Point(0, 1)),
+		UP(new Point(0, 1)),
+		DOWN(new Point(0, -1)),
 		LEFT(new Point(-1, 0)),
 		RIGHT(new Point(1, 0));
 
@@ -41,6 +42,9 @@ public class Grid implements PuzzleInterface{
 	public int height = 5;
 	private Point robotPosition;
 	private Connection[] blockages = new Connection[] {};
+	private static Point r1 = new Point(1,2);
+	private static Point r2 = new Point(4,4);
+
 
 	/**
 	 * Create a new grid by copying another grid
@@ -208,6 +212,73 @@ public class Grid implements PuzzleInterface{
 		}
 		
 		return randomGrid(numberOfBlockages, w, h);
+	}
+	
+	public static Grid testStartGrid(){
+		
+		Point s1 = new Point(1, 4);
+		Point e1 = new Point(2, 4);
+		Connection b1 = new Connection(s1, e1);
+
+		Point s2 = new Point(1, 0);
+		Point e2 = new Point(1, 1);
+		Connection b2 = new Connection(s2, e2);
+
+		Point s3 = new Point(2, 1);
+		Point e3 = new Point(3, 1);
+		Connection b3 = new Connection(s3, e3);
+
+		Point s4 = new Point(2, 2);
+		Point e4 = new Point(2, 3);
+		Connection b4 = new Connection(s4, e4);
+
+		Point s5 = new Point(3, 3);
+		Point e5 = new Point(4, 3);
+		Connection b5 = new Connection(s5, e5);
+
+		Connection[] blockages = new Connection[] { b1, b2, b3, b4, b5 };
+		
+		//RANDOM
+//		Grid grid = Grid.randomGrid(20, 5, 5);
+		
+		
+		Grid grid = new Grid(blockages, r1, 5, 5);
+		
+		return grid;
+		
+	}
+	
+	public static Grid testEndGrid(){
+		Point s1 = new Point(1, 4);
+		Point e1 = new Point(2, 4);
+		Connection b1 = new Connection(s1, e1);
+
+		Point s2 = new Point(1, 0);
+		Point e2 = new Point(1, 1);
+		Connection b2 = new Connection(s2, e2);
+
+		Point s3 = new Point(2, 1);
+		Point e3 = new Point(3, 1);
+		Connection b3 = new Connection(s3, e3);
+
+		Point s4 = new Point(2, 2);
+		Point e4 = new Point(2, 3);
+		Connection b4 = new Connection(s4, e4);
+
+		Point s5 = new Point(3, 3);
+		Point e5 = new Point(4, 3);
+		Connection b5 = new Connection(s5, e5);
+
+		Connection[] blockages = new Connection[] { b1, b2, b3, b4, b5 };
+		
+		//RANDOM
+//		Grid grid = Grid.randomGrid(20, 5, 5);
+		
+	
+		
+		Grid grid = new Grid(blockages, r2, 5, 5);
+		
+		return grid;
 	}
 	
 	/**
@@ -406,49 +477,38 @@ public class Grid implements PuzzleInterface{
 	
 	public static void main(String[] args) {
 
-		//HARD-CODED GRID
-		/*// Generate Blockages on the grid
-		Point s1 = new Point(1, 4);
-		Point e1 = new Point(2, 4);
-		Connection b1 = new Connection(s1, e1);
+			Grid startstate = testStartGrid();
+			Grid endstate = testEndGrid();
+			
+			System.out.println(startstate);
+			startstate.makeMove(Direction.UP);
+			System.out.println(startstate);
+			startstate.calculateValue();
 
-		Point s2 = new Point(1, 0);
-		Point e2 = new Point(1, 1);
-		Connection b2 = new Connection(s2, e2);
-
-		Point s3 = new Point(2, 1);
-		Point e3 = new Point(3, 1);
-		Connection b3 = new Connection(s3, e3);
-
-		Point s4 = new Point(2, 2);
-		Point e4 = new Point(2, 3);
-		Connection b4 = new Connection(s4, e4);
-
-		Point s5 = new Point(3, 3);
-		Point e5 = new Point(4, 3);
-		Connection b5 = new Connection(s5, e5);
-
-		Connection[] blockages = new Connection[] { b1, b2, b3, b4, b5 };*/
-		
-		//RANDOM
-		Grid grid = Grid.randomGrid(20, 5, 5);
-		System.out.println(grid);
+			
 	}
 
 	@Override
 	public int calculateValue()
 	{
-		//remember to set value in node! D:
-		//how many things are out of place
+
+		double x = this.getPosition().getX();
+		double y = this.getPosition().getY();
 		
-//		EightPuzzle Goal = orderedEightPuzzle();
-		int return_value = 0;
+		double goal_x = testEndGrid().getPosition().getX();
+		double goal_y = testEndGrid().getPosition().getY();
 		
-//		for(int i=0; i < this.m_board.length; i++)
-//			 if(this.m_board[i] != Goal.m_board[i]) return_value++;
+		double distance = Math.hypot(goal_x - x, goal_y - y);
 		
 		
-		return return_value;
+		
+		return (int)distance;
+	}
+
+	@Override
+	public int costToMove(Object move) {
+		// TODO Auto-generated method stub
+		return 1;
 	}
 
 }
