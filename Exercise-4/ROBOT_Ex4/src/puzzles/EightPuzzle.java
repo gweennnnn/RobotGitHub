@@ -274,8 +274,6 @@ public class EightPuzzle implements PuzzleInterface {
 		if (move instanceof PuzzleMove)
 		return 1;
 		else return -1;
-		
-
 	}
  
 

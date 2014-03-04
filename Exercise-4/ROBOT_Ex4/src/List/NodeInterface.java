@@ -5,6 +5,7 @@ import java.util.List;
 import puzzles.PuzzleInterface;
 
 public interface NodeInterface<_action> {
+	
 	public void getSolutionList(List<_action> x);
 	
 	public NodeInterface<_action> getPredecessor();

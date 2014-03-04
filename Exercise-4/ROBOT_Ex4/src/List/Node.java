@@ -30,7 +30,7 @@ public class Node<_action> implements NodeInterface<_action>{
 
 	@Override
 	public void setPredecessor(NodeInterface<_action> predecessor) {
-		this.predecessor = predecessor;
+		this.predecessor = (Node<_action>) predecessor;
 	}
 	
 	@Override

@@ -9,14 +9,19 @@ public class AStarNode<_action> extends Node<_action> implements NodeInterface<_
 	private int costToGetHere;
 	
 	public AStarNode(_action move, PuzzleInterface state) {
-		this(move, state, state.calculateValue(), null);
+		this(move, state, null, 0);
 	}
 
-	public AStarNode(_action move, PuzzleInterface state,int value, AStarNode<_action> predecessor)
+	public AStarNode(_action move, PuzzleInterface state, AStarNode<_action> predecessor)
+	{
+		this(move, state, predecessor, (state.costToMove(move) + predecessor.getCostToGetHere()));
+	}
+	
+	public AStarNode(_action move, PuzzleInterface state, AStarNode<_action> predecessor, int costToGetHere)
 	{
 		super(move, state);
-		this.costToGetHere = state.costToMove(move) + predecessor.getCostToGetHere();
-		this.value = state.calculateValue() + this.getCostToGetHere();
+		this.costToGetHere = costToGetHere;
+		this.value =  state.calculateValue() + this.costToGetHere;
 
 		this.setPredecessor(predecessor);
 	}

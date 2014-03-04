@@ -9,7 +9,7 @@ public class Stack<_action> extends ListType<_action>
 	}
 	
 	@Override
-	public Node<_action> pop() {
+	public NodeInterface<_action> pop() {
 		if(this.frontier.isEmpty())
 			return null;
 		int lastItem = this.frontier.size() - 1;
