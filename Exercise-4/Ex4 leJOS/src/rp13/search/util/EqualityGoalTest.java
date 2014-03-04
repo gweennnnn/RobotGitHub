@@ -20,7 +20,8 @@ public class EqualityGoalTest<StateT> implements GoalTest<StateT> {
 
 	@Override
 	public boolean isGoal(StateT _state) {
-		return m_goal.equals(_state);
+		System.out.println(m_goal.equals(_state));
+		return m_goal.toString().equals(_state.toString());
 	}
 
 }

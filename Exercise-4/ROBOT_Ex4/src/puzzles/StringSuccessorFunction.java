@@ -1,7 +1,6 @@
-package stringPuzzle;
+package puzzles;
 import java.util.List;
 
-import puzzles.PuzzleInterface;
 import rp13.search.interfaces.SuccessorFunction;
 import rp13.search.util.ActionStatePair;
 
@@ -13,9 +12,9 @@ public class StringSuccessorFunction implements
 
 		assert (_successors != null);
 
-		for (int i = 0; i < _state.value.length(); i++) 
+		for (int i = 0; i < _state.getValue().length(); i++) 
 		{
-			for (int j = 0; j < _state.value.length(); j++) 
+			for (int j = 0; j < _state.getValue().length(); j++) 
 			{
 				if (j != i)
 				{
@@ -29,10 +28,6 @@ public class StringSuccessorFunction implements
 				}
 			}
 		}
-	}
-
-	public int getValue(PuzzleInterface state) {
-		return 0;
 	}
 }
 

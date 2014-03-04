@@ -3,11 +3,8 @@ package part1;
 import java.util.List;
 
 import part1.Search.SearchType;
-import puzzles.StringPuzzle;
-import puzzles.StringSuccessorFunction;
-import puzzles.Swap;
-//import puzzles.*;
-//import puzzles.EightPuzzle.PuzzleMove;
+import puzzles.*;
+import puzzles.EightPuzzle.PuzzleMove;
 import rp13.search.interfaces.SuccessorFunction;
 
 /**
@@ -26,24 +23,24 @@ public class Main {
     }
 	
 	
-//	public static void solveEightPuzzle()
-//	{
-//		Search<PuzzleMove> USearch = new Search<PuzzleMove>
-//        (EightPuzzle.randomEightPuzzle(), EightPuzzle.orderedEightPuzzle(), searchChoice); 
-//
-//		//With Delegation 
-//		SuccessorFunction succfunc = new EightPuzzleSuccessorFunction();
-//		List<PuzzleMove> solutionList = USearch.search(succfunc, searchChoice); 
-//		
-//		int count = 0; 
-//		for(int i = 0; i < solutionList.size(); i++) 
-//		{ 
-//		System.out.print(solutionList.get(i) + ", "); 
-//		count++; 
-//		} 
-//		System.out.println(); 
-//		System.out.println("Total Moves: " + count); 
-//	}
+	public static void solveEightPuzzle()
+	{
+		Search<PuzzleMove> USearch = new Search<PuzzleMove>
+        (EightPuzzle.randomEightPuzzle(), EightPuzzle.orderedEightPuzzle(), searchChoice); 
+
+		//With Delegation 
+		SuccessorFunction succfunc = new EightPuzzleSuccessorFunction();
+		List<PuzzleMove> solutionList = USearch.search(succfunc, searchChoice); 
+		
+		int count = 0; 
+		for(int i = 0; i < solutionList.size(); i++) 
+		{ 
+		System.out.print(solutionList.get(i) + ", "); 
+		count++; 
+		} 
+		System.out.println(); 
+		System.out.println("Total Moves: " + count); 
+	}
 
 	public static void solveStringPuzzle(String word)
 	{

@@ -12,9 +12,9 @@ public class StringSuccessorFunction implements
 
 		assert (_successors != null);
 
-		for (int i = 0; i < _state.value.length(); i++) 
+		for (int i = 0; i < _state.getValue().length(); i++) 
 		{
-			for (int j = 0; j < _state.value.length(); j++) 
+			for (int j = 0; j < _state.getValue().length(); j++) 
 			{
 				if (j != i)
 				{

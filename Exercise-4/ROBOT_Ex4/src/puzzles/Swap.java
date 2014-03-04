@@ -1,4 +1,4 @@
-package stringPuzzle;
+package puzzles;
 
 public class Swap {
 	private int first;
@@ -19,6 +19,11 @@ public class Swap {
 
 	public int getSecond() {
 		return second;
+	}
+	
+	public String toString()
+	{
+		return "{" + first + ", " + second + "}";
 	}
 
 }

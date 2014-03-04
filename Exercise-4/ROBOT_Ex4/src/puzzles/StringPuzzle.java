@@ -1,7 +1,4 @@
-package stringPuzzle;
-import grid.Connection;
-
-import java.awt.Point;
+package puzzles;
 import java.util.Random;
 
 /**
@@ -11,9 +8,27 @@ import java.util.Random;
  * @author Jordan Bell
  * 
  */
-public class StringPuzzle {
+public class StringPuzzle implements PuzzleInterface {
 
-	public String value;
+	private String value;
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	public String getInitialVal() {
+		return initialVal;
+	}
+
+	public void setInitialVal(String initialVal) {
+		this.initialVal = initialVal;
+	}
+
+	private String initialVal;
+	
 
 	/**
 	 * Create a new puzzle by copying another string
@@ -21,9 +36,14 @@ public class StringPuzzle {
 	public StringPuzzle(StringPuzzle _that) {
 		this(_that.toString());
 	}
+	
+	public StringPuzzle() {
+		this("JumblePuzzle");
+	}
 
 	public StringPuzzle(String value) {
 		this.value = value;
+		this.initialVal = value;
 	}
 
 	 /**
@@ -76,7 +96,7 @@ public class StringPuzzle {
 		Random generator = new Random();
 		int range = value.length();
 		
-		for (int i = 0; i < 100; i++){
+		for (int i = 0; i < 99; i++){
 			int a = generator.nextInt(range);
 			int b = a;
 			
@@ -87,14 +107,27 @@ public class StringPuzzle {
 		}
 	}
 
+	public StringPuzzle orderedWord()
+	{
+		return new StringPuzzle(this.initialVal);
+	}
+	
 	/**
 	 * Checks for equality with another grid
 	 * @param g The grid being compared to.
 	 * @return Whether or not the values of g are equal with the ones in this grid.
 	 */
-	public boolean equals(StringPuzzle sp)
+	@Override
+	public boolean equals(Object _that)
 	{
-		return (value.equals(sp.value));
+		
+		if (_that instanceof StringPuzzle)
+		{
+			StringPuzzle that = (StringPuzzle) _that;
+			return (value.equals(that));
+		}
+			
+		return false;
 	}
 
 	@Override
@@ -102,25 +135,23 @@ public class StringPuzzle {
 		return value;
 	}
 	
-	public static void main(String[] args) {
-
-		StringPuzzle sp = new StringPuzzle("stringpuzzle");
-
-		System.out.println(sp);
+	@Override
+	public int calculateValue() {
+		StringPuzzle Goal = new StringPuzzle();
 		
-		sp.makeMove(new Swap(0, 6));
-		System.out.println(sp);
+		int return_value = 0;
 		
-		sp.makeMove(new Swap(2, 8));
-		System.out.println(sp);
-		
-		sp.makeMove(new Swap(4, 10));
-		System.out.println(sp);
-		
-		sp.jumble();
-		System.out.println("Random: " + sp);
+		for(int i=0; i < this.value.length(); i++)
+			 if(this.value.charAt(i) != Goal.value.charAt(i)) return_value++;
 		
 		
+		return return_value;
 	}
-
+	
+	@Override
+	public int costToMove(Object move) {
+		if(move instanceof Swap)
+		return 1;
+		else return -1;
+	}
 }

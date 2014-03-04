@@ -1,7 +1,4 @@
 package puzzles;
-import grid.Connection;
-
-import java.awt.Point;
 import java.util.Random;
 
 /**
@@ -13,7 +10,25 @@ import java.util.Random;
  */
 public class StringPuzzle implements PuzzleInterface {
 
-	public String value;
+	private String value;
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	public String getInitialVal() {
+		return initialVal;
+	}
+
+	public void setInitialVal(String initialVal) {
+		this.initialVal = initialVal;
+	}
+
+	private String initialVal;
+	
 
 	/**
 	 * Create a new puzzle by copying another string
@@ -28,6 +43,7 @@ public class StringPuzzle implements PuzzleInterface {
 
 	public StringPuzzle(String value) {
 		this.value = value;
+		this.initialVal = value;
 	}
 
 	 /**
@@ -91,6 +107,11 @@ public class StringPuzzle implements PuzzleInterface {
 		}
 	}
 
+	public StringPuzzle orderedWord()
+	{
+		return new StringPuzzle(this.initialVal);
+	}
+	
 	/**
 	 * Checks for equality with another grid
 	 * @param g The grid being compared to.
