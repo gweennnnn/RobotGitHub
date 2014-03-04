@@ -236,11 +236,23 @@ public class EightPuzzle implements PuzzleInterface {
 	public static EightPuzzle randomEightPuzzle() {
 		return randomEightPuzzle(WIDTH * WIDTH * WIDTH);
 	}
+	
+//	CALCULATES THE VALUE OF A SINGLE NODE
+//	BY CALCULATING HOW MANY SQUARES ARE OUT OF PLACE COMPARED TO THE GOAL
+	
 	public int calculateValue()
 	{
 		//remember to set value in node! D:
+		//how many things are out of place
 		
-		return 0;
+		EightPuzzle Goal = orderedEightPuzzle();
+		int return_value = 0;
+		
+		for(int i=0; i < this.m_board.length; i++)
+			 if(this.m_board[i] != Goal.m_board[i]) return_value++;
+		
+		
+		return return_value;
 	}
 
 	public static void main(String[] args) {

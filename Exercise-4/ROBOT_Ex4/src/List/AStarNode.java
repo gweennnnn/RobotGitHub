@@ -17,7 +17,7 @@ public class AStarNode<_action> extends Node<_action> implements NodeInterface<_
 	public AStarNode(_action move, PuzzleInterface state,int value, AStarNode<_action> predecessor)
 	{
 		super(move, state);
-		this.value = value;
+		this.value = state.calculateValue() + predecessor.value;
 		this.setPredecessor(predecessor);
 	}
 	

@@ -2,6 +2,9 @@ package grid;
 import java.awt.Point;
 import java.util.Random;
 
+import puzzles.EightPuzzle;
+import puzzles.PuzzleInterface;
+
 /**
  * A class to represent a traversable robot grid. Takes into account hard-coded
  * blockages on the grid.
@@ -9,7 +12,7 @@ import java.util.Random;
  * @author Jordan Bell
  * 
  */
-public class Grid {
+public class Grid implements PuzzleInterface{
 
 	/**
 	 * The enumeration of the directions the robot can take
@@ -430,6 +433,22 @@ public class Grid {
 		//RANDOM
 		Grid grid = Grid.randomGrid(20, 5, 5);
 		System.out.println(grid);
+	}
+
+	@Override
+	public int calculateValue()
+	{
+		//remember to set value in node! D:
+		//how many things are out of place
+		
+//		EightPuzzle Goal = orderedEightPuzzle();
+		int return_value = 0;
+		
+//		for(int i=0; i < this.m_board.length; i++)
+//			 if(this.m_board[i] != Goal.m_board[i]) return_value++;
+		
+		
+		return return_value;
 	}
 
 }

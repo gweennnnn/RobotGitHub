@@ -1,6 +1,7 @@
 package stringPuzzle;
 import java.util.List;
 
+import puzzles.PuzzleInterface;
 import rp13.search.interfaces.SuccessorFunction;
 import rp13.search.util.ActionStatePair;
 
@@ -30,7 +31,7 @@ public class StringSuccessorFunction implements
 		}
 	}
 
-	public int getValue(EightPuzzle state) {
+	public int getValue(PuzzleInterface state) {
 		return 0;
 	}
 }
