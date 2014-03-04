@@ -1,7 +1,6 @@
 package List;
 
-public class AStar <_action> extends ListType<_action>
-{
+public class AStar <_action> extends Stack<_action> {
 	public AStar()
 	{
 		super();
@@ -23,11 +22,5 @@ public class AStar <_action> extends ListType<_action>
 			}
 			if (added == false) frontier.add(item);
 		}
-	}
-	
-	@Override
-	public AStarNode<_action>  pop() {
-		System.out.println("Extend this class and overwrite this particular method");
-		return null;
 	}
 }

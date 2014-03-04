@@ -6,9 +6,9 @@ import puzzles.PuzzleInterface;
 
 
 public class Node<_action> implements NodeInterface<_action>{
-	private NodeInterface<_action> predecessor;
-	private _action move;
-	private PuzzleInterface state;
+	protected NodeInterface<_action> predecessor;
+	protected _action move;
+	protected PuzzleInterface state;
 	
 	public Node(_action move, PuzzleInterface state) {
 		this(move, state, null);

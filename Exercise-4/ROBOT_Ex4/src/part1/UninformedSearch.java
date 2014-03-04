@@ -76,7 +76,6 @@ public class UninformedSearch<_action> extends EqualityGoalTest<PuzzleInterface>
 		while (!this.list.isEmpty())
 		{
 			currentNode = this.list.pop(); // <------already adds an item to the explored set
-
 			System.out.println("CURRENT NODE!");
 			System.out.println(counter + " passes so far...");
 			System.out.println(currentNode.getMove());

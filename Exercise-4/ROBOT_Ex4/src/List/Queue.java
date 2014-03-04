@@ -9,10 +9,10 @@ public class Queue<_action> extends ListType<_action>
 	}
 
 	@Override
-	public Node<_action> pop() {
+	public NodeInterface<_action> pop() {
 		if(this.frontier.isEmpty())
 			return null;
 		this.explored.add(this.frontier.get(0).getState());
-		return (Node<_action>) this.frontier.remove(0);
+		return this.frontier.remove(0);
 	}
 }

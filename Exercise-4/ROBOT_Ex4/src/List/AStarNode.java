@@ -22,8 +22,13 @@ public class AStarNode<_action> extends Node<_action> implements NodeInterface<_
 		super(move, state);
 		this.costToGetHere = costToGetHere;
 		this.value =  state.calculateValue() + this.costToGetHere;
-
 		this.setPredecessor(predecessor);
+	}
+	
+	@Override
+	public _action getMove()
+	{
+		return this.move;
 	}
 	
 	@Override
