@@ -20,5 +20,10 @@ public class Swap {
 	public int getSecond() {
 		return second;
 	}
+	
+	public String toString()
+	{
+		return "{" + first + ", " + second + "}";
+	}
 
 }

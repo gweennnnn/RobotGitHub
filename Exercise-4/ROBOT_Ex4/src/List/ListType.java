@@ -7,19 +7,24 @@ import java.util.List;
 import puzzles.PuzzleInterface;
 import rp13.search.interfaces.Agenda;
 
-public class ListType<_action> implements Agenda<Node<_action>>
+/**
+ * 
+ * @author Gwen & Goda c:
+ *
+ */
+public class ListType<_action> implements Agenda<NodeInterface<_action>>
 {
-	protected List<Node<_action>> frontier;
+	protected List<NodeInterface<_action>> frontier;
 	protected List<PuzzleInterface> explored;
 	
 	
 	public ListType()
 	{
-		this.frontier = new ArrayList<Node<_action>>();
+		this.frontier = new ArrayList<NodeInterface<_action>>();
 		this.explored = new ArrayList<PuzzleInterface>();
 	}
 	
-	public List<Node<_action>> getFrontier() {
+	public List<NodeInterface<_action>> getFrontier() {
 		return frontier;
 	}
 
@@ -28,17 +33,17 @@ public class ListType<_action> implements Agenda<Node<_action>>
 	}
 	
 	@Override
-	public Iterator<Node<_action>> iterator() {
+	public Iterator<NodeInterface<_action>> iterator() {
 		return frontier.iterator();
 	}
 
 	@Override
-	public void push(Node<_action> _item) {
+	public void push(NodeInterface<_action> _item) {
 		frontier.add(_item);
 	}
 
 	@Override
-	public Node<_action> pop() {
+	public NodeInterface<_action> pop() {
 		System.out.println("Extend this class and overwrite this particular method");
 		return null;
 	}
@@ -49,12 +54,12 @@ public class ListType<_action> implements Agenda<Node<_action>>
 	}
 
 	@Override
-	public boolean contains(Node<_action> _item) {
+	public boolean contains(NodeInterface<_action> _item) {
 		return this.explored.contains(_item.getState());
 	}
 
 	@Override
-	public Node<_action> peek() {
+	public NodeInterface<_action> peek() {
 		return this.frontier.get(0);
 	}
 

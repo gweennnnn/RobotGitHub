@@ -24,6 +24,10 @@ public class StringPuzzle implements PuzzleInterface {
 	public StringPuzzle(StringPuzzle _that) {
 		this(_that.toString());
 	}
+	
+	public StringPuzzle() {
+		this("JumblePuzzle");
+	}
 
 	public StringPuzzle(String value) {
 		this.value = value;
@@ -115,31 +119,21 @@ public class StringPuzzle implements PuzzleInterface {
 	
 	@Override
 	public int calculateValue() {
-		// TODO Auto-generated method stub
-		return 0;
+		StringPuzzle Goal = new StringPuzzle();
+		
+		int return_value = 0;
+		
+		for(int i=0; i < this.value.length(); i++)
+			 if(this.value.charAt(i) != Goal.value.charAt(i)) return_value++;
+		
+		
+		return return_value;
 	}
 	
-	public static void main(String[] args) {
-
-		StringPuzzle sp = new StringPuzzle("stringpuzzle");
-
-		System.out.println(sp);
-		
-		sp.makeMove(new Swap(0, 6));
-		System.out.println(sp);
-		
-		sp.makeMove(new Swap(2, 8));
-		System.out.println(sp);
-		
-		sp.makeMove(new Swap(4, 10));
-		System.out.println(sp);
-		
-		sp.jumble();
-		System.out.println("Random: " + sp);
-		
-		
+	@Override
+	public int costToMove(Object move) {
+		if(move instanceof Swap)
+		return 1;
+		else return -1;
 	}
-
-	
-
 }

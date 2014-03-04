@@ -269,4 +269,10 @@ public class EightPuzzle implements PuzzleInterface {
 
 	}
 
+	@Override
+	public int costToMove(Object move) {
+		if (move instanceof PuzzleMove)
+		return 1;
+		else return -1;
+	}
 }
