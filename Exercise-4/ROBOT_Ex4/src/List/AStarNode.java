@@ -6,10 +6,12 @@ import puzzles.PuzzleInterface;
 public class AStarNode<_action> extends Node<_action> implements NodeInterface<_action>{
 	
 	private int value;
+	private int costToGetHere;
 	
 	public AStarNode(_action move, PuzzleInterface state) {
 		super(move, state);
-		this.value = 0;
+		this.value = state.calculateValue();
+		this.costToGetHere = 0;
 		this.setPredecessor(null);
 		// TODO Auto-generated constructor stub
 	}
@@ -17,7 +19,9 @@ public class AStarNode<_action> extends Node<_action> implements NodeInterface<_
 	public AStarNode(_action move, PuzzleInterface state,int value, AStarNode<_action> predecessor)
 	{
 		super(move, state);
-		this.value = state.calculateValue() + predecessor.value;
+		this.costToGetHere = state.costToMove(move) + predecessor.getCostToGetHere();
+		this.value = state.calculateValue() + this.getCostToGetHere();
+
 		this.setPredecessor(predecessor);
 	}
 	
@@ -26,4 +30,10 @@ public class AStarNode<_action> extends Node<_action> implements NodeInterface<_
 	{
 		return this.value;
 	}
+
+	public int getCostToGetHere() {
+		return this.costToGetHere;
+	}
+
+	
 }

@@ -115,7 +115,8 @@ public class StringPuzzle implements PuzzleInterface {
 	
 	@Override
 	public int calculateValue() {
-		// TODO Auto-generated method stub
+		
+		
 		return 0;
 	}
 	
@@ -138,6 +139,13 @@ public class StringPuzzle implements PuzzleInterface {
 		System.out.println("Random: " + sp);
 		
 		
+	}
+
+	@Override
+	public int costToMove(Object move) {
+		if(move instanceof Swap)
+		return 1;
+		else return -1;
 	}
 
 	

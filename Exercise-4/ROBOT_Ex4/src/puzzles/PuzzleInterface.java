@@ -7,4 +7,6 @@ public interface PuzzleInterface
 	public String toString();
 	
 	public boolean equals(Object _that);
+	
+	public int costToMove(Object move);
 }
