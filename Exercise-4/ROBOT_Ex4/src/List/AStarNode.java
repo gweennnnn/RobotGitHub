@@ -10,7 +10,6 @@ public class AStarNode<_action> extends Node<_action> implements NodeInterface<_
 	
 	public AStarNode(_action move, PuzzleInterface state) {
 		this(move, state, state.calculateValue(), null);
-		// TODO Auto-generated constructor stub
 	}
 
 	public AStarNode(_action move, PuzzleInterface state,int value, AStarNode<_action> predecessor)
