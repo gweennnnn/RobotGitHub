@@ -72,18 +72,26 @@ public class Search<_action> extends EqualityGoalTest<PuzzleInterface>
 		while (!this.list.isEmpty())
 		{
 			currentNode = this.list.pop();
+			System.out.println("CURRENT NODE!");
 			System.out.println(counter + " passes so far...");
+//			System.out.println(currentNode.getMove());
+//			System.out.println(currentNode.getState());
+//			System.out.println("Pass? " + this.isGoal(currentNode.getState()));
 			if (this.isGoal(currentNode.getState()))
 			{
+				System.out.println("GOAL STATE FOUND");
 				List<_action> solutionList = new ArrayList<_action> ();
 				currentNode.getSolutionList(solutionList);
 				return solutionList;
 			}
-
 			// FILLING IN THE FRONTIERS LIST WITH SUCCESSORS
 
 			succFunct.getSuccessors(currentNode.getState(), successors); // <----------gets all the successors
 			
+//			if(successors.isEmpty())
+//				System.out.println("Derp");
+//
+//			System.out.println("CURRENT CHILDREN");
 			//CHILDREN
 			for (ActionStatePair<_action, PuzzleInterface> state : successors)
 			{ 	
@@ -95,11 +103,21 @@ public class Search<_action> extends EqualityGoalTest<PuzzleInterface>
 
 
 				if (!list.contains(tempNode) && !tempNode.getMove().equals(null))
+				{
+//					System.out.println(tempNode.getMove());
+//					System.out.println(tempNode.getState());
+
 					this.list.push(tempNode);
+				}
 			}
 			
 			successors.removeAll(successors);
 			counter++;
+			
+			System.out.println();
+			System.out.println();
+			System.out.println("NEXT NODE!");
+
 
 		}
 		return new ArrayList<_action>();

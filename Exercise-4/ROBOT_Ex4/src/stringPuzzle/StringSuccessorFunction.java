@@ -30,9 +30,5 @@ public class StringSuccessorFunction implements
 			}
 		}
 	}
-
-	public int getValue(PuzzleInterface state) {
-		return 0;
-	}
 }
 

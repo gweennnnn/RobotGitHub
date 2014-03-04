@@ -7,6 +7,7 @@ import puzzles.EightPuzzle;
 import puzzles.EightPuzzleSuccessorFunction;
 import puzzles.EightPuzzle.PuzzleMove;
 import rp13.search.interfaces.SuccessorFunction;
+import stringPuzzle.*;
 
 /**
  * 
@@ -20,7 +21,7 @@ public class Main {
     { 
         //This is how you use it 
 	 
-        solveEightPuzzle();
+        solveStringPuzzle();
     }
 	
 	
@@ -45,6 +46,23 @@ public class Main {
 
 	public static void solveStringPuzzle()
 	{
-		
+
+		StringPuzzle startstate = new StringPuzzle("java");
+		startstate.jumble();
+		System.out.println(startstate);
+		StringPuzzle goalstate = new StringPuzzle("java");
+		SuccessorFunction succfunc = new StringSuccessorFunction();
+		Search<Swap> USearch = new Search<Swap>(startstate, goalstate, searchChoice);
+				List<Swap> solutionList = USearch.search(succfunc, searchChoice); 
+				
+				int count = 0; 
+				for(int i = 0; i < solutionList.size(); i++) 
+				{ 
+				System.out.print(solutionList.get(i).toString() + ", "); 
+				count++; 
+				} 
+				System.out.println(); 
+				System.out.println("Total Moves: " + count); 
+			
 	}
 }
