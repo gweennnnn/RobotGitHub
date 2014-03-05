@@ -9,7 +9,7 @@ import puzzles.PuzzleInterface;
  * @author Gwen & Goda c:
  *
  */
-public class AStarNode<_action> extends Node<_action> implements NodeInterface<_action>{
+public class AStarNode<_action> extends Node<_action>{
 	
 	private int value;
 	private int costToGetHere;
