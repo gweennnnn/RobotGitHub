@@ -1,10 +1,11 @@
 package established;
 
+import grid.Grid.Direction;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import lejos.nxt.Button;
-import grid.Grid.Direction;
 
 /**
  * Grid Traveller takes a List of Directions from the grid, and travels along them.
@@ -14,11 +15,18 @@ import grid.Grid.Direction;
 public class GridTraveller {
 	
 	private List<Direction> actionList;
+	
+	/**
+	 * 0 - GO FORWARD
+	 * 1 - TURN LEFT, GO FORWARD
+	 * 2 - TURN RIGHT, GO FORWARD
+	 * 3 - TURN AROUND, GO FORWARD
+	 * */
 
-	private static final int[][] relativityRegulator = new int[][]{new int[]{0, -1,  2,  1},
-																   new int[]{-1, 0,  1,  2},
-																   new int[]{1,  2,  0, -1},
-																   new int[]{2,  1, -1,  0}
+	private static final int[][] relativityRegulator = new int[][]{new int[]{0, 3,  2,  1},
+																   new int[]{3, 0,  1,  2},
+																   new int[]{1,  2,  0, 3},
+																   new int[]{2,  1, 3,  0}
 																  };
 	public enum GridDirection
 	{
@@ -56,7 +64,11 @@ public class GridTraveller {
 		String path = listToPath(actionList);
 		System.out.println(path);
 		Button.waitForAnyPress();
+		
+		
 		PathFollower pf = new PathFollower(path);
+		
+		
 		pf.runPath();
 	}
 	
@@ -129,7 +141,10 @@ public class GridTraveller {
 	 */
 	private static String submitRelativity(int gridDirection, int orientation) throws IllegalArgumentException
 	{
-		if ((gridDirection | orientation) == -1) throw new IllegalArgumentException("Trying to turn 180 degrees on the grid.");
+//		if ((gridDirection | orientation) == -1) throw new IllegalArgumentException("Trying to turn 180 degrees on the grid.");
+//		System.out.println("TURN AROUND");
+//		Button.waitForAnyPress();
+		
 		Integer movementCode = relativityRegulator[gridDirection][orientation];
 		return movementCode.toString();
 	}

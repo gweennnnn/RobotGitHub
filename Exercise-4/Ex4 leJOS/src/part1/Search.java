@@ -3,6 +3,7 @@ package part1;
 import java.util.ArrayList;
 import java.util.List;
 
+import lejos.nxt.Button;
 import List.AStar;
 import List.AStarNode;
 import List.Node;
@@ -52,6 +53,7 @@ public class Search<_action> extends EqualityGoalTest<PuzzleInterface>
 	
 	public List<_action> search(SuccessorFunction<_action, PuzzleInterface> succFunct, SearchType search) 
     { 
+
 		NodeInterface<_action> startNode;
 		if(search.equals(SearchType.AStar))
 			startNode = new AStarNode<_action>(null, startState); 
@@ -60,26 +62,29 @@ public class Search<_action> extends EqualityGoalTest<PuzzleInterface>
 			
         ArrayList<ActionStatePair<_action, PuzzleInterface>> emptySuccs = new ArrayList<ActionStatePair<_action, PuzzleInterface>>(); 
         succFunct.getSuccessors(startState, emptySuccs); 
+        
+        
         return search(startNode, succFunct, emptySuccs, search); 
     } 
 
 	public List<_action> search(NodeInterface<_action> startNode, SuccessorFunction<_action, PuzzleInterface> succFunct,
 								List<ActionStatePair<_action, PuzzleInterface>> successors, SearchType search)
 	{	
+		
 		NodeInterface<_action> currentNode = startNode;
 		this.list.push(startNode);
-		System.out.println("So, starting from the first node..");
+		
 		int counter = 0;
 		while (!this.list.isEmpty())
 		{
+
 			currentNode = this.list.pop();
-			System.out.println(counter + " passes so far...");
+//			System.out.println(counter + " passes so far...");
 //			System.out.println(currentNode.getMove());
 //			System.out.println(currentNode.getState());
 //			System.out.println("Pass? " + this.isGoal(currentNode.getState()));
 			if (this.isGoal(currentNode.getState()))
 			{
-				System.out.println("GOAL STATE FOUND");
 				List<_action> solutionList = new ArrayList<_action> ();
 				currentNode.getSolutionList(solutionList);
 				return solutionList;
@@ -88,6 +93,7 @@ public class Search<_action> extends EqualityGoalTest<PuzzleInterface>
 
 			succFunct.getSuccessors(currentNode.getState(), successors); // <----------gets all the successors
 			
+			
 //			if(successors.isEmpty())
 //				System.out.println("Derp");
 //
@@ -95,31 +101,36 @@ public class Search<_action> extends EqualityGoalTest<PuzzleInterface>
 			//CHILDREN
 			for (ActionStatePair<_action, PuzzleInterface> state : successors)
 			{ 	
+				
 				NodeInterface<_action> tempNode;
 				if(search.equals(SearchType.AStar))									//GET THE VALUE
 					tempNode = new AStarNode<_action>(state.getAction(), state.getState(), (AStarNode<_action>) currentNode);
 				else
 					tempNode = new Node<_action>(state.getAction(), state.getState(), (Node<_action>) currentNode); 
 
-
+					
 				if (!list.contains(tempNode) && !tempNode.getMove().equals(null))
 				{
-//					System.out.println(tempNode.getMove());
-//					System.out.println(tempNode.getState());
 
 					this.list.push(tempNode);
 				}
 			}
 			
-			successors.removeAll(successors);
+			
+			successors.clear();
 			counter++;
 			
-			System.out.println();
-			System.out.println();
-			System.out.println("NEXT NODE!");
+			
+//			System.out.println();
+//			System.out.println();
+////			System.out.println("NEXT NODE!");
 
 
 		}
+		
+//		System.out.println("return");
+//		Button.waitForAnyPress();
+		
 		return new ArrayList<_action>();
 	}
 

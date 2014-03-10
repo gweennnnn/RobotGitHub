@@ -5,7 +5,7 @@ package List;
  * @author Gwen & Goda c:
  *
  */
-public class AStar <_action> extends Queue<_action> {
+public class AStar<_action> extends Queue<_action> {
 	public AStar()
 	{
 		super();

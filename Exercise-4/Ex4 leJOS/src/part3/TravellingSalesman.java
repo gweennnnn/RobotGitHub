@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import part1.UninformedSearch;
-import part2.Part2;
+import part2.Ex4Part2;
 import grid.Grid;
 import grid.GridSuccessorFunction;
 import grid.Grid.Direction;
@@ -15,7 +15,7 @@ public class TravellingSalesman {
 	TSNode[] cities;
 	ArrayList<TSNode> visited;
 	ArrayList<TSNode> remaining;
-	Part2 traveller;
+	Ex4Part2 traveller;
 	Grid grid;
 	TSNode start;
 	public static TSNode testingStart = new TSNode(new Point(0, 0));
@@ -50,7 +50,7 @@ public class TravellingSalesman {
 		}
 		
 		this.grid = grid;
-		traveller = new Part2();
+		traveller = new Ex4Part2();
 		initDistances();
 	}
 	
