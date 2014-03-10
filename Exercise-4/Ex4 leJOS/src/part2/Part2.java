@@ -23,7 +23,7 @@ import grid.GridSuccessorFunction;
  * 
  *
  */
-public class Ex4Part2{
+public class Part2{
 
 	//Testing values
 	public static Point start = new Point(0, 0);
@@ -34,7 +34,7 @@ public class Ex4Part2{
 	/**
 	 * Construct a Part 2 using a custom grid and custom directions.
 	 */
-	public Ex4Part2(Grid grid, Point start, Point end)
+	public Part2(Grid grid, Point start, Point end)
 	{
 		startState = new Grid(grid, start);
 		endState = new Grid(grid, end);
@@ -43,7 +43,7 @@ public class Ex4Part2{
 	/**
 	 * Construct a grid using the hard-coded default values.
 	 */
-	public Ex4Part2()
+	public Part2()
 	{
 		Connection[] blockages = Grid.getTestingBlockages();
 		startState = new Grid(blockages, start, 5, 5);
@@ -88,7 +88,7 @@ public class Ex4Part2{
 	 * Run a Searching and Finding robot
 	 */
 	public static void main(String[] args) {
-		Ex4Part2 part2 = new Ex4Part2();
+		Part2 part2 = new Part2();
 		part2.run();
 	}
 }

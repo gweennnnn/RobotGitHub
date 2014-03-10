@@ -1,7 +1,7 @@
 package part3;
 
 import grid.Grid;
-import part2.Ex4Part2;
+import part2.Part2;
 
 public class Part3 {
 	
@@ -25,7 +25,7 @@ public class Part3 {
 		currentLocation = ts.getStart();
 		for (TSNode destination : order)
 		{
-			Ex4Part2 route = new Ex4Part2(grid, currentLocation.getPosition(), destination.getPosition());
+			Part2 route = new Part2(grid, currentLocation.getPosition(), destination.getPosition());
 			route.run(); //Physically move to the destination
 			currentLocation = destination; //Now that you're at that destination, make that your currentLocation
 		}
