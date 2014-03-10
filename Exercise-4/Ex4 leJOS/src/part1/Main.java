@@ -16,20 +16,21 @@ import rp13.search.interfaces.SuccessorFunction;
  *
  */
 public class Main {
-	private static SearchType searchChoice = SearchType.DepthFirst;
+	private static SearchType searchChoice = SearchType.AStar;
 	
 	public static void main (String[] args) 
     { 
         //This is how you use it 
-        solveStringPuzzle("hi");
-//		solveEightPuzzle();
+//		System.out.println("hello");
+//        solveStringPuzzle("hi");
+		solveEightPuzzle();
     }
 	
 	
 	public static void solveEightPuzzle()
 	{
 		Search<PuzzleMove> USearch = new Search<PuzzleMove>
-        (EightPuzzle.randomEightPuzzle(), EightPuzzle.orderedEightPuzzle(), searchChoice); 
+        (EightPuzzle.testEightPuzzle(), EightPuzzle.orderedEightPuzzle(), searchChoice); 
 
 		//With Delegation 
 		SuccessorFunction succfunc = new EightPuzzleSuccessorFunction();
@@ -47,16 +48,17 @@ public class Main {
 
 	public static void solveStringPuzzle(String word)
 	{
-
+		System.out.println("hI");
 		StringPuzzle startstate = new StringPuzzle(word);
 		startstate.jumble();
+		System.out.println("Jumble");
 		System.out.println(startstate);
 		StringPuzzle goalstate = new StringPuzzle(word);
 		System.out.println(goalstate);
 		SuccessorFunction succfunc = new StringSuccessorFunction();
 		Search<Swap> USearch = new Search<Swap>(startstate, goalstate, searchChoice);
 				List<Swap> solutionList = USearch.search(succfunc, searchChoice); 
-				
+				System.out.println("Searched");
 				int count = 0; 
 				for(int i = 0; i < solutionList.size(); i++) 
 				{ 
