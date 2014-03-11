@@ -27,10 +27,24 @@ public class Main {
     { 
         //This is how you use it 
 	 
-//        solveGridPuzzle();
-		Grid startstate = Grid.exc5Grid();
-		System.out.println("START STATE: ");
-		System.out.println(startstate);
+        solveGridPuzzle();
+//		Grid startstate = Grid.exc5Grid();
+//		
+//		Grid endstate = Grid.exc5GridGoal();
+//		
+//		System.out.println("START STATE: ");
+//		System.out.println(startstate);
+//		
+//		System.out.println("--------------------------");
+//		
+//		System.out.println("END STATE: ");
+//		System.out.println(endstate);
+//		
+//		System.out.println("--------------------------");
+//		
+//		System.out.println("SEARCH!");
+		
+		
 		
     }
 	
@@ -79,17 +93,21 @@ public class Main {
 	public static void solveGridPuzzle(){
 
 		
-		Grid startstate = Grid.testStartGrid();
+		Grid startstate = Grid.exc5Grid();
+		
+		Grid endstate = Grid.exc5GridGoal();
+		
 		System.out.println("START STATE: ");
 		System.out.println(startstate);
 		
 		System.out.println("--------------------------");
 		
-		Grid endstate = Grid.testEndGrid();
 		System.out.println("END STATE: ");
-		System.out.println(endstate);	
+		System.out.println(endstate);
 		
 		System.out.println("--------------------------");
+		
+		System.out.println("SEARCH!");
 		
 		SuccessorFunction succfunc = new GridSuccessorFunction();
 		

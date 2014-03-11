@@ -54,9 +54,12 @@ public class Part2{
 	 * Run by searching for the solution
 	 */
 	public void run() {
-		Search<Direction> s = new Search<Direction>(Grid.testStartGrid(), Grid.testEndGrid(), SearchType.AStar); 
+		Search<Direction> s = new Search<Direction>(Grid.exc5Grid(), Grid.exc5GridGoal(), SearchType.AStar); 
 		SuccessorFunction succFunct = new GridSuccessorFunction();
+		System.out.println("Running Search!");
+		Delay.msDelay(100);
 		List<Direction> actionList = s.search(succFunct, SearchType.AStar);
+		System.out.println("ROUTE FOUND: "+ actionList);
 		Delay.msDelay(100);
 		
 		//Test values
