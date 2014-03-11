@@ -4,8 +4,10 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
-import part1.UninformedSearch;
+import part1.Search;
+import part1.Search.SearchType;
 import part2.Part2;
+import rp13.search.interfaces.SuccessorFunction;
 import grid.Grid;
 import grid.GridSuccessorFunction;
 import grid.Grid.Direction;
@@ -166,9 +168,9 @@ public class TravellingSalesman {
 	private int calculateDistance(Grid g1, Grid g2)
 	{
 		//SEARCH LENGTH HEURISTIC
-		UninformedSearch<Direction, Grid> s = new UninformedSearch<Direction, Grid>(g1, g2, UninformedSearch.SearchType.DepthFirst);
-		GridSuccessorFunction succFunct = new GridSuccessorFunction();
-		List<Direction> path = s.search(succFunct);
+		Search<Direction> s = new Search<Direction>(g1, g2, SearchType.AStar); 
+		SuccessorFunction succFunct = new GridSuccessorFunction();
+		List<Direction> path = s.search(succFunct, SearchType.AStar);
 		
 		int distanceToTarget = path.size(); //Distance to target is the length of the path taken to get there.
 		return distanceToTarget;

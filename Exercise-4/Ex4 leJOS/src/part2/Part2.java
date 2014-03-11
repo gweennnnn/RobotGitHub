@@ -54,13 +54,9 @@ public class Part2{
 	 * Run by searching for the solution
 	 */
 	public void run() {
-		
-		//(Whatever way) a new search is done
 		Search<Direction> s = new Search<Direction>(Grid.testStartGrid(), Grid.testEndGrid(), SearchType.AStar); 
-//		UninformedSearch<Direction, Grid> s = new UninformedSearch<Direction, Grid>(startState, endState, UninformedSearch.SearchType.BreadthFirst);
 		SuccessorFunction succFunct = new GridSuccessorFunction();
 		List<Direction> actionList = s.search(succFunct, SearchType.AStar);
-		System.out.println("SEARCH!!!!");
 		Delay.msDelay(100);
 		
 		//Test values
@@ -72,14 +68,9 @@ public class Part2{
 //		actionList.add(Direction.LEFT); //2 LEFT
 //		actionList.add(Direction.UP); //1 RIGHT
 //		actionList.add(Direction.LEFT); //2 LEFT
-		System.out.println("Actions found!");
-		System.out.println(actionList);
 		Button.waitForAnyPress();
 		
-		
-		
 		GridTraveller traveller = new GridTraveller(actionList);
-		
 		
 		traveller.runActions();
 	}

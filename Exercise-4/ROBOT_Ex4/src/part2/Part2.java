@@ -5,6 +5,7 @@ import java.util.List;
 
 import lejos.util.Matrix;
 import established.PathFollower;
+import part1.Search;
 import part1.UninformedSearch;
 import puzzles.EightPuzzle.PuzzleMove;
 import grid.Grid.Direction;
@@ -75,7 +76,7 @@ public class Part2{
 
 	public void run() {
 		////However a new search is done
-		UninformedSearch<Direction, Grid> s = new UninformedSearch<Direction, Grid>(startState, endState, UninformedSearch.SearchType.BreadthFirst);
+		Search<Direction, Grid> s = new Search<Direction, Grid>(startState, endState, Search.SearchType.BreadthFirst);
 		
 		////However the results are received
 		List<Direction> actionList = s.search(currNode, succFunct, successors));
