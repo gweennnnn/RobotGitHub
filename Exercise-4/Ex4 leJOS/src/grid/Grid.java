@@ -41,7 +41,7 @@ public class Grid implements PuzzleInterface{
 	public int height = 5;
 	private Point robotPosition;
 	private Connection[] blockages = new Connection[] {};
-	private static Point r1 = new Point(1,2);
+	private static Point r1 = new Point(0,0);
 	private static Point r2 = new Point(4,4);
 
 	/**
@@ -91,6 +91,39 @@ public class Grid implements PuzzleInterface{
 		boolean yValid = (robotPosition.y >= 0) && (robotPosition.y < height);
 		
 		return (xValid && yValid);
+	}
+	
+	public static Grid exc5Grid(){
+		
+		Point s1 = new Point(2, 0);
+		Point e1 = new Point(2, 1);
+		Connection b1 = new Connection(s1, e1);
+		
+		Point s2 = new Point(2, 1);
+		Point e2 = new Point(2, 2);
+		Connection b2 = new Connection(s2, e2);
+		
+		Point s3 = new Point(2, 1);
+		Point e3 = new Point(3, 1);
+		Connection b3 = new Connection(s3, e3);
+		
+		Point s4 = new Point(1, 2);
+		Point e4 = new Point(2, 2);
+		Connection b4 = new Connection(s4, e4);
+		
+		Point s5 = new Point(1, 2);
+		Point e5 = new Point(1, 3);
+		Connection b5 = new Connection(s5, e5);
+		
+		Point s6 = new Point(0, 2);
+		Point e6 = new Point(1, 2);
+		Connection b6 = new Connection(s6, e6);
+		
+		Connection[] blockages = new Connection[] { b1, b2, b3, b4, b5, b6 };
+		
+		Grid grid = new Grid(blockages, r1, 6, 10);
+		
+		return grid;
 	}
 	
 	
@@ -466,7 +499,9 @@ public class Grid implements PuzzleInterface{
 
 				//Draw the node
 				if (thisPosition.equals(robotPosition))
+				{
 					sb.append("R"); //Represent the robot's position
+				}
 				else
 					sb.append("+"); //Represent a junction
 				

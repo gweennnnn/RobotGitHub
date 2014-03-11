@@ -27,7 +27,11 @@ public class Main {
     { 
         //This is how you use it 
 	 
-        solveGridPuzzle();
+//        solveGridPuzzle();
+		Grid startstate = Grid.exc5Grid();
+		System.out.println("START STATE: ");
+		System.out.println(startstate);
+		
     }
 	
 	
