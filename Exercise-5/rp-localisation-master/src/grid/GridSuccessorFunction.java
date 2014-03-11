@@ -3,6 +3,9 @@ import grid.Grid.Direction;
 
 import java.util.List;
 
+import Interfaces.PuzzleInterface;
+import Interfaces.SuccessorFunction;
+
 
 public class GridSuccessorFunction implements
 		SuccessorFunction<Direction, Grid> {

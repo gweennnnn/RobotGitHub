@@ -3,6 +3,8 @@ import java.awt.Point;
 import java.util.Random;
 import java.lang.Math;
 
+import Interfaces.PuzzleInterface;
+
 
 /**
  * A class to represent a traversable robot grid. Takes into account hard-coded

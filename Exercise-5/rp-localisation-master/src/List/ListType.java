@@ -1,10 +1,12 @@
 package List;
 
-import grid.PuzzleInterface;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import Interfaces.Agenda;
+import Interfaces.NodeInterface;
+import Interfaces.PuzzleInterface;
 
 
 /**

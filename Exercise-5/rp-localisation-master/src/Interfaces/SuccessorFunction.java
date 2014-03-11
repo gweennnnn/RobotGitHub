@@ -1,8 +1,10 @@
 /**
  * 
  */
-package grid;
+package Interfaces;
 
+
+import grid.ActionStatePair;
 
 import java.util.List;
 

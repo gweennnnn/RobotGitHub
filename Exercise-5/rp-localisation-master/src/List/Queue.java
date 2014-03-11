@@ -1,5 +1,7 @@
 package List;
 
+import Interfaces.NodeInterface;
+
 /**
  * 
  * @author Gwen & Goda c:

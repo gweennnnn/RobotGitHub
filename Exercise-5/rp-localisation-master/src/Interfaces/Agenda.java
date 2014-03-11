@@ -1,4 +1,4 @@
-package List;
+package Interfaces;
 
 /**
  * An interface to define an agenda for use in a search implementation

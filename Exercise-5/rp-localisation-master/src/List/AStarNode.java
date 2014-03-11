@@ -2,7 +2,8 @@ package List;
 
 import java.util.List;
 
-import grid.PuzzleInterface;
+import Interfaces.Node;
+import Interfaces.PuzzleInterface;
 
 /**
  * 

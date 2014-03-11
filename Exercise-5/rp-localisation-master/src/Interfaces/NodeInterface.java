@@ -1,6 +1,5 @@
-package List;
+package Interfaces;
 
-import grid.PuzzleInterface;
 import java.util.List;
 
 
