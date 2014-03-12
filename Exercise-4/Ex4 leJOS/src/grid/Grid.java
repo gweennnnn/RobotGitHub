@@ -18,8 +18,8 @@ public class Grid implements PuzzleInterface{
 	 * The enumeration of the directions the robot can take
 	 */
 	public enum Direction {
-		UP(new Point(0, -1)),
-		DOWN(new Point(0, 1)),
+		UP(new Point(0, 1)),
+		DOWN(new Point(0, -1)),
 		LEFT(new Point(-1, 0)),
 		RIGHT(new Point(1, 0));
 
@@ -41,7 +41,7 @@ public class Grid implements PuzzleInterface{
 	public int height = 7;
 	private Point robotPosition;
 	private Connection[] blockages = new Connection[] {};
-	private static Point r1 = new Point(0,0);
+	private static Point r1 = new Point(5,5);
 	private static Point r2 = new Point(5,3);
 
 	/**

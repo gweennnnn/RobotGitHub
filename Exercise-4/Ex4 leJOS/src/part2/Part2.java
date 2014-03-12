@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lejos.nxt.Button;
+import lejos.nxt.Sound;
 import lejos.util.Delay;
 import established.GridTraveller;
 import established.PathFollower;
@@ -59,6 +60,7 @@ public class Part2{
 		System.out.println("Running Search!");
 		Delay.msDelay(100);
 		List<Direction> actionList = s.search(succFunct, SearchType.AStar);
+		Sound.beep();
 		System.out.println("ROUTE FOUND: "+ actionList);
 		Delay.msDelay(100);
 		

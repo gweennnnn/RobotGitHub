@@ -79,7 +79,7 @@ public class Search<_action> extends EqualityGoalTest<PuzzleInterface>
 		{
 
 			currentNode = this.list.pop();
-//			System.out.println(counter + " passes so far...");
+			System.out.println(counter + " passes so far...");
 //			System.out.println(currentNode.getMove());
 //			System.out.println(currentNode.getState());
 //			System.out.println("Pass? " + this.isGoal(currentNode.getState()));
