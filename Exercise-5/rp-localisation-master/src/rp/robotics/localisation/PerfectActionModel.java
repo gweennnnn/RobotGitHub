@@ -51,9 +51,9 @@ public class PerfectActionModel implements ActionModel {
 			GridPositionDistribution _to) {
 
 		// iterate through points updating as appropriate
-		for (int y = 1; y < _to.getGridHeight(); y++) {
+		for (int y = (_to.getGridHeight() -1); y > 0; y--) {
 
-			for (int x = 1; x < _to.getGridWidth(); x++) {
+			for (int x = (_to.getGridWidth() - 1); x > 0; x--) {
 
 				
 				
@@ -64,10 +64,16 @@ public class PerfectActionModel implements ActionModel {
 					int fromX = x -1;
 					int fromY = y;
 					float fromProb;
+					
 
 					// position after move
 					int toX = x;
 					int toY = y;
+					
+					float currentProb = _to.getProbability(toX, toY);
+					
+					
+
 
 					// the action model should work out all of the different
 					// ways (x,y) in the _to grid could've been reached based on
@@ -76,17 +82,17 @@ public class PerfectActionModel implements ActionModel {
 					
 				//if the previous grid point was obstructed --> set prob. to 0
 					
-				if (_from.isObstructed(fromX, fromY)){
-					fromProb = 0;
-				}
+//				if (_from.isObstructed(fromX, fromY)){
+//					fromProb = 0;
+//				}
+//				
+//				//if the previous grid is not a valid point --> set prob. to0
+//				
+//				else if (_from.isValidGridPoint(fromX, fromY)){
+//					fromProb = 0;
+//				}
 				
-				//if the previous grid is not a valid point --> set prob. to0
-				
-				else if (_from.isValidGridPoint(fromX, fromY)){
-					fromProb = 0;
-				}
-				
-				else fromProb = _from.getProbability(fromX, fromY);
+				fromProb = _from.getProbability(fromX, fromY);
 
 					// for example if the only way to have got to _to (x,y) was
 					// from _from (x-1, y) (i.e. there was a PLUS_X move from
@@ -98,7 +104,16 @@ public class PerfectActionModel implements ActionModel {
 					
 
 					// set probability for position after move
-					_to.setProbability(toX, toY, fromProb);
+				
+
+					_to.setProbability(toX, toY, fromProb + currentProb);
+					_from.setProbability(fromX, fromY, 0f);
+//					_to.normalise();
+					
+					System.out.println("From Coord : " + fromX + ","+ fromY);
+					System.out.println("From Prob" + _from.getProbability(fromX, fromY));
+					System.out.println("To Coord : " + toX + ","+ toY);
+					System.out.println("To Prob" + _to.getProbability(toX, toY));
 
 				}
 			}
