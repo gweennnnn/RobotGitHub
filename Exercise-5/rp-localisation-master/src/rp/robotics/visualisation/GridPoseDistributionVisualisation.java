@@ -14,7 +14,7 @@ public class GridPoseDistributionVisualisation extends LineMapVisualisation {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private static final float BIGGEST_POINT_RADIUS = 60;
+	private static final float BIGGEST_POINT_RADIUS = 200;
 
 	protected GridPositionDistribution m_gridDistribution;
 
@@ -50,6 +50,7 @@ public class GridPoseDistributionVisualisation extends LineMapVisualisation {
 
 					float radius = BIGGEST_POINT_RADIUS
 							* m_gridDistribution.getProbability(x, y);
+//					if (radius == 0) System.out.println("BLERGH!!!");
 					if (radius > 0) {
 						if (radius < 1) {
 							radius = 1;

@@ -46,7 +46,7 @@ public class GridPositionDistribution {
 
 		// System.out.println(obstructedPoints + " obstructed points");
 
-		float totalPoints = (m_gridWidth * m_gridHeight) - obstructedPoints;
+		float totalPoints = (float) (m_gridWidth * m_gridHeight) - obstructedPoints;
 		float initialProbability = 1f / totalPoints;
 
 		// initialise probs

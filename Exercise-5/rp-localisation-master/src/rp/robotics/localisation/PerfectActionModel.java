@@ -51,7 +51,7 @@ public class PerfectActionModel implements ActionModel {
 			GridPositionDistribution _to) {
 
 		// iterate through points updating as appropriate
-		for (int y = (_to.getGridHeight() -1); y > 0; y--) {
+		for (int y = (_to.getGridHeight() -1); y >= 0; y--) {
 
 			for (int x = (_to.getGridWidth() - 1); x > 0; x--) {
 
@@ -72,7 +72,6 @@ public class PerfectActionModel implements ActionModel {
 					
 					float currentProb = _to.getProbability(toX, toY);
 					
-					
 
 
 					// the action model should work out all of the different
@@ -82,18 +81,24 @@ public class PerfectActionModel implements ActionModel {
 					
 				//if the previous grid point was obstructed --> set prob. to 0
 					
-//				if (_from.isObstructed(fromX, fromY)){
-//					fromProb = 0;
-//				}
-//				
-//				//if the previous grid is not a valid point --> set prob. to0
-//				
-//				else if (_from.isValidGridPoint(fromX, fromY)){
-//					fromProb = 0;
-//				}
+				if (_from.isObstructed(fromX, fromY)){
+					fromProb = 0;
+				}
+				
+				//if the previous grid is not a valid point --> set prob. to0
+				
+				else if (_from.isValidGridPoint(fromX, fromY)){
+					fromProb = 0;
+				}
+					
+					
 				
 				fromProb = _from.getProbability(fromX, fromY);
-
+//				fromProb = Math.round(fromProb * 100) / 100;
+//				currentProb = Math.round(currentProb * 100) / 100;
+				
+//				float roundedFrom = 
+				
 					// for example if the only way to have got to _to (x,y) was
 					// from _from (x-1, y) (i.e. there was a PLUS_X move from
 					// (x-1, y) then you write that to the (x, y) value
@@ -107,7 +112,7 @@ public class PerfectActionModel implements ActionModel {
 				
 
 					_to.setProbability(toX, toY, fromProb + currentProb);
-					_from.setProbability(fromX, fromY, 0f);
+					_from.setProbability(fromX, fromY, 0);
 //					_to.normalise();
 					
 					System.out.println("From Coord : " + fromX + ","+ fromY);
@@ -119,4 +124,5 @@ public class PerfectActionModel implements ActionModel {
 			}
 		}
 	}
+	
 }
