@@ -25,100 +25,163 @@ public class PerfectActionModel implements ActionModel {
 		// Create the new distribution that will result from applying the action
 		// model
 		GridPositionDistribution to = new GridPositionDistribution(_from);
+		int moveX = 0;
+		int moveY = 0;
 
 		// Move the probability in the correct direction for the action
 		if (_heading == Heading.PLUS_X) {
-			movePlusX(_from, to);
+			
+			moveX = -1;
+			movePlus(_from, to, moveX, moveY);			
+			
 		} else if (_heading == Heading.PLUS_Y) {
-			// you could implement a movePlusY etc. or you could find a way do
-			// do all moves in a single method. Hint: all changes are just + or
-			// - 1 to an x or y value.
+			
+			moveY = -1;
+			movePlus(_from, to, moveX, moveY);
+			
 		} else if (_heading == Heading.MINUS_X) {
-
+			moveX = 1;
+			moveMinus(_from, to, moveX, moveY);
+		
 		} else if (_heading == Heading.MINUS_Y) {
-
+			moveY = 1;
+			moveMinus(_from, to, moveX, moveY);
 		}
 
 		return to;
 	}
-
+	
 	/**
-	 * Move probabilities from _from one cell in the plus x direction into _to
+	 * Move probabilities from _from one cell in the plus x or y direction into _to
 	 * 
 	 * @param _from
 	 * @param _to
+	 * @param moveX
+	 * @param moveY
 	 */
-	private void movePlusX(GridPositionDistribution _from,
-			GridPositionDistribution _to) {
 
+	private void movePlus(GridPositionDistribution _from,
+			GridPositionDistribution _to, int moveX, int moveY) {
+		
 		// iterate through points updating as appropriate
-		for (int y = (_to.getGridHeight() -1); y >= 0; y--) {
+		
+				for (int y = (_to.getGridHeight() -1); y >(0 + moveX); y--) {
 
-			for (int x = (_to.getGridWidth() - 1); x > 0; x--) {
+					for (int x = (_to.getGridWidth() -1); x > (0 + moveY); x--) {
 
-				
-				// position before move
-				int fromX = x -1;
-				int fromY = y;
-				float fromProb;
-				
-
-				// position after move
-				int toX = x;
-				int toY = y;
-				
-				// make sure to respect obstructed grid points
-				// and if the move is possible to make
-				//no walls in between points
-				
-				if (!_to.isObstructed(x, y) && 
-						_from.getGridMap().isValidTransition(fromX, fromY, toX, toY) &&
-						_to.isValidGridPoint(toX, toY)) {
-					
-					
-					
-					float currentProb = _to.getProbability(toX, toY);
+						
+						// position before move
+						int fromX = x + moveX;
+						int fromY = y + moveY;
 					
 
+						// position after move
+						int toX = x;
+						int toY = y;
+						
+						// make sure to respect obstructed grid points
+						
+						// and if the move is possible to make
+						//In other words : no walls in between points
+						
+						//and if the previous poin is a valid point
+						
+						if (!_to.isObstructed(x, y) && 
+								_from.getGridMap().isValidTransition(fromX, fromY, toX, toY) &&
+								_to.isValidGridPoint(toX, toY)) {
+							
+							
+							float fromProb;
+							float currentProb = _to.getProbability(toX, toY);
+							
 
-					// the action model should work out all of the different
-					// ways (x,y) in the _to grid could've been reached based on
-					// the _from grid and the move taken (in this case
-					// HEADING.PLUS_X)
-					
-				
-				//if the previous grid is not a valid point --> set prob. to0
-				
-				if (!_from.isValidGridPoint(fromX, fromY)){
-					fromProb = 0;
+
+							// the action model should work out all of the different
+							// ways (x,y) in the _to grid could've been reached based on
+							// the _from grid and the move taken (in this case
+							// HEADING.PLUS_X)
+							
+						
+						//if the previous grid is not a valid point --> set prob. to0
+						
+						if (!_from.isValidGridPoint(fromX, fromY)){
+							fromProb = 0;
+						}
+							
+										
+						fromProb = _from.getProbability(fromX, fromY);
+												
+							// set probability for position after move
+						
+							_to.setProbability(toX, toY, fromProb + currentProb);
+							_to.setProbability(fromX, fromY, 0);
+							
+						}
+					}
 				}
+				
+				
+	}
+	private void moveMinus(GridPositionDistribution _from,
+							GridPositionDistribution _to, int moveX, int moveY) {
+				
+					// iterate through points updating as appropriate
 					
-				
-					
-				
-				fromProb = _from.getProbability(fromX, fromY);
-//				fromProb = Math.round(fromProb * 10) / 10;
-//				currentProb = Math.round(currentProb * 10) / 10;
-				
-				
-					// for example if the only way to have got to _to (x,y) was
-					// from _from (x-1, y) (i.e. there was a PLUS_X move from
-					// (x-1, y) then you write that to the (x, y) value
+					for (int y = 0 ; y < _to.getGridHeight(); y++) {
 
-					// The below code does not move the value, just copies
-					// it to the same position
+						for (int x = 0; x < _to.getGridWidth(); x++) {
 
-					
+									
+							// position before move
+							int fromX = x + moveX;
+							int fromY = y + moveY;
+								
 
-					// set probability for position after move
-				
+							// position after move
+							int toX = x;
+							int toY = y;
+								
+							// make sure to respect obstructed grid points
+									
+							// and if the move is possible to make
+							//In other words : no walls in between points
+									
+							//and if the previous poin is a valid point
+									
+							if (!_to.isObstructed(x, y) && 
+									_from.getGridMap().isValidTransition(fromX, fromY, toX, toY) &&
+									_to.isValidGridPoint(toX, toY)) {
+										
+										
+								float fromProb;
+								float currentProb = _to.getProbability(toX, toY);
+										
 
-					_to.setProbability(toX, toY, fromProb + currentProb);
-					_to.setProbability(fromX, fromY, 0);
-					
-				}
-			}
-		}
+
+								// the action model should work out all of the different
+								// ways (x,y) in the _to grid could've been reached based on
+								// the _from grid and the move taken (in this case
+								// HEADING.PLUS_X)
+										
+									
+								//if the previous grid is not a valid point --> set prob. to0
+									
+								if (!_from.isValidGridPoint(fromX, fromY)){
+										fromProb = 0;
+								}
+										
+													
+								fromProb = _from.getProbability(fromX, fromY);
+															
+								// set probability for position after move
+									
+								_to.setProbability(toX, toY, fromProb + currentProb);
+								_to.setProbability(fromX, fromY, 0);
+										
+							}
+						}
+					}
+		
 	}
 	
 }

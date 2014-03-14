@@ -85,10 +85,10 @@ public class MarkovLocalisationSkeleton {
 			
 			// Do some action
 			// E.g. attempting to move one node in the PLUS_X direction
-			Heading action = Heading.PLUS_X;
+			Heading action = Heading.MINUS_Y;
 
 			// I'm faking movement by waiting for some time
-			Delay.msDelay(100);
+			Delay.msDelay(1000);
 
 			// Once action is completed, apply action model based on the move
 			// the robot took. This creates a new instance of
@@ -108,7 +108,7 @@ public class MarkovLocalisationSkeleton {
 			// Do some sensing
 			// ...
 			// I'm faking sensing by waiting for some time
-			Delay.msDelay(100);
+//			Delay.msDelay(1000);
 
 			// Once completed apply sensor model as appropriate. This changes
 			// the distribution directly (i.e. by reference)
