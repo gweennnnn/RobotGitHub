@@ -79,8 +79,8 @@ public class MarkovLocalisationSkeleton {
 
 //		DummySensorModel sensorModel = new DummySensorModel();
 
-//		while (true) {
-		for(int i = 0; i< 8 ; i++){
+		while (true) {
+//		for(int i = 0; i< 12 ; i++){
 			System.out.println("-------------------------------------------------");
 			
 			// Do some action
@@ -88,7 +88,7 @@ public class MarkovLocalisationSkeleton {
 			Heading action = Heading.PLUS_X;
 
 			// I'm faking movement by waiting for some time
-			Delay.msDelay(1000);
+			Delay.msDelay(100);
 
 			// Once action is completed, apply action model based on the move
 			// the robot took. This creates a new instance of
@@ -108,7 +108,7 @@ public class MarkovLocalisationSkeleton {
 			// Do some sensing
 			// ...
 			// I'm faking sensing by waiting for some time
-			Delay.msDelay(1000);
+			Delay.msDelay(100);
 
 			// Once completed apply sensor model as appropriate. This changes
 			// the distribution directly (i.e. by reference)
@@ -124,17 +124,17 @@ public class MarkovLocalisationSkeleton {
 
 		}
 
-		System.out.println();
-		System.out.println();
-		System.out.println("---------------------");
-		System.out.println();
-		System.out.println();
-		
-		for(int y = 0; y < distribution.getGridHeight(); y++){
-			for(int x = 0; x < distribution.getGridWidth(); x++){
-				System.out.print("[" + distribution.getProbability(x, y) + "]");
-			}
-			System.out.println();
-		}
+//		System.out.println();
+//		System.out.println();
+//		System.out.println("---------------------");
+//		System.out.println();
+//		System.out.println();
+//		
+//		for(int y = 0; y < distribution.getGridHeight(); y++){
+//			for(int x = 0; x < distribution.getGridWidth(); x++){
+//				System.out.print("[" + distribution.getProbability(x, y) + "]");
+//			}
+//			System.out.println();
+//		}
 	}
 }

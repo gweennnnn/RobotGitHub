@@ -153,17 +153,30 @@ public class GridPositionDistribution {
 	/**
 	 * Normalise distribution so that it sums to 1.
 	 */
-	public void normalise() {
+//	public void normalise() {
+//		float total = sumProbabilities();
+//
+//		for (int x = 0; x < m_gridMap.getGridWidth(); x++) {
+//			for (int y = 0; y < m_gridMap.getGridHeight(); y++) {
+//				if (!isObstructed(x, y)) {
+//					m_grid[y][x] = m_grid[y][x] / total;
+//				}
+//			}
+//		}
+//
+//	}
+	
+	public void normalise(){
 		float total = sumProbabilities();
-
+		float alpha = 1f / total;
+		
 		for (int x = 0; x < m_gridMap.getGridWidth(); x++) {
 			for (int y = 0; y < m_gridMap.getGridHeight(); y++) {
 				if (!isObstructed(x, y)) {
-					m_grid[y][x] = m_grid[y][x] / total;
+					m_grid[y][x] = m_grid[y][x] * alpha;
 				}
 			}
 		}
-
 	}
 
 	/**

@@ -14,7 +14,7 @@ public class GridPoseDistributionVisualisation extends LineMapVisualisation {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private static final float BIGGEST_POINT_RADIUS = 200;
+	private static final float BIGGEST_POINT_RADIUS = 100;
 
 	protected GridPositionDistribution m_gridDistribution;
 

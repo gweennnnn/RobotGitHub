@@ -1,5 +1,6 @@
 package rp.robotics.localisation;
 
+import lejos.robotics.navigation.Pose;
 import rp.robotics.mapping.Heading;
 
 /**
@@ -56,19 +57,25 @@ public class PerfectActionModel implements ActionModel {
 			for (int x = (_to.getGridWidth() - 1); x > 0; x--) {
 
 				
+				// position before move
+				int fromX = x -1;
+				int fromY = y;
+				float fromProb;
+				
+
+				// position after move
+				int toX = x;
+				int toY = y;
 				
 				// make sure to respect obstructed grid points
-				if (!_to.isObstructed(x, y)) {
+				// and if the move is possible to make
+				//no walls in between points
+				
+				if (!_to.isObstructed(x, y) && 
+						_from.getGridMap().isValidTransition(fromX, fromY, toX, toY) &&
+						_to.isValidGridPoint(toX, toY)) {
 					
-					// position before move
-					int fromX = x -1;
-					int fromY = y;
-					float fromProb;
 					
-
-					// position after move
-					int toX = x;
-					int toY = y;
 					
 					float currentProb = _to.getProbability(toX, toY);
 					
@@ -79,25 +86,20 @@ public class PerfectActionModel implements ActionModel {
 					// the _from grid and the move taken (in this case
 					// HEADING.PLUS_X)
 					
-				//if the previous grid point was obstructed --> set prob. to 0
-					
-				if (_from.isObstructed(fromX, fromY)){
-					fromProb = 0;
-				}
 				
 				//if the previous grid is not a valid point --> set prob. to0
 				
-				else if (_from.isValidGridPoint(fromX, fromY)){
+				if (!_from.isValidGridPoint(fromX, fromY)){
 					fromProb = 0;
 				}
 					
+				
 					
 				
 				fromProb = _from.getProbability(fromX, fromY);
-//				fromProb = Math.round(fromProb * 100) / 100;
-//				currentProb = Math.round(currentProb * 100) / 100;
+//				fromProb = Math.round(fromProb * 10) / 10;
+//				currentProb = Math.round(currentProb * 10) / 10;
 				
-//				float roundedFrom = 
 				
 					// for example if the only way to have got to _to (x,y) was
 					// from _from (x-1, y) (i.e. there was a PLUS_X move from
@@ -112,14 +114,8 @@ public class PerfectActionModel implements ActionModel {
 				
 
 					_to.setProbability(toX, toY, fromProb + currentProb);
-					_from.setProbability(fromX, fromY, 0);
-//					_to.normalise();
+					_to.setProbability(fromX, fromY, 0);
 					
-					System.out.println("From Coord : " + fromX + ","+ fromY);
-					System.out.println("From Prob" + _from.getProbability(fromX, fromY));
-					System.out.println("To Coord : " + toX + ","+ toY);
-					System.out.println("To Prob" + _to.getProbability(toX, toY));
-
 				}
 			}
 		}
