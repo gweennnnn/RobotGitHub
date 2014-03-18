@@ -40,7 +40,7 @@ public class GridMap extends LineMap {
 			float _yStart, float _cellSize, Line[] _lines,
 			Rectangle _boundingRect) {
 		super(_lines, _boundingRect);
-
+		
 		// Sanity check, test whether the given grid fits within the bounds of
 		// the map
 		float gridMetricWidth = (_gridWidth - 1) * _cellSize;
