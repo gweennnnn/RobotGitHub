@@ -22,8 +22,7 @@ public class PerfectActionModel implements ActionModel {
 	public GridPositionDistribution updateAfterMove(
 			GridPositionDistribution _from, Heading _heading) {
 
-		// Create the new distribution that will result from applying the action
-		// model
+		// Create the new distribution that will result from applying the action model
 		GridPositionDistribution to = new GridPositionDistribution(_from);
 		int moveX = 0;
 		int moveY = 0;
@@ -80,7 +79,6 @@ public class PerfectActionModel implements ActionModel {
 		// iterate through points updating as appropriate
 
 		for (int y = 0; y < _to.getGridHeight(); y++) {
-
 			for (int x = 0; x < _to.getGridWidth(); x++) {
 				move(_from, _to, moveX, moveY, x, y);
 			}
