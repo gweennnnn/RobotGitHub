@@ -4,13 +4,13 @@ import grid.ActionStatePair;
 import java.util.ArrayList;
 import java.util.List;
 
+import List.Node;
 import List.AStar;
 import List.AStarNode;
 import List.EqualityGoalTest;
 import List.Queue;
 import List.Stack;
 import Interfaces.Agenda;
-import Interfaces.Node;
 import Interfaces.NodeInterface;
 import Interfaces.PuzzleInterface;
 import Interfaces.SuccessorFunction;

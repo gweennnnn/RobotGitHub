@@ -1,6 +1,9 @@
-package Interfaces;
+package List;
 
 import java.util.List;
+
+import Interfaces.NodeInterface;
+import Interfaces.PuzzleInterface;
 
 
 
@@ -34,7 +37,7 @@ public class Node<_action> implements NodeInterface<_action>{
 
 	@Override
 	public void setPredecessor(NodeInterface<_action> predecessor) {
-		this.predecessor = (Node<_action>) predecessor;
+		this.predecessor = predecessor;
 	}
 	
 	@Override
@@ -60,7 +63,6 @@ public class Node<_action> implements NodeInterface<_action>{
 
 	@Override
 	public int getValue() {
-		// TODO Auto-generated method stub
 		return -1;
 	}
 }

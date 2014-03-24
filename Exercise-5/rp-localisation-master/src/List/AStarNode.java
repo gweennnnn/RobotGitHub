@@ -2,7 +2,6 @@ package List;
 
 import java.util.List;
 
-import Interfaces.Node;
 import Interfaces.PuzzleInterface;
 
 /**
