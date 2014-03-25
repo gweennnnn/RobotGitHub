@@ -61,7 +61,7 @@ public class MarkovLocalisationSkeleton {
 			}
 		});
 
-		GridMap gridMap = LocalisationUtils.createTrainingMap();
+		GridMap gridMap = LocalisationUtils.create2014Map1();
 
 		// The probability distribution over the robot's location
 		GridPositionDistribution distribution = new GridPositionDistribution(
@@ -82,7 +82,7 @@ public class MarkovLocalisationSkeleton {
 		ActionModel actionModel = new PerfectActionModel();
 
 		// SensorModel sensorModel = new DummySensorModel();
-		DummySensorModel sensorModel = new DummySensorModel();
+		PerfectSensorModel sensorModel = new PerfectSensorModel();
 
 		while (true) {
 //		for(int i = 0; i< 12 ; i++){
@@ -93,12 +93,12 @@ public class MarkovLocalisationSkeleton {
 			Heading action = Heading.PLUS_X;
 
 			// I'm faking movement by waiting for some time
-			Delay.msDelay(1000);
+			Delay.msDelay(5000);
 
 			// Once action is completed, apply action model based on the move
 			// the robot took. This creates a new instance of
 			// GridPoseDistribution and assigns it to distribution
-			distribution = actionModel.updateAfterMove(distribution, action);
+//			distribution = actionModel.updateAfterMove(distribution, action);
 
 			// Update visualisation. Only necessary because it needs to know
 			// about the new distribution instance
@@ -112,21 +112,16 @@ public class MarkovLocalisationSkeleton {
 
 			//================ Sensing ================\\
 			
-			// For testing purposes, our measurements are 100% accurate, and true.
-			DirectionMeasurements dm = new DirectionMeasurements(gridMap, );
-
 			// Once completed apply sensor model as appropriate. This changes
 			// the distribution directly (i.e. by reference)
-			sensorModel.updateDistributionAfterSensing(distribution/**
-			 * , include
-			 * sensor readings
-			 **/
-			);
+			sensorModel.updateDistributionAfterSensing(distribution, gridMeasurements);
 
 			// Note, as the sensor model changes the distribution directly, the
 			// visualisation will update automatically so
 			// mapVis.setDistribution is not necessary after the sensor model
 
+			distribution.normalise();
+			mapVis.setDistribution(distribution);
 		}
 
 //		System.out.println();

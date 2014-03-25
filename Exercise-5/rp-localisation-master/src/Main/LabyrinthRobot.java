@@ -30,7 +30,7 @@ public class LabyrinthRobot extends Robot{
 	{
 		DirectionMeasurements dm = getStandardMeasurements();
 		
-		dm.correctOrientation(orientation, Heading.MINUS_Y);
+		dm.correctOrientation(Heading.MINUS_Y, orientation);
 		return dm;
 	}
 	

@@ -28,6 +28,12 @@ public class PerfectSensorModel {
 		// Commented out the random code to stop people using it without looking
 
 		float prob;
+
+		// Test using the measurements at the robot's location.
+//		DirectionMeasurements dm = robot.getMeasurements();
+		// Test using a dummy position
+		DirectionMeasurements dm = mg.getMeasurementsAt(3, 0);
+
 		// iterate through points updating as appropriate
 		for (int x = 0; x < currentDist.getGridWidth(); x++) {
 			for (int y = 0; y < currentDist.getGridHeight(); y++) {
@@ -35,10 +41,11 @@ public class PerfectSensorModel {
 				if (!currentDist.isObstructed(x, y)) {
 					
 					// The measured distances
-//					DirectionMeasurements dm = robot.getMeasurements();
-					DirectionMeasurements dm = mg.getMeasurementsAt(x, y);
-					// The actual distances at this position
+					
+					
+//					 The actual distances at this position
 					DirectionMeasurements trueDistances = mg.getMeasurementsAt(x, y);
+//					System.out.println("(" + x + ", " + y + "): " + trueDistances);
 					// Do they match?
 					boolean measurementsMatchPosition = dm.equals(trueDistances);
 					prob = currentDist.getProbability(x, y);
