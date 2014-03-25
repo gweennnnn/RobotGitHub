@@ -15,7 +15,7 @@ public class GridPuz implements PuzzleInterface{
 	public GridPuz(Point currPoint) {
 		this.currPoint = currPoint;
 	}
-
+	
 	public Point getCurrPoint()
 	{
 		return this.currPoint;
