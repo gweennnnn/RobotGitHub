@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lejos.nxt.Button;
-import grid.Grid.Direction;
+import grid.GridBoard.Direction;
 
 /**
  * Grid Traveller takes a List of Directions from the grid, and travels along them.
