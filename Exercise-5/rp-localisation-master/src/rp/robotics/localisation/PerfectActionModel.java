@@ -101,7 +101,7 @@ public class PerfectActionModel implements ActionModel {
 		// and if the move is possible to make
 		// In other words : no walls in between points
 
-		// and if the previous poin is a valid point
+		// and if the previous point is a valid point
 
 		if (!_to.isObstructed(x, y)
 				&& _from.getGridMap().isValidTransition(fromX, fromY, toX, toY)
@@ -120,7 +120,7 @@ public class PerfectActionModel implements ActionModel {
 			if (!_from.isValidGridPoint(fromX, fromY)) {
 				fromProb = 0;
 			}
-
+			// TODO Doesn't this override the previous statement? 
 			fromProb = _from.getProbability(fromX, fromY);
 
 			// set probability for position after move

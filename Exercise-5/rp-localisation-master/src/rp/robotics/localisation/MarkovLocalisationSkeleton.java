@@ -6,9 +6,11 @@ import java.awt.event.WindowListener;
 import javax.swing.JFrame;
 
 import lejos.util.Delay;
+import rp.robotics.mapping.DirectionMeasurements;
 import rp.robotics.mapping.GridMap;
 import rp.robotics.mapping.Heading;
 import rp.robotics.mapping.LocalisationUtils;
+import rp.robotics.mapping.MeasuredGrid;
 import rp.robotics.visualisation.GridPoseDistributionVisualisation;
 
 public class MarkovLocalisationSkeleton {
@@ -64,6 +66,8 @@ public class MarkovLocalisationSkeleton {
 		// The probability distribution over the robot's location
 		GridPositionDistribution distribution = new GridPositionDistribution(
 				gridMap);
+		
+		MeasuredGrid gridMeasurements = new MeasuredGrid(gridMap);
 
 		// view the map with 2 pixels as 1 cm
 		GridPoseDistributionVisualisation mapVis = new GridPoseDistributionVisualisation(
@@ -77,7 +81,8 @@ public class MarkovLocalisationSkeleton {
 		// ActionModel actionModel = new DummyActionModel();
 		ActionModel actionModel = new PerfectActionModel();
 
-//		DummySensorModel sensorModel = new DummySensorModel();
+		// SensorModel sensorModel = new DummySensorModel();
+		DummySensorModel sensorModel = new DummySensorModel();
 
 		while (true) {
 //		for(int i = 0; i< 12 ; i++){
@@ -105,18 +110,18 @@ public class MarkovLocalisationSkeleton {
 			System.out.println("map sum: " + distribution.sumProbabilities());
 			
 
-			// Do some sensing
-			// ...
-			// I'm faking sensing by waiting for some time
-//			Delay.msDelay(1000);
+			//================ Sensing ================\\
+			
+			// For testing purposes, our measurements are 100% accurate, and true.
+			DirectionMeasurements dm = new DirectionMeasurements(gridMap, );
 
 			// Once completed apply sensor model as appropriate. This changes
 			// the distribution directly (i.e. by reference)
-//			sensorModel.updateDistributionAfterSensing(distribution/**
-//			 * , include
-//			 * sensor readings
-//			 **/
-//			);
+			sensorModel.updateDistributionAfterSensing(distribution/**
+			 * , include
+			 * sensor readings
+			 **/
+			);
 
 			// Note, as the sensor model changes the distribution directly, the
 			// visualisation will update automatically so

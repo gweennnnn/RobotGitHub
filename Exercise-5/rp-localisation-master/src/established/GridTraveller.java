@@ -29,12 +29,8 @@ public class GridTraveller {
 			this.val = val;
 		}
 		
-		private static GridDirection initialOrientation()
-		{
-			//Edit this if we want to set the initial orientaiton to something different.
-			return UP;
-		}
-		
+		//Edit this if we want to set the initial orientaiton to something different.
+		private static GridDirection initialOrientation() { return UP; }
 	}
 	
 	public GridTraveller(List<Direction> actionList)

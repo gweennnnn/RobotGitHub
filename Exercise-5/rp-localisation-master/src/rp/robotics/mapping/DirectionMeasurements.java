@@ -28,8 +28,6 @@ public class DirectionMeasurements{
 	
 	/**
 	 * Returns a copy of this set of measurements, given a rotation angle (clockwise)
-	 * @param angle
-	 * @return
 	 */
 	public DirectionMeasurements getRotation(int angle)
 	{
