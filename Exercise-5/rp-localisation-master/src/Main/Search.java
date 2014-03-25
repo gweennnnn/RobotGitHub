@@ -51,7 +51,7 @@ public class Search<_action> extends EqualityGoalTest<PuzzleInterface>
 		return list;
 	}
 	
-	public List<_action> search(SuccessorFunction<_action, PuzzleInterface> succFunct, SearchType search) 
+	public List<_action> search(SuccessorFunction succFunct, SearchType search) 
     { 
 		NodeInterface<_action> startNode;
 		if(search.equals(SearchType.AStar))
@@ -89,21 +89,30 @@ public class Search<_action> extends EqualityGoalTest<PuzzleInterface>
 
 			succFunct.getSuccessors(currentNode.getState(), successors); // <----------gets all the successors
 			
-//			if(successors.isEmpty())
-//				System.out.println("Derp");
-//
-//			System.out.println("CURRENT CHILDREN");
-			//CHILDREN
+			if(successors.isEmpty())
+				System.out.println("Derp");
+
+			
+			System.out.println("LIST");
+			System.out.println(list.toString());
+			System.out.println(list.peek());
+			
+			System.out.println("CURRENT CHILDREN");
+//			CHILDREN
 			for (ActionStatePair<_action, PuzzleInterface> state : successors)
-			{ 	
+			{
+				System.out.println("Entered loop");
 				NodeInterface<_action> tempNode;
 				if(search.equals(SearchType.AStar))									//GET THE VALUE
 					tempNode = new AStarNode<_action>(state.getAction(), state.getState(), (AStarNode<_action>) currentNode);
 				else
 					tempNode = new Node<_action>(state.getAction(), state.getState(), (Node<_action>) currentNode); 
-
-
-				if (!list.contains(tempNode) && !tempNode.getMove().equals(null))
+					
+					System.out.println(tempNode.getMove());
+					System.out.println(tempNode.getState());
+					System.out.println(list.contains(tempNode));
+					System.out.println(tempNode.getMove().equals(null));
+				if (list.contains(tempNode) && !tempNode.getMove().equals(null))
 				{
 //					System.out.println(tempNode.getMove());
 //					System.out.println(tempNode.getState());
@@ -111,6 +120,7 @@ public class Search<_action> extends EqualityGoalTest<PuzzleInterface>
 					this.list.push(tempNode);
 				}
 			}
+			System.out.println("End loop");
 			
 			successors.removeAll(successors);
 			counter++;

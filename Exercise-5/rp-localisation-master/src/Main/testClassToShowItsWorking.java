@@ -1,9 +1,14 @@
 package Main;
 
-import grid.Grid;
+import grid.GridBoard;
+import grid.GridPuz;
 import grid.GridSuccessorFunction;
-import grid.Grid.Direction;
+import grid.GridBoard.Direction;
+
+import java.awt.Point;
 import java.util.List;
+
+import Interfaces.PuzzleInterface;
 import Interfaces.SuccessorFunction;
 import Main.Search.SearchType;
 
@@ -13,27 +18,24 @@ public class testClassToShowItsWorking {
 	private static SearchType searchChoice = SearchType.AStar;
 	
 	public static void main(String[] args) {
-		Grid startstate = Grid.exc5Grid();
-		System.out.println("START STATE: ");
-		System.out.println(startstate);
+		
+		solveGridPuzzle();
 	}
 	
 	public static void solveGridPuzzle(){
-
-		
-		Grid startstate = Grid.testStartGrid();
+		GridPuz startstate = new GridPuz(new Point(0, 0));
 		System.out.println("START STATE: ");
 		System.out.println(startstate);
 		
 		System.out.println("--------------------------");
 		
-		Grid endstate = Grid.testEndGrid();
+		GridPuz endstate = new GridPuz(new Point(2, 4));
 		System.out.println("END STATE: ");
 		System.out.println(endstate);	
 		
 		System.out.println("--------------------------");
 		
-		SuccessorFunction succfunc = new GridSuccessorFunction();
+		SuccessorFunction<Direction, GridPuz> succfunc = new GridSuccessorFunction();
 		
 		Search<Direction> USearch = new Search<Direction>
         (startstate, endstate, searchChoice); 

@@ -65,4 +65,10 @@ public class Node<_action> implements NodeInterface<_action>{
 	public int getValue() {
 		return -1;
 	}
+	
+	@Override
+	public String toString() {
+		String x = "Node(" + getMove() + ", " + getValue() + ")";
+		return x;
+	}
 }

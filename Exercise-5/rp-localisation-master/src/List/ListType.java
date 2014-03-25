@@ -62,6 +62,8 @@ public class ListType<_action> implements Agenda<NodeInterface<_action>>
 
 	@Override
 	public NodeInterface<_action> peek() {
+		if(this.frontier.isEmpty())
+			return null;
 		return this.frontier.get(0);
 	}
 

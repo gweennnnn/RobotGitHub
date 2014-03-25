@@ -46,6 +46,12 @@ public class AStarNode<_action> extends Node<_action>{
 	public int getCostToGetHere() {
 		return this.costToGetHere;
 	}
+	
+	@Override
+	public String toString() {
+		String x = "AStarNode(" + getMove() + ", " + getValue() + ")";
+		return x;
+	}
 
 //	@Override
 //	public void getSolutionList(List x) {
