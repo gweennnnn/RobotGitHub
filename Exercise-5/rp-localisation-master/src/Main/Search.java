@@ -112,7 +112,7 @@ public class Search<_action> extends EqualityGoalTest<PuzzleInterface>
 					System.out.println(tempNode.getState());
 					System.out.println(list.contains(tempNode));
 					System.out.println(tempNode.getMove().equals(null));
-				if (list.contains(tempNode) && !tempNode.getMove().equals(null))
+				if (!list.contains(tempNode) && !tempNode.getMove().equals(null))
 				{
 //					System.out.println(tempNode.getMove());
 //					System.out.println(tempNode.getState());

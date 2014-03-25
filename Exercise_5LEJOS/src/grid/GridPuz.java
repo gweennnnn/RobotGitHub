@@ -62,7 +62,7 @@ public class GridPuz implements PuzzleInterface{
 	public boolean equals(Object obj) {
 		GridPuz x = (GridPuz) obj;
 		
-		if(x.getCurrPoint() == ((GridPuz) obj).getCurrPoint())
+		if(x.getCurrPoint().equals(((GridPuz) obj).getCurrPoint()))
 			return true;
 		return false;
 		
