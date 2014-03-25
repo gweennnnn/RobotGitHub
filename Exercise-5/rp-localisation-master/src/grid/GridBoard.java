@@ -1,6 +1,5 @@
 package grid;
 
-import grid.Grid.Direction;
 
 import java.awt.Point;
 import java.util.Random;
