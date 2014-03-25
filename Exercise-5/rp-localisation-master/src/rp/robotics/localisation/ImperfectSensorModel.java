@@ -1,9 +1,7 @@
 package rp.robotics.localisation;
 
-import java.util.Random;
-
+import Main.LabyrinthRobot;
 import rp.robotics.mapping.DirectionMeasurements;
-import rp.robotics.mapping.GridMap;
 import rp.robotics.mapping.MeasuredGrid;
 
 
@@ -16,41 +14,39 @@ import rp.robotics.mapping.MeasuredGrid;
  */
 public class ImperfectSensorModel {
 
-	protected static float accuracy = 1;
+	// TODO Run the robot along a wall, measure known distances and compare the values that the sensor returns.
+	// TODO Then, create a range of probabilities based on those inaccuracies.
 	
 	/**
 	 * Changes a given GPDistribution based on the results of a sensor model.
 	 * @param dm The measurements taken by the sensor.
 	 */
 	public void updateDistributionAfterSensing(GridPositionDistribution currentDist,
-											   MeasuredGrid mg) {
-
-		// Commented out the random code to stop people using it without looking
-
-		float prob;
+											   MeasuredGrid mg,
+											   LabyrinthRobot robot) {
+		
+		// The probability variable (that the robot is in that position) for each position
+		float positionProbability;
 
 		// Test using the measurements at the robot's location.
-//		DirectionMeasurements dm = robot.getMeasurements();
-		// Test using a dummy position
-		DirectionMeasurements dm = mg.getMeasurementsAt(5, 2);
+		DirectionMeasurements dm = robot.getMeasurements();
 
-		// iterate through points updating as appropriate
-		for (int x = 0; x < currentDist.getGridWidth(); x++) {
-			for (int y = 0; y < currentDist.getGridHeight(); y++) {
-				// make sure to respect obstructed grid points
-				if (!currentDist.isObstructed(x, y)) {
-					
-					// The measured distances
-					
-					
-//					 The actual distances at this position
+		// Iterate through points updating as appropriate
+		for (int x = 0; x < currentDist.getGridWidth(); x++) 
+		{
+			for (int y = 0; y < currentDist.getGridHeight(); y++) 
+			{
+				// Continue if valid position
+				if (!currentDist.isObstructed(x, y)) 
+				{
+					// True distances from this position
 					DirectionMeasurements trueDistances = mg.getMeasurementsAt(x, y);
-//					System.out.println("(" + x + ", " + y + "): " + trueDistances);
-					// Do they match?
-					boolean measurementsMatchPosition = dm.equals(trueDistances);
-					prob = currentDist.getProbability(x, y);
+					// Do the measurements match?
+					float equalityProbability = dm.getEqualityProbability(trueDistances);
 					
-					float newProb = prob * (measurementsMatchPosition ? 1 : 0);
+					positionProbability = currentDist.getProbability(x, y);
+					
+					float newProb = positionProbability * equalityProbability;
 					currentDist.setProbability(x, y, newProb);
 				}
 			}

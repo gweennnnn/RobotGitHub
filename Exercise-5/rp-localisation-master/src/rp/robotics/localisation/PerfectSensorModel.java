@@ -16,8 +16,6 @@ import rp.robotics.mapping.MeasuredGrid;
  */
 public class PerfectSensorModel {
 
-	protected static float accuracy = 1;
-	
 	/**
 	 * Changes a given GPDistribution based on the results of a sensor model.
 	 * @param dm The measurements taken by the sensor.
