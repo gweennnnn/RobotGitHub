@@ -32,11 +32,16 @@ public class DirectionMeasurements{
 	}
 	
 	/**
-	 * Returns a copy of this set of measurements, given a rotation angle (clockwise)
+	 * Returns a copy of this set of measurements, given a rotation angle
+	 * (counter-clockwise)
 	 */
 	public DirectionMeasurements getRotation(int angle)
 	{
 		DirectionMeasurements r_measurements;
+		
+		// Normalise the angle to be between particular values
+		while (angle >= 360) { angle -= 360; }
+		while (angle < 0)    { angle += 360; }
 		
 		// Change the directions accordingly.
 		switch (angle)
@@ -54,7 +59,7 @@ public class DirectionMeasurements{
 			r_measurements = new DirectionMeasurements(west, east, north, south);
 			break;
 		default:
-			throw new IllegalArgumentException(angle + " is not a valid rotation angle.");
+			throw new IllegalArgumentException(angle + " is not a valid rotation angle. Must be 0, 90, 180 or 270 (+- 360n)");
 		}
 		
 		return r_measurements;
@@ -88,13 +93,13 @@ public class DirectionMeasurements{
 	{
 		int e = (int) Heading.toDegrees(expectedHeading);
 		int a = (int) Heading.toDegrees(actualHeading);
-		
-		rotate(e-a);
+
+		rotate(a-e);
 	}
 	
 	public String toString()
 	{
-		return "N: " + north + " S: " + south + " E: " + east + " W: " + west;
+		return "N:" + north + ", S:" + south + ", E:" + east + ", W:" + west;
 	}
 
 	/**
@@ -103,18 +108,15 @@ public class DirectionMeasurements{
 	 * @return The proability that the agent is in that given position, to match the measurements.
 	 */
 	public float getEqualityProbability(DirectionMeasurements trueDistances) {
-		// TODO Find a better heuristic for the difference between the two DMs
+
+		// Calculate the average difference between them
+		float totalProbability = 1;
+		totalProbability *= SensorInaccuracies.getProbabilityByDifference((north - trueDistances.north));
+		totalProbability *= SensorInaccuracies.getProbabilityByDifference((south - trueDistances.south));
+		totalProbability *= SensorInaccuracies.getProbabilityByDifference((east -  trueDistances.east));
+		totalProbability *= SensorInaccuracies.getProbabilityByDifference((west -  trueDistances.west));
 			
-			// Calculate the average difference between them
-			int totalDifference = 0;
-			totalDifference += trueDistances.north - north;
-			totalDifference += trueDistances.south - south;
-			totalDifference += trueDistances.east  - east;
-			totalDifference += trueDistances.west  - west;
-			
-			totalDifference /= 4;
-			
-		return SensorInaccuracies.getProbabilityByDifference(totalDifference);
+		return totalProbability;
 	}
 }
 
@@ -147,13 +149,11 @@ class SensorInaccuracies
 	 * @return The probability that the agent is in a given position, depending
 	 *         on that difference.
 	 */
-	public static float getProbabilityByDifference(int difference)
+	public static float getProbabilityByDifference(float difference)
 	{
 		difference = Math.abs(difference);
-		for (DifferenceAccuracyPair dap : inaccuracies.DAs)
-		{
-			if (dap.matchesDifference(difference))
-			{
+		for (DifferenceAccuracyPair dap : inaccuracies.DAs){
+			if (dap.matchesDifference(difference)){
 				return dap.accuracy;
 			}
 		}
@@ -169,9 +169,9 @@ class SensorInaccuracies
  */
 class DifferenceAccuracyPair
 {
-	private int minDifference;
-	private int maxDifference;
-	public float accuracy;
+	private int minDifference; // Exclusive
+	private int maxDifference; // Inclusive
+	public 	float accuracy;
 	
 	/**
 	 * Construct a new pair: difference and corresponding accuracy.
@@ -191,10 +191,14 @@ class DifferenceAccuracyPair
 	 * @param difference The difference being checked for
 	 * @return If that difference is within the ranges set.
 	 */
-	public boolean matchesDifference(int difference)
+	public boolean matchesDifference(float difference)
 	{
-		boolean withinRange = (difference >  minDifference) || 
+		boolean withinRange = (difference >  minDifference) &&
 							  (difference <= maxDifference);
+		
+		// There is an exception if the max and min are equal, and hence would never fulfil the above predicate.
+		if (minDifference == maxDifference) withinRange = (difference == maxDifference);
+
 		return withinRange;
 	}
 }

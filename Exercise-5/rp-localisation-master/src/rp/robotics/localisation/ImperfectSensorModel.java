@@ -6,10 +6,9 @@ import rp.robotics.mapping.MeasuredGrid;
 
 
 /**
- * An example of how you could start writing an action model given the available
- * classes.
+ * A realistic sensor model for our robot.
  * 
- * @author nah
+ * @author Jordan Bell
  * 
  */
 public class ImperfectSensorModel {
@@ -20,16 +19,17 @@ public class ImperfectSensorModel {
 	/**
 	 * Changes a given GPDistribution based on the results of a sensor model.
 	 * @param dm The measurements taken by the sensor.
-	 */
+	 */ // TODO Change robot argument to measurements argument, calc measurements before this call.
 	public void updateDistributionAfterSensing(GridPositionDistribution currentDist,
 											   MeasuredGrid mg,
-											   LabyrinthRobot robot) {
-		
-		// The probability variable (that the robot is in that position) for each position
-		float positionProbability;
+											   DirectionMeasurements dm) {
 
-		// Test using the measurements at the robot's location.
-		DirectionMeasurements dm = robot.getMeasurements();
+		/*
+		 * The position probability variables (that the robot is in that
+		 * position) for each position
+		 */
+		float posProb;
+		float equalityProb; // The probability that the dm measured distances equal the measurements at a given point.
 
 		// Iterate through points updating as appropriate
 		for (int x = 0; x < currentDist.getGridWidth(); x++) 
@@ -42,12 +42,13 @@ public class ImperfectSensorModel {
 					// True distances from this position
 					DirectionMeasurements trueDistances = mg.getMeasurementsAt(x, y);
 					// Do the measurements match?
-					float equalityProbability = dm.getEqualityProbability(trueDistances);
+					equalityProb = dm.getEqualityProbability(trueDistances);
 					
-					positionProbability = currentDist.getProbability(x, y);
+					// Find the probability of being in this position, given those measurements
+					posProb = currentDist.getProbability(x, y);
+					posProb *= equalityProb;
 					
-					float newProb = positionProbability * equalityProbability;
-					currentDist.setProbability(x, y, newProb);
+					currentDist.setProbability(x, y, posProb);
 				}
 			}
 		}
