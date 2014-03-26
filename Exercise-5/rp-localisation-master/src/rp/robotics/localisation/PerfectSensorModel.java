@@ -22,33 +22,27 @@ public class PerfectSensorModel {
 	 */
 	public void updateDistributionAfterSensing(GridPositionDistribution currentDist,
 											   MeasuredGrid mg) {
+		// New Probability Calculation, used for each point
+		float oldProb;
+		boolean measurementsMatchPosition;
+		float newProb;
 
-		// Commented out the random code to stop people using it without looking
-
-		float prob;
-
-		// Test using the measurements at the robot's location.
-//		DirectionMeasurements dm = robot.getMeasurements();
 		// Test using a dummy position
 		DirectionMeasurements dm = mg.getMeasurementsAt(3, 0);
 
-		// iterate through points updating as appropriate
+		// Iterate through points updating as appropriate
 		for (int x = 0; x < currentDist.getGridWidth(); x++) {
 			for (int y = 0; y < currentDist.getGridHeight(); y++) {
 				// make sure to respect obstructed grid points
 				if (!currentDist.isObstructed(x, y)) {
 					
-					// The measured distances
-					
-					
-//					 The actual distances at this position
+					// The actual distances at this position
 					DirectionMeasurements trueDistances = mg.getMeasurementsAt(x, y);
-//					System.out.println("(" + x + ", " + y + "): " + trueDistances);
-					// Do they match?
-					boolean measurementsMatchPosition = dm.equals(trueDistances);
-					prob = currentDist.getProbability(x, y);
+					// Do the measured distances match?
+					measurementsMatchPosition = dm.equals(trueDistances);
+					oldProb = currentDist.getProbability(x, y);
 					
-					float newProb = prob * (measurementsMatchPosition ? 1 : 0);
+					newProb = oldProb * (measurementsMatchPosition ? 1 : 0);
 					currentDist.setProbability(x, y, newProb);
 				}
 			}
