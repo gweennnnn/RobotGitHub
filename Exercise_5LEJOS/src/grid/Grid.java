@@ -546,10 +546,4 @@ public class Grid implements PuzzleInterface{
 		return 1;
 	}
 
-	@Override
-	public Object getPuzzObj() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

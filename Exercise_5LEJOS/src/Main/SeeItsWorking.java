@@ -6,9 +6,9 @@ import grid.GridPuz;
 import grid.GridSuccessorFunction;
 import grid.GridBoard.Direction;
 
-import lejos.geom.Point;
 import java.util.List;
 
+import lejos.geom.Point;
 import lejos.nxt.Button;
 import Interfaces.PuzzleInterface;
 import Interfaces.SuccessorFunction;
@@ -25,9 +25,17 @@ public class SeeItsWorking {
 	}
 	
 	public static void solveGridPuzzle(){
-		GridPuz startstate = new GridPuz(GridBoard.start);
+		GridPuz startstate = new GridPuz(new Point(0, 0));
+//		System.out.println("START STATE: ");
+//		System.out.println(startstate);
+//		
+//		System.out.println("--------------------------");
 		
 		GridPuz endstate = new GridPuz(GridBoard.endGoal);
+//		System.out.println("END STATE: ");
+//		System.out.println(endstate);	
+//		
+//		System.out.println("--------------------------");
 		
 		SuccessorFunction<Direction, GridPuz> succfunc = new GridSuccessorFunction();
 		

@@ -9,6 +9,4 @@ public interface PuzzleInterface
 	public boolean equals(Object _that);
 	
 	public int costToMove(Object move);
-	
-	public Object getPuzzObj();
 }

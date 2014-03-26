@@ -1,8 +1,7 @@
 package grid;
 
-import java.awt.Point;
-
 import grid.GridBoard.Direction;
+import lejos.geom.Point;
 import Interfaces.PuzzleInterface;
 
 public class GridPuz implements PuzzleInterface{
@@ -16,7 +15,7 @@ public class GridPuz implements PuzzleInterface{
 	public GridPuz(Point currPoint) {
 		this.currPoint = currPoint;
 	}
-	
+
 	public Point getCurrPoint()
 	{
 		return this.currPoint;
@@ -63,7 +62,7 @@ public class GridPuz implements PuzzleInterface{
 	public boolean equals(Object obj) {
 		GridPuz x = (GridPuz) obj;
 		
-		if(x.getCurrPoint().equals(((GridPuz) obj).getCurrPoint()))
+		if(x.getCurrPoint() == ((GridPuz) obj).getCurrPoint())
 			return true;
 		return false;
 		
@@ -72,10 +71,5 @@ public class GridPuz implements PuzzleInterface{
 	@Override
 	public String toString() {
 		return "Points: " + this.getCurrX() + ", " + this.getCurrY();
-	}
-
-	@Override
-	public Object getPuzzObj() {
-		return this.currPoint;
 	}
 }

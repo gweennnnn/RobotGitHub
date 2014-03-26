@@ -1,8 +1,7 @@
 package grid;
 
-import lejos.geom.Point;
-
 import grid.GridBoard.Direction;
+import lejos.geom.Point;
 import Interfaces.PuzzleInterface;
 
 public class GridPuz implements PuzzleInterface{
@@ -72,10 +71,5 @@ public class GridPuz implements PuzzleInterface{
 	@Override
 	public String toString() {
 		return "Points: " + this.getCurrX() + ", " + this.getCurrY();
-	}
-
-	@Override
-	public Object getPuzzObj() {
-		return this.currPoint;
 	}
 }

@@ -21,6 +21,4 @@ public interface NodeInterface<_action> {
 	public PuzzleInterface getState();
 	
 	public int getValue();
-	
-	public boolean equals(Object _that);
 }

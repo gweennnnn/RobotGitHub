@@ -71,11 +71,4 @@ public class Node<_action> implements NodeInterface<_action>{
 		String x = "Node(" + getMove() + ", " + getValue() + ")";
 		return x;
 	}
-
-	@Override
-	public boolean equals(Object x) {
-		PuzzleInterface y = ((NodeInterface<_action>) x).getState();
-		return this.getState().equals(y); 
-	}
-
 }

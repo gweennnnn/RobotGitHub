@@ -1,6 +1,6 @@
 package grid;
 
-import java.awt.Point;
+import lejos.geom.Point;
 
 
 /**
