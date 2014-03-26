@@ -108,25 +108,13 @@ public class DirectionMeasurements{
 	 * @return The proability that the agent is in that given position, to match the measurements.
 	 */
 	public float getEqualityProbability(DirectionMeasurements trueDistances) {
-		// TODO Find a better heuristic for the difference between the two DMs
-			
-			// Calculate the average difference between them
-			float totalProbability = 1;
-			totalProbability *= SensorInaccuracies.getProbabilityByDifference((north - trueDistances.north));
-			totalProbability *= SensorInaccuracies.getProbabilityByDifference((south - trueDistances.south));
-			totalProbability *= SensorInaccuracies.getProbabilityByDifference((east -  trueDistances.east));
-			totalProbability *= SensorInaccuracies.getProbabilityByDifference((west -  trueDistances.west));
-			
-//			float prob1 = SensorInaccuracies.getProbabilityByDifference((north - trueDistances.north));
-//			System.out.println(prob1);
-//			float prob2 = SensorInaccuracies.getProbabilityByDifference((south - trueDistances.south));
-//			System.out.println(prob2);
-//			float prob3 = SensorInaccuracies.getProbabilityByDifference((east -  trueDistances.east));
-//			System.out.println(prob3);
-//			float prob4 = SensorInaccuracies.getProbabilityByDifference((west -  trueDistances.west));
-//			System.out.println(prob4);
-			
-//			totalProbability = (prob1 * prob2 * prob3 * prob4) / 4;
+
+		// Calculate the average difference between them
+		float totalProbability = 1;
+		totalProbability *= SensorInaccuracies.getProbabilityByDifference((north - trueDistances.north));
+		totalProbability *= SensorInaccuracies.getProbabilityByDifference((south - trueDistances.south));
+		totalProbability *= SensorInaccuracies.getProbabilityByDifference((east -  trueDistances.east));
+		totalProbability *= SensorInaccuracies.getProbabilityByDifference((west -  trueDistances.west));
 			
 		return totalProbability;
 	}
