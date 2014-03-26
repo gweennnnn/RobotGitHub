@@ -2,7 +2,7 @@ package grid;
 import java.util.Random;
 import java.lang.Math;
 
-import lejos.geom.Point;
+import java.awt.Point;
 import Interfaces.PuzzleInterface;
 
 

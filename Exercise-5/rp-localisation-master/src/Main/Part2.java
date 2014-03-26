@@ -4,9 +4,9 @@ import grid.GridBoard.Direction;
 import grid.GridPuz;
 import grid.GridSuccessorFunction;
 
+import java.awt.Point;
 import java.util.List;
 
-import lejos.geom.Point;
 import lejos.nxt.Button;
 import lejos.nxt.Sound;
 import lejos.util.Delay;

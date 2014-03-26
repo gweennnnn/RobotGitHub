@@ -6,7 +6,7 @@ import grid.GridPuz;
 import grid.GridSuccessorFunction;
 import grid.GridBoard.Direction;
 
-import lejos.geom.Point;
+import java.awt.Point;
 import java.util.List;
 
 import lejos.nxt.Button;
@@ -25,9 +25,17 @@ public class SeeItsWorking {
 	}
 	
 	public static void solveGridPuzzle(){
-		GridPuz startstate = new GridPuz(GridBoard.start);
+		GridPuz startstate = new GridPuz(new Point(0, 0));
+//		System.out.println("START STATE: ");
+//		System.out.println(startstate);
+//		
+//		System.out.println("--------------------------");
 		
 		GridPuz endstate = new GridPuz(GridBoard.endGoal);
+//		System.out.println("END STATE: ");
+//		System.out.println(endstate);	
+//		
+//		System.out.println("--------------------------");
 		
 		SuccessorFunction<Direction, GridPuz> succfunc = new GridSuccessorFunction();
 		
@@ -45,10 +53,10 @@ public class SeeItsWorking {
 				System.out.println(); 
 				System.out.println("Total Moves: " + count); 	
 				
-				Button.waitForAnyPress();
+				//Button.waitForAnyPress();
 				
-				GridTraveller traveller = new GridTraveller(solutionList);
+				//GridTraveller traveller = new GridTraveller(solutionList);
 				
-				traveller.runActions();
+				//traveller.runActions();
 	}
 }

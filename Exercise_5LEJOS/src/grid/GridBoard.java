@@ -5,11 +5,19 @@ import java.util.Random;
 
 import lejos.geom.Point;
 
+
+
 public class GridBoard {
 	public static void main(String[] args)
 	{
 		System.out.println(GridBoard.print());
 	}
+	public static int width = 11;
+	public static int height = 7;
+	public static Connection[] blockages = exc5Grid();
+	public static Point start = new Point(0, 0);
+	public static Point endGoal = new Point(10, 6);
+	
 	
 	public static enum Direction {
 		UP(new Point(0, 1)),
@@ -31,10 +39,7 @@ public class GridBoard {
 
 	}
 	
-	public static int width = 11;
-	public static int height = 7;
-	public static Connection[] blockages = exc5Grid();
-	public static Point endGoal = new Point(5, 3);
+	
 	
 	public static double getEndX()
 	{

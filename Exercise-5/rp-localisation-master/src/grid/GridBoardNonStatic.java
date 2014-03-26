@@ -2,7 +2,7 @@ package grid;
 
 import java.util.Random;
 
-import lejos.geom.Point;
+import java.awt.Point;
 
 
 public class GridBoardNonStatic {
