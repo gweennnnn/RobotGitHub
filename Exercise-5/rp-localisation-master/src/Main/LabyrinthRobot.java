@@ -20,6 +20,7 @@ public class LabyrinthRobot extends /*GridFollower*/ Robot{
 	Heading relativeNorth 		= Heading.MINUS_Y;
 	Heading relativeOrientation = Heading.PLUS_X;
 	protected boolean localised = false;
+	private static final float localisationThreshold = 0.8f; // The probability needed for a single point, when considered "Localised"
 	
 	public void run()
 	{
@@ -60,10 +61,10 @@ public class LabyrinthRobot extends /*GridFollower*/ Robot{
 														   getMeasurements());
 				distribution.normalise();
 				
-				if (distribution.highestProb() >= localisationThreshold)
+				if (distribution.getHighestProb() >= localisationThreshold )
 				{
 					localised = true;
-					start = distribution.likelyPosition();
+					start = distribution.getLikelyPosition();
 				}
 			}
 		}

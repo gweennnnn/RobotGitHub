@@ -120,12 +120,11 @@ public class DirectionMeasurementsTest {
 	@Test
 	public void testProbabilityByDifference()
 	{
-		// A bunch of weird float values, due to the inaccuracy of float calculation.
-		assertEquals(dm1.getEqualityProbability(dmTrue), 4.00000020E-4f);
-		assertEquals(dm3.getEqualityProbability(dmTrue), 4.00000020E-4f);
-		assertEquals(dm5.getEqualityProbability(dmTrue), 0.40960002f);
-		assertEquals(dm6.getEqualityProbability(dmTrue), 1.00000005E-4f);
-		assertEquals(dm7.getEqualityProbability(dmTrue), 4.00000030E-5f);
+		assertEquals(dm1.getEqualityProbability(dmTrue), 0.00040, 0.000001);
+		assertEquals(dm3.getEqualityProbability(dmTrue), 0.00040, 0.000001);
+		assertEquals(dm5.getEqualityProbability(dmTrue), 0.40960, 0.000001);
+		assertEquals(dm6.getEqualityProbability(dmTrue), 0.00010, 0.000001);
+		assertEquals(dm7.getEqualityProbability(dmTrue), 0.00004, 0.000001);
 		assertEquals(dm8.getEqualityProbability(dmTrue), 0.0f);
 	}
 }
