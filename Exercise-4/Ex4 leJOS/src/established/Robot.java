@@ -37,13 +37,13 @@ public class Robot
 		turn(-90);
 		//LEFT_WHEEL.rotate(338);
 	}
-	
-	protected static void turnRound()
+		protected static void turnRound()
 	{
 		turn(-90);
 		turn(-90);
 		//LEFT_WHEEL.rotate(338);
 	}
+
 	
 	
 	protected static void turn(int angle)

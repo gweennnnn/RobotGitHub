@@ -42,6 +42,13 @@ public class MeasuredGridPosition {
 		east =  grid.rangeToObstacleFromGridPoint(_x, _y, Heading.PLUS_X);
 		south = grid.rangeToObstacleFromGridPoint(_x, _y, Heading.PLUS_Y);
 		west =  grid.rangeToObstacleFromGridPoint(_x, _y, Heading.MINUS_X);
+
+		// For each of the directions, cap them at the maximum measureable distance by the sensor.
+		int max = DirectionMeasurements.MAX_DISTANCE;
+		north = (north > max) ? max : north;
+		south = (south > max) ? max : south;
+		east = (east > max) ? max : east;
+		west = (west > max) ? max : west;
 		
 		dm = new DirectionMeasurements(north, south, east, west);
 	}

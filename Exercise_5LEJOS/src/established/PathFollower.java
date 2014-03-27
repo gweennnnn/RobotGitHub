@@ -11,10 +11,12 @@ public class PathFollower extends LineFollower {
 	protected final int FORWARD = 0;
 	protected final int LEFT = 1;
 	protected final int RIGHT = 2;
-	protected int[] SEQUENCE = makeSequence("12020");
+	protected final int TURNAROUND = 3;
+	protected int[] SEQUENCE;
 	protected Random rand = new Random();
 	
 	public PathFollower(String path){
+		
 		SEQUENCE = makeSequence(path);
 	}
 
@@ -52,6 +54,7 @@ public class PathFollower extends LineFollower {
 	public void runPath()
 	{
 		init();
+
 		
 		while(_run && (SEQUENCE != null))
 		{
@@ -59,12 +62,16 @@ public class PathFollower extends LineFollower {
 			boolean leftLine = LS_LEFT.getLightValue() >= s_left.threshold;
 			boolean rightLine = LS_RIGHT.getLightValue() >= s_right.threshold;
 			
-			if(!leftLine && !rightLine) handleIntersection();
+			if(!leftLine && !rightLine) {
+				handleIntersection();
+				followLine();
+				}
 			else // just a straight line
 			{
 				if (!midLine && !leftLine && !rightLine) turnAround();
 				else followLine();
 			}
+
 		}
 	}
 	/*=================== PATHTAKING CODE ===================*/
@@ -104,10 +111,17 @@ public class PathFollower extends LineFollower {
 	 * @return An integer array of the string.
 	 */
 	public static int[] makeSequence(String str) {
+		
+		str += "0";
+		
 		int[] path = new int[str.length()];
 		
-		for(int i = 0; i < path.length; i++)
+		
+		for(int i = 0; i < path.length; i++){
 			path[i] = Integer.parseInt(Character.toString(str.charAt(i)));
+			}
+		
+		
 		return path;
     }
 	
@@ -136,21 +150,55 @@ public class PathFollower extends LineFollower {
 		stop();
 		goForward(50);
 		
-		switch(SEQUENCE[0])
-		{
-		case FORWARD:
-			//Keep going, don't turn.
-			break;
-		case RIGHT:
+		int move = SEQUENCE[0];
+		
+		if(move == RIGHT){
+			stop();
 			turnRight();
-			break;
-		case LEFT:
-			turnLeft();
-			break;
 		}
+		else if (move == LEFT){
+			stop();
+			turnLeft();
+		}
+		else if (move == TURNAROUND){
+			stop();
+			this.turnAround();
+		}
+				
+
 		nextMovement();
-	}
-	
+		
+		
+//		switch(SEQUENCE[0])
+//		{
+//		
+//		case FORWARD:
+//			//Keep going, don't turn.
+//			stop();
+//			goForward(50);
+//			break;
+//		case RIGHT:
+//			stop();
+//			turnRight();
+//			stop();
+//			goForward(50);
+//			break;
+//		case LEFT:
+//			stop();
+//			turnLeft();
+//			stop();
+//			goForward(50);
+//			break;
+//		case TURNAROUND:
+//			turnRound();
+//			stop();
+//			goForward(50);
+////			break;
+//			
+//		nextMovement();
+//	}
+}
+
 	private void chooseRandomDirection()
 	{
 		int randomChoice = rand.nextInt(2);

@@ -93,7 +93,6 @@ public class LineFollower extends Robot {
 
 		//Add listener
 		Button.ESCAPE.addButtonListener(new ButtonPressListener(this));
-		
 		delay(400);
 
 		//Initialise the background light values, for each sensor.
