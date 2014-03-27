@@ -1,6 +1,7 @@
 package Main;
 
 
+import lejos.nxt.Sound;
 import lejos.util.Delay;
 import rp.robotics.localisation.ActionModel;
 import rp.robotics.localisation.GridPositionDistribution;
@@ -14,13 +15,16 @@ import rp.robotics.mapping.LocalisationUtils;
 import rp.robotics.mapping.MeasuredGrid;
 import rp.robotics.visualisation.GridPoseDistributionVisualisation;
 import established.Robot;
-
+ // TODO Extend the class that runs and traverses the grid search. 
 public class LabyrinthRobot extends /*GridFollower*/ Robot{
 	
 	Heading relativeNorth 		= Heading.MINUS_Y;
 	Heading relativeOrientation = Heading.PLUS_X;
 	protected boolean localised = false;
 	private static final float localisationThreshold = 0.8f; // The probability needed for a single point, when considered "Localised"
+	
+	
+	//===================== MAIN =====================\\
 	
 	public void run()
 	{
@@ -42,12 +46,7 @@ public class LabyrinthRobot extends /*GridFollower*/ Robot{
 		ImperfectSensorModel sensorModel = new ImperfectSensorModel();
 
 		while (_run) {
-			if (localised)
-			{
-				
-			}
-			else
-			{
+			if (!localised){
 				// Choose next direction to move
 				Heading action = nextAction();
 				
@@ -64,11 +63,43 @@ public class LabyrinthRobot extends /*GridFollower*/ Robot{
 				if (distribution.getHighestProb() >= localisationThreshold )
 				{
 					localised = true;
-					start = distribution.getLikelyPosition();
+					start = distribution.getLikelyPosition(); // TODO Start should be inherited from the superclass
 				}
 			}
+			
+			// Localised! Now make your way to the target
+			runSearchTraversal(); // TODO Repurpose Part 2 of the last exercise into the GridFollower, and create this method.
+			playVictorySong();
 		}
 	}
+	
+	
+	//===================== MOVEMENTS =====================\\
+	
+	private Heading nextAction()
+	{
+		// TODO Write code that chooses the motions used to localise. May be more or less arbitrary.
+		return Heading.values()[0];
+	}
+	
+	private void playVictorySong()
+	{
+		Sound.playNote(Sound.FLUTE, 784, 90);
+		Delay.msDelay(4);
+		Sound.playNote(Sound.FLUTE, 740, 90);
+		Delay.msDelay(4);
+		Sound.playNote(Sound.FLUTE, 622, 90);
+		Sound.playNote(Sound.FLUTE, 440, 90);
+		Delay.msDelay(4);
+		Sound.playNote(Sound.FLUTE, 415, 90);
+		Delay.msDelay(4);
+		Sound.playNote(Sound.FLUTE, 659, 90);
+		Delay.msDelay(4);
+		Sound.playNote(Sound.FLUTE, 831, 90);
+		Sound.playNote(Sound.FLUTE, 1047, 270);
+	}
+	
+	//===================== MEASUREMENTS =====================\\
 	
 	/**
 	 * Assume that you are facing North, before taking the measurements.
