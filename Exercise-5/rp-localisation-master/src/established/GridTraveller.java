@@ -22,7 +22,7 @@ public class GridTraveller {
 																  };
 	public enum GridDirection
 	{
-		UP(0), DOWN(1), LEFT(2), RIGHT(3);
+		UP(0), DOWN(1), LEFT(2), RIGHT(3), SONG(4);
 		private final int val;
 		
 		private GridDirection(int val) {
@@ -88,6 +88,11 @@ public class GridTraveller {
 				movements.add(GridDirection.RIGHT);
 				orientations.add(GridDirection.RIGHT);
 			}
+			else if (d == null)
+			{
+				movements.add(GridDirection.SONG);
+				orientations.add(GridDirection.SONG);
+			}
 		}
 		
 		String s = "";
@@ -101,7 +106,8 @@ public class GridTraveller {
 			 */
 			GridDirection movement = movements.get(i);
 			GridDirection orientation = orientations.get(i);
-			s += submitRelativity(movement, orientation);
+			if ((movement == GridDirection.SONG) && (orientation == GridDirection.SONG)) s += "S";
+			else s += submitRelativity(movement, orientation);
 		}
 		return s;
 	}
