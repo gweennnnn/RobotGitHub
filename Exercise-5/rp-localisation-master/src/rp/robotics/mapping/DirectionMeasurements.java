@@ -3,7 +3,7 @@ package rp.robotics.mapping;
 public class DirectionMeasurements{
 	
 	/** The maximum distance detected by the robot's sensor */
-	protected static final int MAX_DISTANCE = 255;
+	public static final int MAX_DISTANCE = 300;
 	
 	// Directional Values held by this data structure.
 	public float north;
