@@ -3,7 +3,7 @@ package grid;
 
 import java.util.Random;
 
-import lejos.geom.Point;
+import java.awt.Point;
 
 public class GridBoard {
 	public static void main(String[] args)
@@ -34,7 +34,7 @@ public class GridBoard {
 	public static int width = 11;
 	public static int height = 7;
 	public static Connection[] blockages = exc5Grid();
-	public static Point endGoal = new Point(5, 3);
+	public static Point endGoal = new Point(10, 6);
 	
 	public static double getEndX()
 	{

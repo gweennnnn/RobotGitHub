@@ -86,7 +86,7 @@ public class MarkovLocalisationSkeleton {
 
 		while (true) {
 //		for(int i = 0; i< 12 ; i++){
-			System.out.println("-------------------------------------------------");
+//			System.out.println("-------------------------------------------------");
 			
 			// Do some action
 			// E.g. attempting to move one node in the PLUS_X direction
@@ -107,7 +107,7 @@ public class MarkovLocalisationSkeleton {
 			mapVis.setDistribution(distribution);
 			
 
-			System.out.println("map sum: " + distribution.sumProbabilities());
+//			System.out.println("map sum: " + distribution.sumProbabilities());
 			
 
 			//================ Sensing ================\\

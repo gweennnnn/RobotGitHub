@@ -112,6 +112,7 @@ public class Search<_action> extends EqualityGoalTest<PuzzleInterface>
 //					System.out.println(tempNode.getState());
 //					System.out.println(list.contains(tempNode));
 //					System.out.println(tempNode.getMove().equals(null));
+					System.out.println("TEMP NODE");
 					System.out.println(tempNode);
 				if (!list.contains(tempNode))
 				{
@@ -119,7 +120,6 @@ public class Search<_action> extends EqualityGoalTest<PuzzleInterface>
 //					System.out.println(tempNode.getState());
 
 					this.list.push(tempNode);
-					System.out.println("bacon pancakes");
 				}
 			}
 //			System.out.println("End loop");

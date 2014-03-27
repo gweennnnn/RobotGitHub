@@ -69,18 +69,18 @@ public class Search<_action> extends EqualityGoalTest<PuzzleInterface>
 	{	
 		NodeInterface<_action> currentNode = startNode;
 		this.list.push(startNode);
-		System.out.println("So, starting from the first node..");
+//		System.out.println("So, starting from the first node..");
 		int counter = 0;
 		while (!this.list.isEmpty())
 		{
 			currentNode = this.list.pop();
-			System.out.println(counter + " passes so far...");
+			System.out.println(counter + "passes so far");
 //			System.out.println(currentNode.getMove());
 //			System.out.println(currentNode.getState());
 //			System.out.println("Pass? " + this.isGoal(currentNode.getState()));
 			if (this.isGoal(currentNode.getState()))
 			{
-				System.out.println("GOAL STATE FOUND");
+//				System.out.println("GOAL STATE FOUND");
 				List<_action> solutionList = new ArrayList<_action> ();
 				currentNode.getSolutionList(solutionList);
 				return solutionList;
@@ -96,7 +96,7 @@ public class Search<_action> extends EqualityGoalTest<PuzzleInterface>
 //			System.out.println("LIST");
 //			System.out.println(list.toString());
 //			System.out.println(list.peek());
-//			
+			
 //			System.out.println("CURRENT CHILDREN");
 //			CHILDREN
 			for (ActionStatePair<_action, PuzzleInterface> state : successors)
@@ -108,11 +108,13 @@ public class Search<_action> extends EqualityGoalTest<PuzzleInterface>
 				else
 					tempNode = new Node<_action>(state.getAction(), state.getState(), (Node<_action>) currentNode); 
 					
-					System.out.println(tempNode.getMove());
-					System.out.println(tempNode.getState());
-					System.out.println(list.contains(tempNode));
-					System.out.println(tempNode.getMove().equals(null));
-				if (!list.contains(tempNode) && !tempNode.getMove().equals(null))
+//					System.out.println(tempNode.getMove());
+//					System.out.println(tempNode.getState());
+//					System.out.println(list.contains(tempNode));
+//					System.out.println(tempNode.getMove().equals(null));
+					System.out.println("TEMP NODE");
+					System.out.println(tempNode);
+				if (!list.contains(tempNode))
 				{
 //					System.out.println(tempNode.getMove());
 //					System.out.println(tempNode.getState());
@@ -122,7 +124,7 @@ public class Search<_action> extends EqualityGoalTest<PuzzleInterface>
 			}
 //			System.out.println("End loop");
 			
-			successors.removeAll(successors);
+			successors.clear();
 			counter++;
 			
 //			System.out.println();
