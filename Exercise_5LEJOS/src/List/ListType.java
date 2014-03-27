@@ -57,7 +57,13 @@ public class ListType<_action> implements Agenda<NodeInterface<_action>>
 
 	@Override
 	public boolean contains(NodeInterface<_action> _item) {
-		return this.explored.contains(_item.getState());
+		for(int i = 0; i < explored.size(); i++)
+		{
+			if(explored.get(i).getPuzzObj().equals(_item.getState().getPuzzObj()))
+				return true;
+		}
+		
+		return false;
 	}
 
 	@Override

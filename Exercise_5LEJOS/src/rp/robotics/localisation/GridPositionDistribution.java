@@ -1,5 +1,7 @@
 package rp.robotics.localisation;
 
+import java.awt.Point;
+
 import rp.robotics.mapping.GridMap;
 
 /**
@@ -182,5 +184,37 @@ public class GridPositionDistribution {
 			}
 		}
 		return total;
+	}
+
+	/**
+	 * Get the highest probability on the grid.
+	 * @return The highest probability on the grid.
+	 */
+	public float getHighestProb() {
+		float highest = 0f;
+		
+		for(Float[] w : m_grid){
+			for (Float prob : w){
+				if (prob > highest) highest = prob;
+			}
+		}
+		
+		return highest;
+	}
+
+	/**
+	 * Returns the point with the highest probability
+	 * @return
+	 */
+	public Point getLikelyPosition() {
+		float highest = getHighestProb();
+		
+		for(int i = 0; i > m_gridWidth; i++){
+			for (int j = 0; j > m_gridHeight; j++){
+				if (m_grid[i][j] == highest) return new Point(i, j);
+			}
+		}
+		
+		throw new AssertionError("I have no idea what went wrong: likelyPosition() in GridPositionDistribution");
 	}
 }

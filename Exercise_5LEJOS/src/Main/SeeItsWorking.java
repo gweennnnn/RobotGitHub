@@ -6,9 +6,9 @@ import grid.GridPuz;
 import grid.GridSuccessorFunction;
 import grid.GridBoard.Direction;
 
+import java.awt.Point;
 import java.util.List;
 
-import lejos.geom.Point;
 import lejos.nxt.Button;
 import Interfaces.PuzzleInterface;
 import Interfaces.SuccessorFunction;

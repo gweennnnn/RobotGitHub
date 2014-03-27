@@ -1,19 +1,21 @@
 package Main;
 
+import established.GridTraveller;
 import grid.GridBoard;
 import grid.GridPuz;
 import grid.GridSuccessorFunction;
 import grid.GridBoard.Direction;
 
+import java.awt.Point;
 import java.util.List;
 
-import lejos.geom.Point;
+import lejos.nxt.Button;
 import Interfaces.PuzzleInterface;
 import Interfaces.SuccessorFunction;
 import Main.Search.SearchType;
 
 
-public class testClassToShowItsWorking {
+public class SeeItsWorking {
 	
 	private static SearchType searchChoice = SearchType.AStar;
 	
@@ -49,6 +51,12 @@ public class testClassToShowItsWorking {
 				count++; 
 				} 
 				System.out.println(); 
-				System.out.println("Total Moves: " + count); 		
+				System.out.println("Total Moves: " + count); 	
+				
+				//Button.waitForAnyPress();
+				
+				//GridTraveller traveller = new GridTraveller(solutionList);
+				
+				//traveller.runActions();
 	}
 }
