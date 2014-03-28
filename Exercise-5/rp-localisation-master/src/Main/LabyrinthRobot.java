@@ -79,9 +79,7 @@ public class LabyrinthRobot extends GridTraveller{
 		
 		// Localised! Now make your way to the target
 		startPoint = distribution.getLikelyPosition(); // TODO Start should be inherited from the superclass
-		
 		traverseSolution();
-		playVictorySong();
 	}
 	
 	
