@@ -33,7 +33,7 @@ public class PerfectActionModel implements ActionModel {
 			moveX = -1;
 			movePlus(_from, to, moveX, moveY);
 
-		} else if (_heading == Heading.PLUS_Y) {
+		} else if (_heading == Heading.MINUS_Y) {
 
 			moveY = -1;
 			movePlus(_from, to, moveX, moveY);
@@ -42,7 +42,7 @@ public class PerfectActionModel implements ActionModel {
 			moveX = 1;
 			moveMinus(_from, to, moveX, moveY);
 
-		} else if (_heading == Heading.MINUS_Y) {
+		} else if (_heading == Heading.PLUS_Y) {
 			moveY = 1;
 			moveMinus(_from, to, moveX, moveY);
 		}

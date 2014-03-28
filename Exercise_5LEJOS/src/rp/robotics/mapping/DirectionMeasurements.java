@@ -128,14 +128,14 @@ class SensorInaccuracies
 	private SensorInaccuracies()
 	{
 		// Between 0 and 0
-		DAs[0] = new DifferenceAccuracyPair(0, 20,  0.70f);
+		DAs[0] = new DifferenceAccuracyPair(0, 50,  0.50f);
 		// Between 0 and 1
-		DAs[1] = new DifferenceAccuracyPair(21, 40,  0.20f);
+		DAs[1] = new DifferenceAccuracyPair(51, 70,  0.30f);
 		// Between 1 and 3
-		DAs[2] = new DifferenceAccuracyPair(41, 60,  0.10f);
+		DAs[2] = new DifferenceAccuracyPair(71, 80,  0.10f);
 		// Between 3 and 6
-		DAs[3] = new DifferenceAccuracyPair(61, 80,  0.05f);
-		DAs[4] = new DifferenceAccuracyPair(81, 300, 0.005f);
+		DAs[3] = new DifferenceAccuracyPair(81, 90,  0.05f);
+		DAs[4] = new DifferenceAccuracyPair(91, 300, 0.05f);
 
 	}
 	

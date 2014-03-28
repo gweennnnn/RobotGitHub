@@ -8,10 +8,13 @@ import Interfaces.SuccessorFunction;
 import lejos.nxt.Sound;
 import lejos.util.Delay;
 import rp.robotics.localisation.ActionModel;
+import rp.robotics.localisation.BooleanSensorModel;
 import rp.robotics.localisation.GridPositionDistribution;
 import rp.robotics.localisation.ImperfectSensorModel;
 import rp.robotics.localisation.PerfectActionModel;
 import rp.robotics.localisation.PerfectSensorModel;
+import rp.robotics.mapping.BooleanMeasurements;
+import rp.robotics.mapping.BooleanWallGrid;
 import rp.robotics.mapping.DirectionMeasurements;
 import rp.robotics.mapping.GridMap;
 import rp.robotics.mapping.Heading;
@@ -34,7 +37,7 @@ public class LabyrinthRobot extends LineFollower {
 	Heading relativeNorth = Heading.MINUS_Y;
 	Heading relativeOrientation = Heading.PLUS_X;
 	protected boolean localised = false;
-	private static final float localisationThreshold = 0.8f; // The probability needed for a single point, when considered "Localised"
+	private static final float localisationThreshold = 0.7f; // The probability needed for a single point, when considered "Localised"
 
 	private Point startPoint = new Point(0, 0);
 	private static final Point midPoint = new Point(0, 0);
@@ -49,13 +52,17 @@ public class LabyrinthRobot extends LineFollower {
 		// leJOS Grid
 		GridMap gridMap = LocalisationUtils.create2014Map1();
 //		System.out.println("created map");
+		
+		int x = -1;
+		int y = -1;
 
 		// The probability distribution over the robot's location
 		GridPositionDistribution distribution = new GridPositionDistribution(
 				gridMap);
 //		System.out.println("created grid position distribution");
 		
-		MeasuredGrid gridMeasurements = new MeasuredGrid(gridMap);
+//		MeasuredGrid gridMeasurements = new MeasuredGrid(gridMap);
+		BooleanWallGrid gridMeasurements = new BooleanWallGrid(gridMap);
 //		System.out.println("created measured grid");
 
 		// view the map with 2 pixels as 1 cm
@@ -65,7 +72,9 @@ public class LabyrinthRobot extends LineFollower {
 		// ActionModel & SensorModel
 		ActionModel actionModel = new PerfectActionModel();
 //		System.out.println("perfect action model");
-		ImperfectSensorModel sensorModel = new ImperfectSensorModel();
+//		ImperfectSensorModel sensorModel = new ImperfectSensorModel();
+		
+		BooleanSensorModel sensorModel = new BooleanSensorModel();
 //		System.out.println("imperfect sensor model");
 
 		while (_run && !localised) {
@@ -86,8 +95,7 @@ public class LabyrinthRobot extends LineFollower {
 //			System.out.println("update after move");
 			distribution.normalise();
 //			System.out.println("normalise");
-			int x = -1;
-			int y = -1;
+			
 			float z = distribution.getHighestProb(x, y);
 //			System.out.println("PROB: " + z);
 //			System.out.println("X: " + x);
@@ -102,23 +110,24 @@ public class LabyrinthRobot extends LineFollower {
 			
 			//================ SENSING ================\\
 			//System.out.println("pre sensor");
-//			sensorModel.updateDistributionAfterSensing(distribution, 
-//													   gridMeasurements, 
-//													   getMeasurements(action));
-////			System.out.println("post sensor");
-//			distribution.normalise();
-////			System.out.println("normalise");
-//
-//			if (distribution.getHighestProb(x, y) >= localisationThreshold ) { localised = true; 
-//			System.out.println("WE FOUND OURSELVES");
-//			Sound.beep();
-//			System.out.println("Coord: " + x + "," + y);
-//			waitForPress();
-//			}
+			sensorModel.updateDistributionAfterSensing(distribution, 
+													   gridMeasurements, 
+													   getMeasurements(action));
+			
+//			System.out.println("post sensor");
+			distribution.normalise();
+//			System.out.println("normalise");
+
+			if (distribution.getHighestProb(x, y) >= localisationThreshold ) { localised = true; 
+			System.out.println("WE FOUND OURSELVES");
+			Sound.beep();
+			System.out.println("Coord: " + x + "," + y);
+			waitForPress();
+			}
 		}
 		
 		// Localised! Now make your way to the target
-		startPoint = distribution.getLikelyPosition(); // TODO Start should be inherited from the superclass
+		startPoint = new Point(x, y); // TODO Start should be inherited from the superclass
 		
 		traverseSolution();
 		playVictorySong();
@@ -323,7 +332,7 @@ public class LabyrinthRobot extends LineFollower {
 	private boolean canMoveForward()
 	{
 		int value = HEAD.getDistance();
-		System.out.println("Distance :" + value);
+//		System.out.println("Distance :" + value);
 		return value > 200;
 	}
 	
@@ -365,9 +374,9 @@ public class LabyrinthRobot extends LineFollower {
 	 * Assume that you are facing North, before taking the measurements.
 	 * NOT ANYMORE
 	 */
-	private DirectionMeasurements getStandardMeasurements(Heading action)
+	private BooleanMeasurements getStandardMeasurements(Heading action)
 	{
-		int north, south, east, west;
+		boolean north, south, east, west;
 		
 		//if the robot is facing north MINUS_Y		
 		if (action.equals(Heading.MINUS_Y)){
@@ -398,7 +407,7 @@ public class LabyrinthRobot extends LineFollower {
 			south = measureAndTurn();
 		}
 				
-		return new DirectionMeasurements(north, south, east, west);
+		return new BooleanMeasurements(north, south, east, west);
 	}
 	
 	/**
@@ -406,17 +415,17 @@ public class LabyrinthRobot extends LineFollower {
 	 * @return what is happening?\
 	 * 
 	 */
-	public DirectionMeasurements getMeasurements(Heading action)
+	public BooleanMeasurements getMeasurements(Heading action)
 	{
-		DirectionMeasurements dm = getStandardMeasurements(action);
+		BooleanMeasurements dm = getStandardMeasurements(action);
 		
 		return dm;
 	}
 	
-	private int measureAndTurn()
+	private boolean measureAndTurn()
 	{
 		delay(500);
-		int r_val = HEAD.getDistance();
+		boolean r_val = HEAD.getDistance() < 200;
 		turnRight();
 		
 		return r_val;
