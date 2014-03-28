@@ -26,13 +26,13 @@ public enum Heading {
 	public static float toDegrees(Heading _heading) {
 		float heading = 0;
 
-		if (_heading == Heading.PLUS_X) {
+		if (_heading == Heading.PLUS_X) { //east
 			heading = 0;
-		} else if (_heading == Heading.PLUS_Y) {
+		} else if (_heading == Heading.PLUS_Y) { //south
 			heading = 90;
-		} else if (_heading == Heading.MINUS_X) {
+		} else if (_heading == Heading.MINUS_X) { //west
 			heading = 180;
-		} else if (_heading == Heading.MINUS_Y) {
+		} else if (_heading == Heading.MINUS_Y) { //north
 			heading = -90;
 		} else {
 			assert false : "Unknown value for enumeration";

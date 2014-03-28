@@ -21,7 +21,37 @@ public class SeeItsWorking {
 	
 	public static void main(String[] args) {
 		
-		solveGridPuzzle();
+//		solveGridPuzzle();
+		solveGrid2(new Point(2, 2), new Point(5, 4), new Point(10, 6));
+	}
+	
+	public static List<Direction> solveGrid2(Point startpoint, Point midpoint, Point endpoint)
+	{
+		GridPuz start = new GridPuz(startpoint);
+		GridPuz mid = new GridPuz(midpoint);
+		GridPuz end = new GridPuz(endpoint);
+		
+		SuccessorFunction<Direction, GridPuz> succfunc = new GridSuccessorFunction();
+		
+		// Choose the kind of search
+		Search.SearchType searchChoice = Search.SearchType.AStar;
+		
+		// Get to the mid
+		Search<Direction> startToMidSearch = new Search(start, mid, searchChoice);
+		
+		// Get to the end
+		Search<Direction> midToEndSearch = new Search<>(mid, end, searchChoice);
+		
+		List<Direction> solutionList = startToMidSearch.search(succfunc, searchChoice);
+		
+		if(!solutionList.get(solutionList.size()-1).equals(Direction.UP))
+			solutionList.add(Direction.UP);
+		// A null value, to show that we're halfway done.
+		solutionList.add(null);
+		// Directions to the end.
+		solutionList.addAll(midToEndSearch.search(succfunc, searchChoice));
+		
+		return solutionList;
 	}
 	
 	public static void solveGridPuzzle(){

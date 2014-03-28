@@ -2,6 +2,7 @@ package Main;
 
 
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
 
 import Interfaces.SuccessorFunction;
@@ -25,6 +26,7 @@ import established.GridTraveller;
 import established.LineFollower;
 import established.Robot;
 import grid.GridBoard.Direction;
+import grid.GridBoard;
 import grid.GridPuz;
 import grid.GridSuccessorFunction;
 
@@ -37,27 +39,30 @@ public class LabyrinthRobot extends LineFollower {
 	Heading relativeNorth = Heading.MINUS_Y;
 	Heading relativeOrientation = Heading.PLUS_X;
 	protected boolean localised = false;
-	private static final float localisationThreshold = 0.7f; // The probability needed for a single point, when considered "Localised"
+	private static final float localisationThreshold = 0.45f; // The probability needed for a single point, when considered "Localised"
 
-	private Point startPoint = new Point(0, 0);
-	private static final Point midPoint = new Point(0, 0);
-	private static final Point endPoint = new Point(0, 0);
+	private Point startPoint = new Point(2, 2);
+	private static final Point midPoint = new Point(1, 1);
+	private static final Point endPoint = new Point(5, 3);
 	protected Heading currentHeading = Heading.PLUS_X;
-	
+	int x = -1;
+	int y = -1;
+	float z = -1f;
+	GridPositionDistribution distribution;
+	ArrayList values;
 	//===================== MAIN =====================\\
 	
 	public void run()
 	{
 		init();
+		
 		// leJOS Grid
 		GridMap gridMap = LocalisationUtils.create2014Map1();
 //		System.out.println("created map");
 		
-		int x = -1;
-		int y = -1;
 
 		// The probability distribution over the robot's location
-		GridPositionDistribution distribution = new GridPositionDistribution(
+		distribution = new GridPositionDistribution(
 				gridMap);
 //		System.out.println("created grid position distribution");
 		
@@ -70,73 +75,110 @@ public class LabyrinthRobot extends LineFollower {
 //				distribution, 2);
 
 		// ActionModel & SensorModel
-		ActionModel actionModel = new PerfectActionModel();
-//		System.out.println("perfect action model");
-//		ImperfectSensorModel sensorModel = new ImperfectSensorModel();
-		
-		BooleanSensorModel sensorModel = new BooleanSensorModel();
-//		System.out.println("imperfect sensor model");
-
-		while (_run && !localised) {
-			// Choose next direction to move
-//			System.out.println("created map");
-			Heading action = nextAction(currentHeading);
-			currentHeading = action;
-//			System.out.println("get new action");
-			
-			// TODO Move there
-			
-			//================ ACTION ================\\
-			distribution = actionModel.updateAfterMove(distribution, action);
-			
-			System.out.println("---------------");
-			System.out.println("We Moved : "+ action);
-			
-//			System.out.println("update after move");
-			distribution.normalise();
-//			System.out.println("normalise");
-			
-			float z = distribution.getHighestProb(x, y);
-//			System.out.println("PROB: " + z);
-//			System.out.println("X: " + x);
-//			System.out.println("Y: " + y);
-			if (z >= localisationThreshold ) {
-				localised = true; 
-				System.out.println("WE FOUND OURSELVES");
-				Sound.beep();
-				System.out.println("Coord: " + x + "," + y);
-				waitForPress();
-			}
-			
-			//================ SENSING ================\\
-			//System.out.println("pre sensor");
-			sensorModel.updateDistributionAfterSensing(distribution, 
-													   gridMeasurements, 
-													   getMeasurements(action));
-			
-//			System.out.println("post sensor");
-			distribution.normalise();
-//			System.out.println("normalise");
-
-			if (distribution.getHighestProb(x, y) >= localisationThreshold ) { localised = true; 
-			System.out.println("WE FOUND OURSELVES");
-			Sound.beep();
-			System.out.println("Coord: " + x + "," + y);
-			waitForPress();
-			}
-		}
+//		ActionModel actionModel = new PerfectActionModel();
+////		System.out.println("perfect action model");
+////		ImperfectSensorModel sensorModel = new ImperfectSensorModel();
+//		
+//		BooleanSensorModel sensorModel = new BooleanSensorModel();
+////		System.out.println("imperfect sensor model");
+//
+//		while (_run && !localised) {
+//			// Choose next direction to move
+////			System.out.println("created map");
+//			Heading action = nextAction(currentHeading);
+//			currentHeading = action;
+////			System.out.println("get new action");
+//			
+//			// TODO Move there
+//			
+//			//================ ACTION ================\\
+//			distribution = actionModel.updateAfterMove(distribution, action);
+//			
+//			System.out.println("---------------");
+//			System.out.println("We Moved : "+ action);
+//			
+////			System.out.println("update after move");
+//			distribution.normalise();
+////			System.out.println("normalise");
+//			
+//			if(this.haveWeFoundOurselves())
+//			{
+//				localised = true; 
+//				System.out.println("WE FOUND OURSELVES");
+//				Sound.beep();
+//				System.out.println("Coord: " + x + "," + y);
+//				waitForPress();
+//				break;
+//			}
+//			
+//			//================ SENSING ================\\
+//			//System.out.println("pre sensor");
+//			sensorModel.updateDistributionAfterSensing(distribution, 
+//													   gridMeasurements, 
+//													   getMeasurements(action));
+//			
+////			System.out.println("post sensor");
+//			distribution.normalise();
+////			System.out.println("normalise");
+//			values = distribution.getHighestProb();
+//			x = (int) values.get(0);
+//			y = (int) values.get(1);
+//			z = (float) values.get(2);
+//			
+//			if(this.haveWeFoundOurselves())
+//			{
+//				localised = true; 
+//				System.out.println("WE FOUND OURSELVES");
+//				Sound.beep();
+//				System.out.println("Coord: " + x + "," + y);
+//				waitForPress();
+//				break;
+//			}
+//		}
+//		
+//		//make sure our robot is facing up for the search
+//		if(currentHeading.equals(Heading.PLUS_X)){
+//			turnLeft();
+//		}
+//		else if(currentHeading.equals(Heading.PLUS_Y)){
+//			turnRound();
+//		}
+//		else if(currentHeading.equals(Heading.MINUS_X)){
+//			turnRight();
+//		}
 		
 		// Localised! Now make your way to the target
-		startPoint = new Point(x, y); // TODO Start should be inherited from the superclass
+		startPoint = new Point(8, 4); // TODO Start should be inherited from the superclass
 		
-		traverseSolution();
+		traverseSolution(startPoint, midPoint);
+		stop();
 		playVictorySong();
+		waitForPress();
+		traverseSolution(midPoint, endPoint);
+		stop();
+		playVictorySong();
+		waitForPress();
 	}
 	
 	
-	private void traverseSolution() {
-		List<Direction> path = LabyrinthRobot.solveGrid2(startPoint, midPoint, endPoint); // TODO Repurpose Part 2 of the last exercise into the GridFollower, and create this method.
-		
+	private boolean haveWeFoundOurselves()
+	{
+		values = distribution.getHighestProb();
+	
+		x = (int) values.get(0);
+		y = (int) values.get(1);
+		z = (float) values.get(2);
+//		System.out.println("PROB: " + z);
+//		System.out.println("X: " + x);
+//		System.out.println("Y: " + y);
+		if (z >= localisationThreshold )
+			return true;
+		return false;
+	}
+	
+	private void traverseSolution(Point start, Point end) {
+		List<Direction> path = LabyrinthRobot.solveGrid(start, end); // TODO Repurpose Part 2 of the last exercise into the GridFollower, and create this method.
+		waitForPress();
 		GridTraveller traveller = new GridTraveller(path);
 		
 		traveller.runActions();
@@ -335,6 +377,21 @@ public class LabyrinthRobot extends LineFollower {
 //		System.out.println("Distance :" + value);
 		return value > 200;
 	}
+	
+	public static List<Direction> solveGrid(Point startpoint, Point endpoint)
+	{
+		GridPuz start = new GridPuz(startpoint);
+		GridPuz end = new GridPuz(endpoint);
+		SuccessorFunction<Direction, GridPuz> succfunc = new GridSuccessorFunction();
+		
+		// Choose the kind of search
+		Search.SearchType searchChoice = Search.SearchType.AStar;
+		
+		// Get to the mid
+		Search<Direction> startToMidSearch = new Search(start, end, searchChoice);
+		return startToMidSearch.search(succfunc, searchChoice);
+	}
+	
 	
 	// Find a destination
 	public static List<Direction> solveGrid2(Point startpoint, Point midpoint, Point endpoint)

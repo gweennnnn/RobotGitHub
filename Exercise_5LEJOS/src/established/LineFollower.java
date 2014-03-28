@@ -76,7 +76,7 @@ public class LineFollower extends Robot {
 	 */
 	protected void init() {
 		LCD.clearDisplay();
-		
+		this.setSpeed(FAST);
 		//Wait until ready to scan
 		System.out.println("Place away from lines, and press ENTER");
 		waitForPress();

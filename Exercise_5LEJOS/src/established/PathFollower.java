@@ -12,7 +12,6 @@ public class PathFollower extends LineFollower {
 	protected final int LEFT = 1;
 	protected final int RIGHT = 2;
 	protected final int TURNAROUND = 3;
-	protected final int SONG = 7;
 	protected int[] SEQUENCE;
 	protected Random rand = new Random();
 	
@@ -164,11 +163,6 @@ public class PathFollower extends LineFollower {
 		else if (move == TURNAROUND){
 			stop();
 			turnRound();
-		}
-		else if (move == SONG){
-			stop();
-			playVictorySong();
-			waitForPress();
 		}
 				
 

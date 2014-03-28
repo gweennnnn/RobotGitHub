@@ -90,7 +90,7 @@ public class MarkovLocalisationSkeleton {
 			
 			// Do some action
 			// E.g. attempting to move one node in the PLUS_X direction
-			Heading action = Heading.PLUS_Y;
+			Heading action = Heading.PLUS_X;
 
 			// I'm faking movement by waiting for some time
 			Delay.msDelay(500);

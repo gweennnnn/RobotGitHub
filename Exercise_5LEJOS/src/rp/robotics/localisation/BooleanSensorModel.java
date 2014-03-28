@@ -38,6 +38,7 @@ public class BooleanSensorModel {
 					// True distances from this position
 					//DISTANCES FROM A MAP
 					BooleanMeasurements trueDistances = mg.getMeasurementsAt(x, y);
+					posProb = currentDist.getProbability(x, y);
 					// Do the measurements match?
 					
 					//if a measurement matches multiplie the probability as of 0.9
@@ -45,43 +46,25 @@ public class BooleanSensorModel {
 					//that will set up the probability of sensing the walls around it correctly
 					
 					//check north values
-					if((dm.north && trueDistances.north) || (!dm.north && !trueDistances.north)){
-						posProb += equalityProb * 0.9f;
-					}
-					else {
-						posProb += equalityProb * 0.1f;
-					}
-					//check east values
-					if((dm.east && trueDistances.east) || (!dm.east && !trueDistances.east)){
-						posProb += equalityProb * 0.9f;
-					}
-					else {
-						posProb += equalityProb * 0.1f;
-					}
-					//check south
-					if((dm.south && trueDistances.south) || (!dm.south && !trueDistances.south)){
-						posProb += equalityProb * 0.9f;
-					}
-					else {
-						posProb += equalityProb * 0.1f;
-					}
-					//check west
-					if((dm.west && trueDistances.west) || (!dm.west && !trueDistances.west)){
-						posProb += equalityProb * 0.9f;
-					}
-					else {
-						posProb += equalityProb * 0.1f;
+//					if((dm.north && trueDistances.north) || (!dm.north && !trueDistances.north)){
+					if((dm.north && trueDistances.north) ||
+					   (dm.east && trueDistances.east) ||
+					   (dm.south && trueDistances.south) ||
+					   (dm.west && trueDistances.west) ||
+					   ((!dm.north && !trueDistances.north) && (!dm.south && !trueDistances.south) && (!dm.east && !trueDistances.east) && (!dm.west && !trueDistances.west))
+					   ){
+						posProb *= equalityProb * 16f;
 					}
 						
 					// Find the probability of being in this position, given those measurements
-					posProb = currentDist.getProbability(x, y);
+					
 						
 					currentDist.setProbability(x, y, posProb);
 				}
 			}
 		}
 
-		currentDist.normalise();
+//		currentDist.normalise();
 	}
 }
 

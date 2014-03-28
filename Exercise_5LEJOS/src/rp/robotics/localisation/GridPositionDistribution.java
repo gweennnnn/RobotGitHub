@@ -1,6 +1,7 @@
 package rp.robotics.localisation;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 import rp.robotics.mapping.GridMap;
 
@@ -190,8 +191,32 @@ public class GridPositionDistribution {
 	 * Get the highest probability on the grid.
 	 * @return The highest probability on the grid.
 	 */
-	public float getHighestProb(int x, int y) {
+//	public float getHighestProb(int x, int y) {
+//		float highest = 0f;
+//		for(int i = 0; i < 6; i++)
+//		{
+//			for(int j = 0; j < 11; j++)
+//			{
+//				if(m_grid[i][j] > highest)
+//				{
+//					highest = m_grid[i][j];
+//					x = j;
+//					y = i;
+//				}
+//			}
+//		}
+//		
+//		
+//		System.out.print("HIGHEST: ");
+//		System.out.println("(" + x + ", " + y + ") = " + highest);
+//		System.out.println("---------------");
+//		return highest;
+//	}
+
+	public ArrayList getHighestProb() {
 		float highest = 0f;
+		int x = -1;
+		int y = -1;
 		for(int i = 0; i < 6; i++)
 		{
 			for(int j = 0; j < 11; j++)
@@ -205,21 +230,27 @@ public class GridPositionDistribution {
 			}
 		}
 		
+		ArrayList returnvalues = new ArrayList();
+		returnvalues.add(x);
+		returnvalues.add(y);
+		returnvalues.add(highest);
 		
 		System.out.print("HIGHEST: ");
 		System.out.println("(" + x + ", " + y + ") = " + highest);
 		System.out.println("---------------");
-		return highest;
+		return returnvalues;
 	}
-
+	
 	/**
 	 * Returns the point with the highest probability
 	 * @return
 	 */
 	public Point getLikelyPosition() {
-		int x = 0;
-		int y = 0;
-		float highest = getHighestProb(x, y);
+		ArrayList values = getHighestProb();
+
+		int x = (int) values.get(0);
+		int y = (int) values.get(1);
+		float highest = (float) values.get(2);
 		
 		for(int i = 0; i > m_gridWidth; i++){
 			for (int j = 0; j > m_gridHeight; j++){
