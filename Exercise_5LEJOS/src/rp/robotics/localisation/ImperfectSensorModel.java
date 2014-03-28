@@ -40,6 +40,7 @@ public class ImperfectSensorModel {
 				if (!currentDist.isObstructed(x, y)) 
 				{
 					// True distances from this position
+					//DISTANCES FROM A MAP
 					DirectionMeasurements trueDistances = mg.getMeasurementsAt(x, y);
 					// Do the measurements match?
 					equalityProb = dm.getEqualityProbability(trueDistances);

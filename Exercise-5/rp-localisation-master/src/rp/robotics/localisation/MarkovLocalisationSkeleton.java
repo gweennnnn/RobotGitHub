@@ -90,15 +90,15 @@ public class MarkovLocalisationSkeleton {
 			
 			// Do some action
 			// E.g. attempting to move one node in the PLUS_X direction
-			Heading action = Heading.PLUS_X;
+			Heading action = Heading.PLUS_Y;
 
 			// I'm faking movement by waiting for some time
-			Delay.msDelay(5000);
+			Delay.msDelay(500);
 
 			// Once action is completed, apply action model based on the move
 			// the robot took. This creates a new instance of
 			// GridPoseDistribution and assigns it to distribution
-//			distribution = actionModel.updateAfterMove(distribution, action);
+			distribution = actionModel.updateAfterMove(distribution, action);
 
 			// Update visualisation. Only necessary because it needs to know
 			// about the new distribution instance
@@ -114,13 +114,13 @@ public class MarkovLocalisationSkeleton {
 			
 			// Once completed apply sensor model as appropriate. This changes
 			// the distribution directly (i.e. by reference)
-			sensorModel.updateDistributionAfterSensing(distribution, gridMeasurements);
+//			sensorModel.updateDistributionAfterSensing(distribution, gridMeasurements);
 
 			// Note, as the sensor model changes the distribution directly, the
 			// visualisation will update automatically so
 			// mapVis.setDistribution is not necessary after the sensor model
 
-			distribution.normalise();
+//			distribution.normalise();
 			mapVis.setDistribution(distribution);
 		}
 

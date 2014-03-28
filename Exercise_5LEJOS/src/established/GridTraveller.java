@@ -11,7 +11,7 @@ import grid.GridBoard.Direction;
  * @author Jordan Bell
  *
  */
-public class GridTraveller {
+public class GridTraveller{
 	
 	private List<Direction> actionList;
 
@@ -93,6 +93,7 @@ public class GridTraveller {
 				movements.add(GridDirection.SONG);
 				orientations.add(GridDirection.SONG);
 			}
+
 		}
 		
 		String s = "";
@@ -106,7 +107,7 @@ public class GridTraveller {
 			 */
 			GridDirection movement = movements.get(i);
 			GridDirection orientation = orientations.get(i);
-			if ((movement == GridDirection.SONG) && (orientation == GridDirection.SONG)) s += "S";
+			if ((movement == GridDirection.SONG) && (orientation == GridDirection.SONG)) s += "7";
 			else s += submitRelativity(movement, orientation);
 		}
 		return s;

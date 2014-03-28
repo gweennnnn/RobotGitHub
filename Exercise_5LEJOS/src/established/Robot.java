@@ -4,6 +4,7 @@ import lejos.nxt.Button;
 import lejos.nxt.Motor;
 import lejos.nxt.NXTRegulatedMotor;
 import lejos.nxt.SensorPort;
+import lejos.nxt.Sound;
 import lejos.nxt.addon.OpticalDistanceSensor;
 import lejos.robotics.navigation.DifferentialPilot;
 import lejos.util.Delay;
@@ -28,15 +29,22 @@ public class Robot
 	
 	protected static void turnLeft()
 	{
-		turn(90);
+		turn(93);
     	//RIGHT_WHEEL.rotate(338);  
 	}
 	
 	protected static void turnRight()
 	{
+		turn(-93);
+		//LEFT_WHEEL.rotate(338);
+	}
+		protected static void turnRound()
+	{
+		turn(-90);
 		turn(-90);
 		//LEFT_WHEEL.rotate(338);
 	}
+
 	
 	
 	protected static void turn(int angle)
@@ -109,5 +117,22 @@ public class Robot
 	public void buttonResponse(Button b)
 	{
 			System.exit(0);
+	}
+	
+	public void playVictorySong()
+	{
+		Sound.playNote(Sound.FLUTE, 784, 90);
+		Delay.msDelay(4);
+		Sound.playNote(Sound.FLUTE, 740, 90);
+		Delay.msDelay(4);
+		Sound.playNote(Sound.FLUTE, 622, 90);
+		Sound.playNote(Sound.FLUTE, 440, 90);
+		Delay.msDelay(4);
+		Sound.playNote(Sound.FLUTE, 415, 90);
+		Delay.msDelay(4);
+		Sound.playNote(Sound.FLUTE, 659, 90);
+		Delay.msDelay(4);
+		Sound.playNote(Sound.FLUTE, 831, 90);
+		Sound.playNote(Sound.FLUTE, 1047, 270);
 	}
 }

@@ -46,7 +46,6 @@ public class PerfectActionModel implements ActionModel {
 			moveY = 1;
 			moveMinus(_from, to, moveX, moveY);
 		}
-
 		return to;
 	}
 
@@ -83,6 +82,7 @@ public class PerfectActionModel implements ActionModel {
 				move(_from, _to, moveX, moveY, x, y);
 			}
 		}
+			
 
 	}
 
@@ -124,7 +124,6 @@ public class PerfectActionModel implements ActionModel {
 			fromProb = _from.getProbability(fromX, fromY);
 
 			// set probability for position after move
-
 			_to.setProbability(toX, toY, fromProb + currentProb);
 			_to.setProbability(fromX, fromY, 0);
 		}

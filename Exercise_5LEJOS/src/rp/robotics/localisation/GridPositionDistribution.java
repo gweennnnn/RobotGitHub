@@ -190,15 +190,25 @@ public class GridPositionDistribution {
 	 * Get the highest probability on the grid.
 	 * @return The highest probability on the grid.
 	 */
-	public float getHighestProb() {
+	public float getHighestProb(int x, int y) {
 		float highest = 0f;
-		
-		for(Float[] w : m_grid){
-			for (Float prob : w){
-				if (prob > highest) highest = prob;
+		for(int i = 0; i < 6; i++)
+		{
+			for(int j = 0; j < 11; j++)
+			{
+				if(m_grid[i][j] > highest)
+				{
+					highest = m_grid[i][j];
+					x = j;
+					y = i;
+				}
 			}
 		}
 		
+		
+		System.out.print("HIGHEST: ");
+		System.out.println("(" + x + ", " + y + ") = " + highest);
+		System.out.println("---------------");
 		return highest;
 	}
 
@@ -207,7 +217,9 @@ public class GridPositionDistribution {
 	 * @return
 	 */
 	public Point getLikelyPosition() {
-		float highest = getHighestProb();
+		int x = 0;
+		int y = 0;
+		float highest = getHighestProb(x, y);
 		
 		for(int i = 0; i > m_gridWidth; i++){
 			for (int j = 0; j > m_gridHeight; j++){
